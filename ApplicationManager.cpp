@@ -4,6 +4,8 @@
 #include "Actions\AddCircleAction.h"
 #include "Actions\AddTriAction.h"
 #include "Actions\AddHexaAction.h"
+#include "Actions/SelectAction.h"
+
 
 
 
@@ -54,6 +56,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case DRW_Hexa :
 			pAct = new AddHexaAction(this);
 			break;
+		case Selection_Tool:
+			pAct = new SelectAction(this);
+			break;
 		case EXIT:
 			///create ExitAction here
 			
@@ -84,6 +89,18 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure *ApplicationManager::GetFigure(int x, int y) const
 {
+	//CSquare* TheShape = NULL;
+	bool PointBelong = false;
+
+	for (int i = FigCount - 1; i >= 0; i--) {
+
+		//TheShape = dynamic_cast <CSquare*> (FigList[i]);
+		PointBelong = FigList [i]->PointBelong(x, y);
+		if (PointBelong) {
+
+			return FigList[i];
+		}
+	}
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
 

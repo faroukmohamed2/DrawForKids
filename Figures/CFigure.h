@@ -24,7 +24,9 @@ public:
 	
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
-
+	virtual bool PointBelong(int x , int y) = 0;
+	 bool IsInTriangle(Point , Point , Point , Point );
+	 double CalcAreaTriangle(Point, Point, Point);
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
 

@@ -9,4 +9,6 @@ private:
 public:
 	CSquare(Point, GfxInfo FigureGfxInfo);
 	virtual void Draw(Output* pOut) const;
+	virtual bool PointBelong(int, int);
+
 };
