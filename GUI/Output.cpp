@@ -260,7 +260,10 @@ void Output::DrawSquare(Point P1, GfxInfo squareGfxInfo, bool selected) const
 
 
 	pWind->DrawRectangle((P1.x) - length, (P1.y) - length, (P1.x) + length, (P1.y) + length, style);//call the function that draw a rectangle and we pass the corners of the square (we calculated them) and style
-	CreateDrawToolBar();//we redraw the tool bar becaue of the case . a part of the square is in the region of tool bar
+	if (UI.InterfaceMode == MODE_DRAW)
+		CreateDrawToolBar();			//we redraw the tool bar becaue of the case . a part of the hexagon is in the region of tool bar
+	else
+		CreatePlayToolBar();
 }
 
 
@@ -329,7 +332,12 @@ void Output::DrawHexa(Point P1, GfxInfo HexaGfxInfo, bool selected) const
 
 
 	pWind->DrawPolygon(X, Y, 6, style);//we call the polygon draw function and pass two X and y components arrays , number of vertices "6" and the style
-	CreateDrawToolBar();//we redraw the tool bar becaue of the case . a part of the hexagon is in the region of tool bar
+	
+	
+	if (UI.InterfaceMode == MODE_DRAW)
+		CreateDrawToolBar();			//we redraw the tool bar becaue of the case . a part of the hexagon is in the region of tool bar
+	else
+		CreatePlayToolBar();
 }
 
 void Output::DrawCircle(Point P1, Point P2, GfxInfo circleGfxInfo, bool selected) const
@@ -356,7 +364,10 @@ void Output::DrawCircle(Point P1, Point P2, GfxInfo circleGfxInfo, bool selected
 
 
 	pWind->DrawCircle(P1.x, P1.y, Radius, style); // call the circle draw function and pass to it (center , radius"calculated") and style
-	CreateDrawToolBar(); //we redraw the tool bar becaue of the case . a part of the circle is in the region of tool bar
+	if (UI.InterfaceMode == MODE_DRAW)
+		CreateDrawToolBar();			
+	else
+		CreatePlayToolBar(); //we redraw the tool bar becaue of the case . a part of the circle is in the region of tool bar
 }
 
 

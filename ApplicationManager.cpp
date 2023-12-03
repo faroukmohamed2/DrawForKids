@@ -5,9 +5,8 @@
 #include "Actions\AddTriAction.h"
 #include "Actions\AddHexaAction.h"
 #include "Actions/SelectAction.h"
-
-
-
+#include "Actions/ChangeToPLayModeAction.h"
+#include "Actions/ChangeToDrawModeAction.h"
 
 
 //Constructor
@@ -41,6 +40,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
+		case TO_PLAY:
+			pAct = new ChangeToPlayModeAction(this);
+			break;
+		case TO_DRAW:
+			pAct = new ChangeToDrawModeAction(this);
+			break;
 		case DRW_RECT:
 			pAct = new AddRectAction(this);
 			break;
@@ -59,6 +64,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case Selection_Tool:
 			pAct = new SelectAction(this);
 			break;
+
 		case EXIT:
 			///create ExitAction here
 			
@@ -72,7 +78,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	if(pAct != NULL)
 	{
 		pAct->Execute();//Execute
-		delete pAct;	//You may need to change this line depending to your implementation
+		//delete pAct;	//You may need to change this line depending to your implementation
 		pAct = NULL;
 	}
 }
