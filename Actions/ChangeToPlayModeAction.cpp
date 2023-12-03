@@ -6,11 +6,8 @@ ChangeToPlayModeAction::ChangeToPlayModeAction(ApplicationManager* pApp) :Action
 {}
 void ChangeToPlayModeAction::ReadActionParameters()
 {
-	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
-	pOut->PrintMessage("Change to Play Mode");
-	pOut->ClearStatusBar();
-
+	pOut->PrintMessage("Changed to Play Mode");
 }
 void ChangeToPlayModeAction::Execute()
 {
