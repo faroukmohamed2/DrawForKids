@@ -177,6 +177,9 @@
     </ClCompile>
     <ClCompile Include="Actions\ChangeToPlayModeAction.cpp" />
     <ClCompile Include="Actions\ChangeToDrawModeAction.cpp" />
+    <ClCompile Include="Actions\SaveAction.cpp" />
+    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="Actions\LoadAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -293,6 +296,9 @@
     </ClInclude>
     <ClInclude Include="Actions\ChangeToPlayModeAction.h" />
     <ClInclude Include="Actions\ChangeToDrawModeAction.h" />
+    <ClInclude Include="Actions\SaveAction.h" />
+    <ClInclude Include="Utils.h" />
+    <ClInclude Include="Actions\LoadAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

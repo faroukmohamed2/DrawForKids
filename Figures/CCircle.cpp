@@ -1,11 +1,12 @@
 #include "CCircle.h"
 #include <cmath>
-
+#include <fstream>
 CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	this->P1= P1;
 	this->P2 = P2;
 }
+CCircle::CCircle(int id) : CFigure(id) {}
 
 
 void CCircle::Draw(Output* pOut) const
@@ -24,4 +25,21 @@ bool CCircle::PointBelong(int x, int y)
 	if ((float)(pow(x, 2) + pow(y, 2)) <= (float)pow(Radius, 2))
 		return true;
 	return false;
+}
+
+string CCircle::GetName() const {
+	return "CIRC";
+}
+
+
+void CCircle::Save(ofstream &file) {
+	SavePoint(file, P1);
+	SavePoint(file, P2);
+	CFigure::Save(file);
+}
+
+void CCircle::Load(ifstream& file) {
+	LoadPoint(file, P1);
+	LoadPoint(file, P2);
+	CFigure::Load(file);
 }

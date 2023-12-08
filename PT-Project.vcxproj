@@ -13,11 +13,12 @@
   <PropertyGroup Label="Globals">
     <ProjectName>PT Project</ProjectName>
     <ProjectGuid>{1AC3DDD7-FDDE-487E-A2A4-52A8FCF7BDB9}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -134,6 +135,8 @@
     <ClCompile Include="Actions\AddTriAction.cpp" />
     <ClCompile Include="Actions\ChangeToDrawModeAction.cpp" />
     <ClCompile Include="Actions\ChangeToPlayModeAction.cpp" />
+    <ClCompile Include="Actions\LoadAction.cpp" />
+    <ClCompile Include="Actions\SaveAction.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
@@ -182,6 +185,7 @@
     <ClCompile Include="GUI\Output.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\AddCircleAction.h" />
@@ -190,6 +194,8 @@
     <ClInclude Include="Actions\AddTriAction.h" />
     <ClInclude Include="Actions\ChangeToDrawModeAction.h" />
     <ClInclude Include="Actions\ChangeToPlayModeAction.h" />
+    <ClInclude Include="Actions\LoadAction.h" />
+    <ClInclude Include="Actions\SaveAction.h" />
     <ClInclude Include="Actions\SelectAction.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />
@@ -224,6 +230,7 @@
     <ClInclude Include="GUI\UI_Info.h" />
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="DEFS.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

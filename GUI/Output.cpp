@@ -203,6 +203,14 @@ color Output::getCrntFillColor() const	//get current filling color
 int Output::getCrntPenWidth() const		//get current pen width
 {	return UI.PenWidth;	}
 
+void Output::setCrntDrawColor(color color)	//get current drwawing color
+{
+	UI.DrawColor = color;
+}
+void Output::setCrntFillColor(color color)	//get current filling color
+{
+	UI.FillColor = color;
+}
 //======================================================================================//
 //								Figures Drawing Functions								//
 //======================================================================================//

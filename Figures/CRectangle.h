@@ -10,8 +10,14 @@ private:
 	Point Corner2;
 public:
 	CRectangle(Point , Point, GfxInfo FigureGfxInfo );
+	CRectangle(int id);
+
 	virtual void Draw(Output* pOut) const;
 	virtual bool PointBelong(int, int);
+
+	string GetName() const;
+	void Save(ofstream& OutFile);
+	void Load(ifstream& Infile);
 };
 
 #endif

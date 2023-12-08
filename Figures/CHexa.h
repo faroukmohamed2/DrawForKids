@@ -10,8 +10,14 @@ private:
 
 public:
 	CHexa(Point, GfxInfo FigureGfxInfo);
+	CHexa(int id);
+
 	virtual void Draw(Output* pOut) const;
 	virtual bool PointBelong(int, int);
 	void GetCorners(Point [] , Point );
+
+	string GetName() const;
+	void Save(ofstream& OutFile);
+	void Load(ifstream& Infile);
 
 };
