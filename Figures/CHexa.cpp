@@ -31,6 +31,14 @@ bool CHexa::PointBelong(int x , int y )
 	return false;
 }
 
+void CHexa::Move(Point NewLocation)
+{
+	Center.x = NewLocation.x;
+	Center.y = NewLocation.y;
+}
+
+
+
 void CHexa::GetCorners(Point Corners [6] , Point P1)
 {
 	float l = 100;            // P1 is center 

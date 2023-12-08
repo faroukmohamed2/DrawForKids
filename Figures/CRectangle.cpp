@@ -42,3 +42,29 @@ void CRectangle::Load(ifstream& file) {
 	CFigure::Load(file);
 
 }
+
+void CRectangle::Move(Point NewLocation)
+{
+	Point Center;
+
+	Center.x = (Corner1.x + Corner2.x) / 2;
+	Center.y = (Corner1.y + Corner2.y) / 2;
+
+	
+
+	double DistanceX = NewLocation.x - Center.x;
+	double DistanceY = NewLocation.y - Center.y;
+
+	Corner1.x += DistanceX;
+	Corner1.y += DistanceY;
+
+	Corner2.x += DistanceX;
+	Corner2.y += DistanceY;
+
+	
+
+}
+
+
+
+

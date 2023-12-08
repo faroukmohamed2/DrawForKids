@@ -41,3 +41,11 @@ void CSquare::Load(ifstream& file) {
 	CFigure::Load(file);
 
 }
+
+void CSquare::Move(Point NewLocation)
+{
+	Center.x = NewLocation.x;
+	Center.y = NewLocation.y;
+}
+
+

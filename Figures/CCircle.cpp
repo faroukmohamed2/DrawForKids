@@ -27,6 +27,20 @@ bool CCircle::PointBelong(int x, int y)
 	return false;
 }
 
+void CCircle::Move(Point NewLocation)
+{
+	double DiffrenceX = NewLocation.x - P1.x;
+	double DiffrenceY = NewLocation.y - P1.y;
+	P1.x = NewLocation.x;
+	P1.y = NewLocation.y;
+	P2.x += DiffrenceX;
+	P2.y += DiffrenceY;
+
+	
+
+
+}
+
 string CCircle::GetName() const {
 	return "CIRC";
 }

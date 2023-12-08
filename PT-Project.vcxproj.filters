@@ -180,6 +180,10 @@
     <ClCompile Include="Actions\SaveAction.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Actions\LoadAction.cpp" />
+    <ClCompile Include="Actions\ChangeColorAction.cpp" />
+    <ClCompile Include="Actions\ChangeFillAction.cpp" />
+    <ClCompile Include="Actions\DeleteFigAction.cpp" />
+    <ClCompile Include="Actions\MoveAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -299,6 +303,10 @@
     <ClInclude Include="Actions\SaveAction.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Actions\LoadAction.h" />
+    <ClInclude Include="Actions\ChangeColorAction.h" />
+    <ClInclude Include="Actions\ChangeFillAction.h" />
+    <ClInclude Include="Actions\DeleteFigAction.h" />
+    <ClInclude Include="Actions\MoveAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

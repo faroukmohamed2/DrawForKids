@@ -11,7 +11,7 @@ CTriangle::CTriangle(int id) : CFigure(id) {}
 
 void CTriangle::Draw(Output* pOut) const
 {
-	//Call Output::DrawRect to draw a rectangle on the screen	
+		
 	pOut->DrawTrig(Corner1, Corner2, Corner3, FigGfxInfo, Selected);
 }
 
@@ -40,3 +40,24 @@ void CTriangle::Load(ifstream& file) {
 	CFigure::Load(file);
 
 }
+
+void CTriangle::Move(Point NewLocation)
+{
+
+	double DiffrenceX = NewLocation.x - Corner1.x;
+	double DiffrenceY = NewLocation.y - Corner1.y;
+
+	Corner1.x = NewLocation.x;
+	Corner1.y = NewLocation.y;
+
+	Corner2.x += DiffrenceX;
+	Corner2.y += DiffrenceY;
+	Corner3.x += DiffrenceX;
+	Corner3.y += DiffrenceY;
+}
+
+
+
+
+
+
