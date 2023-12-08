@@ -32,6 +32,8 @@ std::string ColorToName(color color) {
 		return "YELLOW";
 	else if (color == ORANGE)
 		return "ORANGE";
+	else if (color == WHITE)
+		return "WHITE";
 	else
 		return "NONE";
 }
@@ -49,6 +51,8 @@ color NameToColor(std::string id) {
 		return YELLOW;
 	else if (id == "ORANGE")
 		return ORANGE;
+	else if (id == "WHITE")
+		return WHITE;
 	else
 		return PINK;
 }
