@@ -30,14 +30,24 @@ void SelectAction::ReadActionParameters()
 void SelectAction::Execute()
 {
 	ReadActionParameters();
+
+	CFigure* OldSelected = pManager->IsSelected();
+	if (OldSelected != NULL)
+		OldSelected->SetSelected(false);
+
+	
 	CFigure* TheSelected = pManager->GetFigure(P1.x, P1.y);
 	while (TheSelected == NULL) {
 		ReadActionParameters();
 		TheSelected = pManager->GetFigure(P1.x, P1.y);
 	}
-	if (TheSelected != NULL)
+	if (OldSelected != TheSelected)
 	TheSelected->SetSelected(!(TheSelected->IsSelected()));
-	
+
 	TheSelected = NULL;
+	OldSelected = NULL;
+	
+
+	
 
 } 

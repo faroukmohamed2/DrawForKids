@@ -46,5 +46,6 @@ void AddCircleAction::Execute()
 	CCircle*R=new CCircle(P1, P2, CircleGfxInfo);
 
 	//Add the rectangle to the list of figures
-	pManager->AddFigure(R);
+	int ID = pManager->AddFigure(R);
+	R->SetId(ID);
 }

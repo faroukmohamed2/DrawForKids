@@ -40,3 +40,27 @@ double CFigure::CalcAreaTriangle(Point P1, Point P2, Point P3 )
 	return Area;
 }
 
+void CFigure::SetId(int id)
+{
+	ID = id;
+}
+
+int CFigure::GetID()
+{
+	return ID;
+}
+
+void CFigure::Delete(Output* pOut)
+{
+	FigGfxInfo.isFilled = false;
+	ChngDrawClr(UI.BkGrndColor);
+	this->Draw(pOut);
+	ChngFillClr(UI.BkGrndColor);
+	this->Draw(pOut);
+}
+
+
+
+
+
+

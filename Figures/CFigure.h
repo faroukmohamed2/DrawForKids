@@ -27,6 +27,11 @@ public:
 	virtual bool PointBelong(int x , int y) = 0;
 	 bool IsInTriangle(Point , Point , Point , Point );
 	 double CalcAreaTriangle(Point, Point, Point);
+	 void SetId(int);
+	 int GetID();
+	 void Delete(Output* pOut) ;
+	 virtual void Move(Point) = 0;
+	 
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
 

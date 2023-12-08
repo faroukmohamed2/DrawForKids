@@ -1,6 +1,6 @@
 #include "AddRectAction.h"
 #include "..\Figures\CRectangle.h"
-
+#include "..\Figures\CFigure.h"
 #include "..\ApplicationManager.h"
 
 #include "..\GUI\input.h"
@@ -46,5 +46,7 @@ void AddRectAction::Execute()
 	CRectangle *R=new CRectangle(P1, P2, RectGfxInfo);
 
 	//Add the rectangle to the list of figures
-	pManager->AddFigure(R);
+	int ID = pManager->AddFigure(R);
+	R->SetId(ID);
+
 }

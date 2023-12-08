@@ -24,3 +24,11 @@ bool CSquare::PointBelong(int x, int y)
 
 	return false;
 }
+
+void CSquare::Move(Point NewLocation)
+{
+	Center.x = NewLocation.x;
+	Center.y = NewLocation.y;
+}
+
+

@@ -7,6 +7,10 @@
 #include "Actions/SelectAction.h"
 #include "Actions/ChangeToPLayModeAction.h"
 #include "Actions/ChangeToDrawModeAction.h"
+#include "Actions/ChangeColorAction.h"
+#include "Actions/ChangeFillAction.h"
+#include "Actions/DeleteFigAction.h"
+#include "Actions/MoveAction.h"
 
 
 //Constructor
@@ -58,13 +62,42 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case DRW_Trig:
 			pAct = new AddTriAction(this);
 			break;
-		case DRW_Hexa :
+		case DRW_Hexa:
 			pAct = new AddHexaAction(this);
 			break;
 		case Selection_Tool:
 			pAct = new SelectAction(this);
 			break;
-
+		case DRW_Red:
+			pAct = new ChangeColorAction(this, DRW_Red);
+			break;
+		case DRW_Green:
+			pAct = new ChangeColorAction(this, DRW_Green);
+			break;
+		case DRW_Orange:
+			pAct = new ChangeColorAction(this, DRW_Orange);
+			break;
+		case DRW_Yellow:
+			pAct = new ChangeColorAction(this, DRW_Yellow);
+			break;
+		case DRW_Blue:
+			pAct = new ChangeColorAction(this, DRW_Blue);
+			break;
+		case DRW_Black:
+			pAct = new ChangeColorAction(this, DRW_Black);
+			break;
+		case Fill_Tool:
+			pAct = new ChangeFillAction(this, Fill_Tool);
+			break;
+		case Pencile_Tool:
+			pAct = new ChangeFillAction(this, Pencile_Tool);
+			break;
+		case Delete:
+			pAct = new DeleteFigAction(this);
+			break;
+		case Move_Tool:
+			pAct = new MoveAction(this);
+			
 		case EXIT:
 			///create ExitAction here
 			
@@ -87,10 +120,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 //==================================================================================//
 
 //Add a figure to the list of figures
-void ApplicationManager::AddFigure(CFigure* pFig)
+int ApplicationManager::AddFigure(CFigure* pFig)
 {
 	if(FigCount < MaxFigCount )
 		FigList[FigCount++] = pFig;	
+	return FigCount;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure *ApplicationManager::GetFigure(int x, int y) const
@@ -115,6 +149,25 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 	//Remember that ApplicationManager only calls functions do NOT implement it.
 
 	return NULL;
+}
+CFigure* ApplicationManager::IsSelected() const
+{
+	for (int i = 0; i < FigCount; i++)
+		if (FigList[i]->IsSelected())
+			return FigList[i];
+	return NULL;
+}
+void ApplicationManager::DeleteFigure(int deleteID)
+{
+	// could be changed 
+
+
+
+	delete FigList[deleteID - 1];
+	FigList[deleteID - 1] = NULL;
+	FigList[deleteID - 1] = FigList[FigCount - 1];
+	FigList[FigCount - 1] = NULL;
+	FigCount--;
 }
 //==================================================================================//
 //							Interface Management Functions							//
