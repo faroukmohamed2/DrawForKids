@@ -5,8 +5,13 @@
 #include "Actions\AddTriAction.h"
 #include "Actions\AddHexaAction.h"
 #include "Actions/SelectAction.h"
+#include "Actions/SaveAction.h"
 #include "Actions/ChangeToPLayModeAction.h"
 #include "Actions/ChangeToDrawModeAction.h"
+#include "Actions/LoadAction.h"
+#include <fstream>
+#include <iostream>
+#include <string>
 #include "Actions/ChangeColorAction.h"
 #include "Actions/ChangeFillAction.h"
 #include "Actions/DeleteFigAction.h"
@@ -40,7 +45,7 @@ ActionType ApplicationManager::GetUserAction() const
 void ApplicationManager::ExecuteAction(ActionType ActType) 
 {
 	Action* pAct = NULL;
-	
+	cout << ActType << endl;
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
@@ -68,6 +73,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case Selection_Tool:
 			pAct = new SelectAction(this);
 			break;
+		case SAVE_RECORD:
+			pAct = new SaveAction(this);
+			break;
+		case LOAD_RECORD:
+			pAct = new LoadAction(this);
+			break;
+
 		case DRW_Red:
 			pAct = new ChangeColorAction(this, DRW_Red);
 			break;
@@ -118,6 +130,37 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = NULL;
 	}
 }
+//==================================================================================//
+//						       Save System Functions								//
+//==================================================================================//
+void ApplicationManager::SaveAll(ofstream &file) const {
+	file << FigCount << endl;
+	for (int i = 0; i < FigCount; i++) {
+		file << FigList[i]->GetName() << " ";
+		file << FigList[i]->GetId() << " ";
+		FigList[i]->Save(file);
+		file << endl;
+	}
+	pOut->PrintMessage("Saved " + std::to_string(FigCount) + " Figures");
+}
+
+void ApplicationManager::LoadAll(CFigure** list, int count) {
+	for (int i = 0; i < MaxFigCount; i++) {
+		if (FigList[i] != nullptr)
+			delete FigList[i];
+		FigList[i] = NULL;
+	}
+	FigCount = count;
+
+	for (int i = 0; i < count; i++)
+		FigList[i] = list[i];
+}
+
+int ApplicationManager::GetFigCount() const
+{
+	return FigCount;
+}
+
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
@@ -179,6 +222,14 @@ void ApplicationManager::DeleteFigure(int deleteID)
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {	
+	Point p1, p2; //Draw white background
+	p1.y = UI.ToolBarHeight;
+	p2.x = UI.width;
+	p2.y = UI.height - UI.StatusBarHeight;
+	GfxInfo gfxInfo;
+	gfxInfo.FillClr = UI.BkGrndColor;
+	pOut->DrawRect(p1, p2, gfxInfo);
+
 	for(int i=0; i<FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }

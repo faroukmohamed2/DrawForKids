@@ -1,11 +1,18 @@
 #include "CCircle.h"
 #include <cmath>
-
+#include <fstream>
+int CCircle::CircCount = 0;
+int CCircle::GetCircCount()
+{
+	return CircCount;
+}
 CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	this->P1= P1;
 	this->P2 = P2;
+	CircCount++;
 }
+CCircle::CCircle(int id) : CFigure(id) {}
 
 
 void CCircle::Draw(Output* pOut) const
@@ -38,4 +45,26 @@ void CCircle::Move(Point NewLocation)
 	
 
 
+}
+
+string CCircle::GetName() const {
+	return "CIRC";
+}
+
+
+void CCircle::Save(ofstream &file) {
+	SavePoint(file, P1);
+	SavePoint(file, P2);
+	CFigure::Save(file);
+}
+
+void CCircle::Load(ifstream& file) {
+	LoadPoint(file, P1);
+	LoadPoint(file, P2);
+	CFigure::Load(file);
+}
+
+CCircle::~CCircle()
+{
+	CircCount--;
 }

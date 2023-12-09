@@ -1,8 +1,16 @@
 #include "CHexa.h"
-
+int CHexa::HexCount = 0;
 CHexa::CHexa(Point P1, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	Center = P1;
+	HexCount++;
+}
+
+CHexa::CHexa(int id) : CFigure(id) {}
+
+int CHexa::GetHexCount()
+{
+	return HexCount;
 }
 
 
@@ -48,4 +56,24 @@ void CHexa::GetCorners(Point Corners [6] , Point P1)
 	Corners[2].x = Corners[4].x = (P1.x) + (l / 2);
 	Corners[4].y = Corners[5].y = (P1.y) + (0.8660254 * l);
 	Corners[1].y = Corners[2].y = (P1.y) - (0.8660254 * l);
+}
+string CHexa::GetName() const {
+	return "HEXA";
+}
+
+void CHexa::Save(ofstream& file){
+	SavePoint(file, Center);
+	CFigure::Save(file);
+
+}
+
+void CHexa::Load(ifstream& file) {
+	LoadPoint(file, Center);
+	CFigure::Load(file);
+
+}
+
+CHexa::~CHexa()
+{
+	HexCount--;
 }

@@ -6,6 +6,16 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 	Selected = false;
 }
 
+CFigure::CFigure(int id)
+{
+	ID = id;
+	Selected = false;
+}
+
+int CFigure::GetId() const {
+	return ID;
+}
+
 void CFigure::SetSelected(bool s)
 {	Selected = s; }
 
@@ -40,6 +50,40 @@ double CFigure::CalcAreaTriangle(Point P1, Point P2, Point P3 )
 	return Area;
 }
 
+void CFigure::SavePoint(ofstream& OutFile, Point &point) {
+	OutFile << point.x << " ";
+	OutFile << point.y << " ";
+}
+
+void CFigure::LoadPoint(ifstream& file, Point &point) {
+	file >> point.x;
+	file >> point.y;
+}
+
+void CFigure::Save(ofstream& OutFile) {
+	OutFile << FigGfxInfo.DrawClr << " ";
+
+	if (FigGfxInfo.isFilled)
+		OutFile << FigGfxInfo.FillClr << " ";
+	else
+		OutFile << "NO-FILL" << " ";
+}
+
+void CFigure::Load(ifstream& InFile) {
+
+
+	InFile >> FigGfxInfo.DrawClr;
+
+	string fillId;
+	InFile >> fillId;
+	if (fillId == "NO-FILL")
+		FigGfxInfo.isFilled = false;
+	else
+		FigGfxInfo.FillClr = NameToColor(fillId);
+
+
+}
+
 void CFigure::SetId(int id)
 {
 	ID = id;
@@ -58,7 +102,7 @@ void CFigure::Delete(Output* pOut)
 	ChngFillClr(UI.BkGrndColor);
 	this->Draw(pOut);
 }
-
+CFigure::~CFigure() {}
 
 
 

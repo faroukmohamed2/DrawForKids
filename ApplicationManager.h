@@ -41,6 +41,12 @@ public:
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window	
+	void ReloadFigures() const;
+
+	//Save system
+	void SaveAll(ofstream &file) const;
+	void LoadAll(CFigure** list, int count);
+	int GetFigCount() const;
 };
 
 #endif

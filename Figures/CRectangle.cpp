@@ -1,11 +1,13 @@
 #include "CRectangle.h"
-
+int CRectangle::RecCount = 0;
 CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo)
 {
 	Corner1 = P1;
 	Corner2 = P2;
+	RecCount++;
 }
-	
+
+CRectangle::CRectangle(int id) : CFigure(id) {}
 
 void CRectangle::Draw(Output* pOut) const
 {
@@ -24,6 +26,22 @@ bool CRectangle::PointBelong(int x , int y )
 		return true;
 	return false;
 	
+}
+string CRectangle::GetName() const {
+	return "RECT";
+}
+void CRectangle::Save(ofstream& file) {
+	SavePoint(file, Corner1);
+	SavePoint(file, Corner2);
+	CFigure::Save(file);
+
+}
+
+void CRectangle::Load(ifstream& file) {
+	LoadPoint(file, Corner1);
+	LoadPoint(file, Corner2);
+	CFigure::Load(file);
+
 }
 
 void CRectangle::Move(Point NewLocation)
@@ -46,6 +64,16 @@ void CRectangle::Move(Point NewLocation)
 
 	
 
+}
+
+int CRectangle::GetRecCount()
+{
+	return RecCount;
+}
+
+CRectangle::~CRectangle()
+{
+	RecCount--;
 }
 
 
