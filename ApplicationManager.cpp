@@ -11,7 +11,7 @@
 #include "Actions/ChangeFillAction.h"
 #include "Actions/DeleteFigAction.h"
 #include "Actions/MoveAction.h"
-
+#include "Actions/SelectTheShape.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -97,7 +97,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case Move_Tool:
 			pAct = new MoveAction(this);
-			
+			break;
+		case FIG_TYP:
+			pAct = new SelectTheShape(this);
+			break;
 		case EXIT:
 			///create ExitAction here
 			

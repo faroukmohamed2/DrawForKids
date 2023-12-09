@@ -181,6 +181,7 @@
     <ClCompile Include="Actions\ChangeFillAction.cpp" />
     <ClCompile Include="Actions\DeleteFigAction.cpp" />
     <ClCompile Include="Actions\MoveAction.cpp" />
+    <ClCompile Include="Actions\SelectTheShape.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -301,6 +302,7 @@
     <ClInclude Include="Actions\ChangeFillAction.h" />
     <ClInclude Include="Actions\DeleteFigAction.h" />
     <ClInclude Include="Actions\MoveAction.h" />
+    <ClInclude Include="Actions\SelectTheShape.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

@@ -9,14 +9,14 @@ ChangeToDrawModeAction::ChangeToDrawModeAction(ApplicationManager* pApp) :Action
 
 void ChangeToDrawModeAction::ReadActionParameters()
 {
-	Output* pOut = pManager->GetOutput();
+	const Output* pOut = pManager->GetOutput();
 	pOut->PrintMessage("Changed to Draw mode");
 }
 
 void ChangeToDrawModeAction::Execute()
 {
 	ReadActionParameters();
-	Output* pOut = pManager->GetOutput();
+	const Output* pOut = pManager->GetOutput();
 	if (pOut != NULL)
 	{
 		pOut->CreateDrawToolBar();
