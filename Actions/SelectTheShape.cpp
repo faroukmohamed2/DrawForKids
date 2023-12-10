@@ -128,6 +128,7 @@ void SelectTheShape::ReadActionParameters()
 			pOut->PrintMessage("Select all Hexagons");
 			break;
 		}
+		pIn->GetPointClicked(p.x, p.y);
 	}
 
 }
@@ -135,4 +136,5 @@ void SelectTheShape::ReadActionParameters()
 void SelectTheShape::Execute()
 {
 	ReadActionParameters();
+	CFigure* pick = pManager->GetFigure(p.x, p.y);
 }
