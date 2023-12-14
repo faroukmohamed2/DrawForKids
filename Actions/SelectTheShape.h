@@ -8,7 +8,7 @@ class SelectTheShape : public Action
 	enum shapes { REC, TRI, SQU, CIRC, HEX, NUM };
 public:
 	SelectTheShape(ApplicationManager* pApp);
-	bool IsExist(int);
+	int NotExist(int);
 	int GetValidShape();
 	virtual void ReadActionParameters();
 	virtual void Execute();

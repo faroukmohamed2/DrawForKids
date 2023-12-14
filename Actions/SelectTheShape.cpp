@@ -11,92 +11,37 @@
 using namespace std;
 SelectTheShape::SelectTheShape(ApplicationManager *pApp):Action(pApp)
 {
-	CircCount = 0;
-	SquCount = 0;
-	HexCount = 0;
-	TriCount = 0;
-	RecCount = 0;
-	FigCount = 0;
-	CircCount += CCircle::GetCircCount();
-	SquCount += CSquare::GetSquCount();
-	HexCount += CHexa::GetHexCount();
-	TriCount += CTriangle::GetTriCount();
-	RecCount += CRectangle::GetRecCount();
-	FigCount += pManager->GetFigCount();
+
+	CircCount = CCircle::GetCircCount();
+	SquCount = CSquare::GetSquCount();
+	HexCount = CHexa::GetHexCount();
+	TriCount = CTriangle::GetTriCount();
+	RecCount = CRectangle::GetRecCount();
+	FigCount = pManager->GetFigCount();
 
 }
 
-bool SelectTheShape::IsExist(int shape)
+int SelectTheShape::NotExist(int rand)
 {
-	if (shape == 0)
-		return false;
-	else
-		return true;
+	if (rand == SQU && SquCount == 0)
+		return SQU;
+	if (rand == REC && RecCount == 0)
+		return REC;
+	if (rand == CIRC && CircCount == 0)
+		return CIRC;
+	if (rand == TRI && TriCount == 0)
+		return TRI;
+	if (rand == HEX && HexCount == 0)
+		return HEX;
 }
 int SelectTheShape::GetValidShape()
 {
-	srand(static_cast<unsigned int>(time(nullptr)));
-	int randshape = rand() % NUM;
-	bool test = true;
-	while (test)
+	int randshape;
+	do
 	{
-		if (IsExist(SquCount) && randshape == SQU)
-		{
-			test = false;
-		}
-		else
-		{
-			while (randshape == SQU)
-			{
-				randshape = rand() % NUM;
-			}
-		}
+		randshape = rand() % NUM;
+	} while (randshape == NotExist(randshape));
 
-		if (IsExist(RecCount) && randshape == REC)
-		{
-			test = false;
-		}
-		else
-		{
-			while (randshape == REC)
-			{
-				randshape = rand() % NUM;
-			}
-		}
-		if (IsExist(TriCount) && randshape == TRI)
-		{
-			test = false;
-		}
-		else
-		{
-			while (randshape == TRI)
-			{
-				randshape = rand() % NUM;
-			}
-		}
-		if (IsExist(CircCount) && randshape == CIRC)
-		{
-			test = false;
-		}
-		else
-		{
-			while (randshape == CIRC)
-			{
-				randshape = rand() % NUM;
-			}
-		}
-		if (IsExist(HexCount) && randshape == HEX)
-		{
-			test = false;
-		}
-		else
-		{
-			while (randshape == HEX)
-			{
-				randshape = rand() % NUM;
-			}
-		}
-	}
 		return randshape;
 }
 
