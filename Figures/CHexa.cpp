@@ -16,7 +16,6 @@ int CHexa::GetHexCount()
 
 void CHexa::Draw(Output* pOut) const
 {
-	//Call Output::DrawRect to draw a rectangle on the screen	
 	pOut->DrawHexa(Center, FigGfxInfo, Selected);
 }
 
@@ -41,6 +40,16 @@ void CHexa::Move(Point NewLocation)
 {
 	Center.x = NewLocation.x;
 	Center.y = NewLocation.y;
+}
+void CHexa::PrintInfo(Output*pOut)
+{
+	string ID, type, center , msg;
+	ID = to_string(this->ID);
+	type = "Hexagon";
+	center = '(' + to_string(Center.x) + ',' + to_string(Center.y) + ')';
+	msg = "Shape ID: " + ID + "   Type: " + type + "   Center: " + center;
+	
+	pOut->PrintMessage(msg);
 }
 
 

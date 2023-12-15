@@ -14,7 +14,7 @@ public:
 	virtual void Draw(Output* pOut) const;
 	virtual bool PointBelong(int, int);
 	void Move(Point);
-
+	virtual void PrintInfo(Output* pOut);
 	string GetName() const;
 	void Save(ofstream& OutFile);
 	void Load(ifstream& Infile);

@@ -18,19 +18,20 @@ void DeleteFigAction::ReadActionParameters()
 	}
 
 	else {
-		pOut->PrintMessage("you must select a shape before using the fill bucket");
+		pOut->PrintMessage("you must select a shape before using the delete action");
 		CanExecute = false;
 	}
 }
 
 void DeleteFigAction::Execute()
 {
-	Output* pOut = pManager->GetOutput();
+		Output* pOut = pManager->GetOutput();
+		ReadActionParameters();
 
-	ReadActionParameters();
-	ToDelete->SetSelected(false);
-	ToDelete->Delete(pOut);
-	pManager->DeleteFigure(ToDelete->GetID());
-
+	if (CanExecute) {		
+		ToDelete->SetSelected(false);
+		ToDelete->Delete(pOut);
+		pManager->DeleteFigure(ToDelete->GetID());
+	}
 
 }
