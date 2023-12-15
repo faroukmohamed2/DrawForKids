@@ -28,7 +28,7 @@ void MoveAction::ReadActionParameters()
 	}
 
 	else {
-		pOut->PrintMessage("you must select a shape before using the fill bucket");
+		pOut->PrintMessage("you must select a shape before using the move tool");
 		CanExecute = false;
 	}
 }
@@ -37,8 +37,10 @@ void MoveAction::Execute()
 {
 	Output* pOut = pManager->GetOutput();
 
-	ReadActionParameters();
-	ToMove->SetSelected(false);
-	pOut->ClearDrawArea();
-	ToMove->Move(NewLocation);
+	ReadActionParameters(); 
+	if (CanExecute) {
+		ToMove->SetSelected(false);
+		pOut->ClearDrawArea();
+		ToMove->Move(NewLocation);
+	}
 }
