@@ -15,17 +15,27 @@ void CSquare::Draw(Output* pOut) const
 
 bool CSquare::PointBelong(int x, int y)
 {
-	const int SquareLength = 70; 
 
-	double MaxX = Center.x + SquareLength;
-	double MaxY = Center.y + SquareLength;
-	double MinX = Center.x - SquareLength;
-	double MinY = Center.y - SquareLength;
+	double MaxX = Center.x + HalfSquareLength;
+	double MaxY = Center.y + HalfSquareLength;
+	double MinX = Center.x - HalfSquareLength;
+	double MinY = Center.y - HalfSquareLength;
 
 	if (MaxX > x && MinX < x && MaxY > y && MinY < y)
 		return true;
 
 	return false;
+}
+void CSquare::PrintInfo(Output*pOut)
+{
+	string ID, type, center, length , msg;
+	ID = to_string(this->ID);
+	type = "square";
+	center = '(' + to_string(Center.x) + ',' + to_string(Center.y) + ')';
+	length = to_string(2 * HalfSquareLength);
+	msg = "Shape ID: " + ID + "   Type: " + type + "   Center: " + center + "   Length: " + length;
+	pOut->PrintMessage(msg);
+
 }
 string CSquare::GetName() const {
 	return "SQUA";

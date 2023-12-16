@@ -99,7 +99,6 @@ void ChangeFillAction::Execute()
 		else if (ReqStyle == Border) {
 			ToChange->ChngDrawClr(SelectedColor);
 			ToChange->SetSelected(!(ToChange->IsSelected()));
-			//UI.FillColor = SelectedColor;
 
 		}
 

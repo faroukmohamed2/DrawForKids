@@ -57,6 +57,17 @@ void CTriangle::Move(Point NewLocation)
 	Corner3.x += DiffrenceX;
 	Corner3.y += DiffrenceY;
 }
+void CTriangle::PrintInfo(Output*pOut)
+{
+	string ID, type, corner1 , corner2 , corner3 , msg;
+	ID = to_string(this->ID);
+	type = "Trinagle";
+	corner1 = '(' + to_string(Corner1.x) + ',' + to_string(Corner1.y) + "),";
+	corner2 = '(' + to_string(Corner2.x) + ',' + to_string(Corner2.y) + "),";
+	corner3=  '(' + to_string(Corner3.x) + ',' + to_string(Corner3.y) + ')' ;
+	msg = "Shape ID: " + ID + "    Type: " + type + "   Corners:" + corner1 + corner2 + corner3;
+	pOut->PrintMessage(msg);
+}
 int CTriangle::GetTriCount()
 {
 	return TriCount;

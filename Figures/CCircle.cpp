@@ -47,6 +47,18 @@ void CCircle::Move(Point NewLocation)
 
 }
 
+void CCircle::PrintInfo(Output*pOut)
+{
+	float Radius = sqrt(pow((P1.x) - (P2.x), 2) + pow((P1.y) - (P2.y), 2));
+	string ID, type, radius, center , msg;
+	ID = to_string(this->ID);
+	type = "Circle";
+	radius = to_string(Radius);
+	center = '(' + to_string(P1.x) + ',' + to_string(P1.y) + ')';
+	msg = "Shape ID: " + ID + "   Type: " + type + "   Center: " + center + "   Radius: " + radius;
+	pOut->PrintMessage(msg);
+}
+
 string CCircle::GetName() const {
 	return "CIRC";
 }

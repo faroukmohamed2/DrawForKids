@@ -164,7 +164,8 @@ void ApplicationManager::LoadAll(CFigure** list, int count) {
 
 int ApplicationManager::GetFigCount() const
 {
-	return FigCount;
+
+	return FigCount ;
 }
 
 //==================================================================================//
@@ -176,21 +177,21 @@ int ApplicationManager::AddFigure(CFigure* pFig)
 {
 	if(FigCount < MaxFigCount )
 		FigList[FigCount++] = pFig;	
-	return FigCount;
+	return FigID++;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure *ApplicationManager::GetFigure(int x, int y) const
 {
-	//CSquare* TheShape = NULL;
+	
 	bool PointBelong = false;
 
 	for (int i = FigCount - 1; i >= 0; i--) {
+		if (FigList[i] != NULL) {
+			PointBelong = FigList[i]->PointBelong(x, y);
+			if (PointBelong) {
 
-		//TheShape = dynamic_cast <CSquare*> (FigList[i]);
-		PointBelong = FigList [i]->PointBelong(x, y);
-		if (PointBelong) {
-
-			return FigList[i];
+				return FigList[i];
+			}
 		}
 	}
 	//If a figure is found return a pointer to it.
@@ -211,14 +212,23 @@ CFigure* ApplicationManager::IsSelected() const
 }
 void ApplicationManager::DeleteFigure(int deleteID)
 {
-	// could be changed 
+	int toDelete = 0;
+	for (int i = 0; i < FigCount; i++) {
 
+		if (FigList[i]->GetId() == deleteID) {
+			toDelete = i;
+			break;
+		}
+	}
+	delete FigList[toDelete];
+	FigList[toDelete] = NULL;
 
+	while (toDelete != FigCount-1) {
 
-	delete FigList[deleteID - 1];
-	FigList[deleteID - 1] = NULL;
-	FigList[deleteID - 1] = FigList[FigCount - 1];
-	FigList[FigCount - 1] = NULL;
+		FigList[toDelete] = FigList[toDelete + 1];
+		FigList[toDelete + 1] = NULL;
+        toDelete++;
+	}
 	FigCount--;
 }
 void ApplicationManager::show()

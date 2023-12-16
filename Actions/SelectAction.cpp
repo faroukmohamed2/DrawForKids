@@ -29,6 +29,7 @@ void SelectAction::ReadActionParameters()
 
 void SelectAction::Execute()
 {
+	Output* pOut = pManager->GetOutput();
 	ReadActionParameters();
 
 	CFigure* OldSelected = pManager->IsSelected();
@@ -41,8 +42,10 @@ void SelectAction::Execute()
 		ReadActionParameters();
 		TheSelected = pManager->GetFigure(P1.x, P1.y);
 	}
-	if (OldSelected != TheSelected)
-	TheSelected->SetSelected(!(TheSelected->IsSelected()));
+	if (OldSelected != TheSelected) {
+		TheSelected->SetSelected(!(TheSelected->IsSelected()));
+		TheSelected->PrintInfo(pOut);
+	}
 
 	TheSelected = NULL;
 	OldSelected = NULL;

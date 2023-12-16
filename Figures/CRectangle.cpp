@@ -27,9 +27,33 @@ bool CRectangle::PointBelong(int x , int y )
 	return false;
 	
 }
+
+
+void CRectangle::PrintInfo(Output*pOut)
+{
+	string ID , type , Height , Width ,TheCenter,msg;
+	Point Center;
+
+	Center.x = (Corner1.x + Corner2.x) / 2;
+	Center.y = (Corner1.y + Corner2.y) / 2;
+
+	ID = to_string(this->ID);
+	type = "Rectangle";
+	Height = to_string(abs(Corner1.y - Corner2.y));
+	Width = to_string(abs(Corner1.x - Corner2.x));
+	TheCenter = '(' + to_string(Center.x) + ',' + to_string(Center.y) + ')';
+
+	msg = "Shape ID: " + ID + "   Type:" + type + "   center:" + TheCenter + "   Height: " + Height + "   Width: " + Width;
+	
+	pOut->PrintMessage(msg);
+} 
+
+
 string CRectangle::GetName() const {
 	return "RECT";
 }
+
+
 void CRectangle::Save(ofstream& file) {
 	SavePoint(file, Corner1);
 	SavePoint(file, Corner2);
