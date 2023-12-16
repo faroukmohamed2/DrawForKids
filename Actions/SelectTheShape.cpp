@@ -34,15 +34,13 @@ int SelectTheShape::NotExist(int rand)
 	if (rand == HEX && HexCount == 0)
 		return HEX;
 }
-int SelectTheShape::GetValidShape()
+void SelectTheShape::GetValidShape()
 {
-	int randshape;
 	do
 	{
 		randshape = rand() % NUM;
 	} while (randshape == NotExist(randshape));
 
-		return randshape;
 }
 
 void SelectTheShape::ReadActionParameters()
@@ -50,11 +48,9 @@ void SelectTheShape::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
-	if (FigCount == 0)
-		pOut->PrintMessage("Please Draw Some Shapes");
-	else
+
+	if (FigCount != 0)
 	{
-		int randshape = GetValidShape();
 		switch (randshape)
 		{
 		case REC:
@@ -74,12 +70,97 @@ void SelectTheShape::ReadActionParameters()
 			break;
 		}
 		pIn->GetPointClicked(p.x, p.y);
+
 	}
 
 }
 
 void SelectTheShape::Execute()
 {
-	ReadActionParameters();
-	CFigure* pick = pManager->GetFigure(p.x, p.y);
+	int TrueAns = 0, WrongAns = 0;
+	CFigure** pick = new CFigure * [FigCount];
+	Output* pOut = pManager->GetOutput();
+	if (FigCount == 0)
+		pOut->PrintMessage("Please Draw Some Shapes");
+	else
+	{
+		GetValidShape();
+		for (int i = 0; i < FigCount; i++)
+		{
+			ReadActionParameters();
+			pick[i] = pManager->GetFigure(p.x, p.y);
+			if (EndExecute() == TO_DRAW)
+			{
+				pManager->ExecuteAction(TO_DRAW);
+				break;
+			}
+			else if (EndExecute() == RESET)
+			{
+				pManager->ExecuteAction(RESET);
+				break;
+			}
+			while (pick[i] == NULL)
+			{
+				ReadActionParameters();
+				pick[i] = pManager->GetFigure(p.x, p.y);
+			}
+			if (pick[i])
+			{
+				pick[i]->ChngDrawClr(UI.BkGrndColor);
+				if (pick[i]->IsFilled())
+					pick[i]->ChngFillClr(UI.BkGrndColor);
+			}
+			pManager->UpdateInterface();
+			if (dynamic_cast<CRectangle*>(pick[i]) && randshape == REC)
+			{
+				TrueAns++;
+				RecCount--;
+			}
+			else if (dynamic_cast<CTriangle*>(pick[i]) && randshape == TRI)
+			{
+				TrueAns++;
+				TriCount--;
+			}
+			else if (dynamic_cast<CCircle*>(pick[i]) && randshape == CIRC)
+			{
+				TrueAns++;
+				CircCount--;
+			}
+			else if (dynamic_cast<CHexa*>(pick[i]) && randshape == HEX)
+			{
+				TrueAns++;
+				HexCount--;
+			}
+			else if (dynamic_cast<CSquare*>(pick[i]) && randshape == SQU)
+			{
+				TrueAns++;
+				SquCount--;
+			}
+			else
+				WrongAns++;
+
+
+			if (randshape == NotExist(randshape))
+			{
+
+				pOut->PrintMessage("True Answers: " + to_string(TrueAns) + " Wrong Answers: " + to_string(WrongAns));
+				break;
+			}
+
+		}
+	}
+}
+
+
+
+ActionType SelectTheShape::EndExecute()
+{
+
+	if (p.y < UI.ToolBarHeight)
+	{
+		if (p.x < (UI.width - UI.MenuItemWidth * 2) && p.x >(UI.width - UI.MenuItemWidth * 2 * 2))
+			return TO_DRAW;
+		if (p.x > UI.MenuItemWidth * 9 && p.x < UI.MenuItemWidth * 11)
+			return RESET;
+	}
 }

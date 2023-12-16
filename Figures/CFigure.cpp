@@ -12,6 +12,13 @@ CFigure::CFigure(int id)
 	Selected = false;
 }
 
+bool CFigure::IsFilled()
+{
+	if (FigGfxInfo.isFilled)
+		return true;
+	return false;
+}
+
 int CFigure::GetId() const {
 	return ID;
 }

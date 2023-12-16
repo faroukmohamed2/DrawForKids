@@ -17,7 +17,7 @@
 #include "Actions/DeleteFigAction.h"
 #include "Actions/MoveAction.h"
 #include "Actions/SelectTheShape.h"
-
+#include "Actions/RestartAction.h" 
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -113,6 +113,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case FIG_TYP:
 			pAct = new SelectTheShape(this);
 			break;
+		case RESET:
+			pAct = new Restart(this);
+			break;
 		case EXIT:
 			///create ExitAction here
 			
@@ -130,6 +133,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = NULL;
 	}
 }
+
+
+
 //==================================================================================//
 //						       Save System Functions								//
 //==================================================================================//
@@ -215,6 +221,16 @@ void ApplicationManager::DeleteFigure(int deleteID)
 	FigList[FigCount - 1] = NULL;
 	FigCount--;
 }
+void ApplicationManager::show()
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		FigList[i]->ChngDrawClr(UI.DrawColor);
+		if (FigList[i]->IsFilled())
+			FigList[i]->ChngFillClr(UI.FillColor);
+
+	}
+}
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
@@ -231,7 +247,8 @@ void ApplicationManager::UpdateInterface() const
 	pOut->DrawRect(p1, p2, gfxInfo);
 
 	for(int i=0; i<FigCount; i++)
-		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+		if (FigList[i])
+			FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input

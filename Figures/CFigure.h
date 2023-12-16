@@ -22,7 +22,7 @@ protected:
 public:
 	CFigure(GfxInfo FigureGfxInfo);
 	CFigure(int id);
-
+	bool IsFilled();
 	virtual string GetName() const = 0;
 	int GetId() const;
 

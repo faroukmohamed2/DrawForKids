@@ -97,6 +97,7 @@ void Output::CreateStatusBar() const
 	pWind->SetPen(UI.StatusBarColor, 1);
 	pWind->SetBrush(UI.StatusBarColor);
 	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
+
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::ClearStatusBar() const

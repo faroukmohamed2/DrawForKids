@@ -20,6 +20,7 @@ void ChangeToDrawModeAction::Execute()
 	if (pOut != NULL)
 	{
 		pOut->CreateDrawToolBar();
+		pManager->show();
 	}
 
 }

@@ -138,6 +138,7 @@
     <ClCompile Include="Actions\ChangeToDrawModeAction.cpp" />
     <ClCompile Include="Actions\ChangeToPlayModeAction.cpp" />
     <ClCompile Include="Actions\LoadAction.cpp" />
+    <ClCompile Include="Actions\RestartAction.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
     <ClCompile Include="Actions\DeleteFigAction.cpp" />
     <ClCompile Include="Actions\MoveAction.cpp" />
@@ -202,6 +203,7 @@
     <ClInclude Include="Actions\ChangeToDrawModeAction.h" />
     <ClInclude Include="Actions\ChangeToPlayModeAction.h" />
     <ClInclude Include="Actions\LoadAction.h" />
+    <ClInclude Include="Actions\RestartAction.h" />
     <ClInclude Include="Actions\SaveAction.h" />
     <ClInclude Include="Actions\DeleteFigAction.h" />
     <ClInclude Include="Actions\MoveAction.h" />

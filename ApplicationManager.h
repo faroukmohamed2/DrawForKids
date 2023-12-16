@@ -15,14 +15,13 @@ class ApplicationManager
 private:
 	int FigCount;		//Actual number of figures
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
-
 	CFigure* SelectedFig; //Pointer to the selected figure
-
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
 
 public:	
+	int acttype;//test
 	ApplicationManager(); 
 	~ApplicationManager();
 	
@@ -30,13 +29,12 @@ public:
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
 	void ExecuteAction(ActionType) ; //Creates an action and executes it
-	
 	// -- Figures Management Functions
 	int AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
 	CFigure *GetFigure(int x, int y) const;
 	CFigure* IsSelected() const;
 	void DeleteFigure(int);          //Search for a figure given a point inside the figure
-		
+	void show();
 	// -- Interface Management Functions
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
