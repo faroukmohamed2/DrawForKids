@@ -42,6 +42,7 @@ public:
 	 void SetId(int);
 	 int GetID();
 	 void Delete(Output* pOut) ;
+	 bool getfillstate();
 	 virtual void Move(Point) = 0;
 	 
 	///The following functions should be supported by the figure class

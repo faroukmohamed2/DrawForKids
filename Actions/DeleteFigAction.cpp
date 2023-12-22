@@ -2,6 +2,7 @@
 
 DeleteFigAction::DeleteFigAction(ApplicationManager* pApp) :Action(pApp)
 {
+	UndoValidity = true;
 }
 
 void DeleteFigAction::ReadActionParameters()

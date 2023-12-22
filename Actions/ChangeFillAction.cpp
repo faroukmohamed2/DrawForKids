@@ -16,6 +16,7 @@ ChangeFillAction::ChangeFillAction(ApplicationManager* pApp, ActionType ChngStyl
 
 	else if (ChngStyle == Pencile_Tool)
 		ReqStyle = Border;
+	UndoValidity = true;
 }
 
 void ChangeFillAction::ReadActionParameters()
@@ -24,6 +25,9 @@ void ChangeFillAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 	ToChange = pManager->IsSelected();
+	FGindex = pManager->IsSelected()->GetID();
+	lastFillstate = ToChange->getfillstate();
+
 	if (ToChange != NULL) {
 
 		if (ReqStyle == Fill)
@@ -92,16 +96,57 @@ void ChangeFillAction::Execute()
 	if (CanExecute) {
 
 		if (ReqStyle == Fill) {
+
 			ToChange->ChngFillClr(SelectedColor);
 			ToChange->SetSelected(!(ToChange->IsSelected()));
+			lastSelected = UI.FillColor;
 			UI.FillColor = SelectedColor;
+
+
 		}
 		else if (ReqStyle == Border) {
+
 			ToChange->ChngDrawClr(SelectedColor);
 			ToChange->SetSelected(!(ToChange->IsSelected()));
+			lastSelected = UI.DrawColor;
+			UI.DrawColor = SelectedColor;
 
 		}
 
 
 	}
+}
+
+void ChangeFillAction::undo()
+{
+	if (ReqStyle == Fill) {
+		if (lastFillstate) {
+
+			pManager->GetFigure(FGindex)->ChngFillClr(lastSelected);
+
+		}
+		else pManager->GetFigure(FGindex)->ChngFillClr(UI.BkGrndColor);
+	}
+	else if (ReqStyle == Border) {
+		pManager->GetFigure(FGindex)->ChngDrawClr(lastSelected);
+
+
+	}
+	
+}
+
+void ChangeFillAction::redo()
+{
+	if (ReqStyle == Fill) {
+
+		pManager->GetFigure(FGindex)->ChngFillClr(SelectedColor);
+
+	}
+	else if (ReqStyle == Border) {
+
+		pManager->GetFigure(FGindex)->ChngDrawClr(SelectedColor);
+
+
+	}
+	
 }
