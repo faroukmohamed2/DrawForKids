@@ -2,7 +2,6 @@
 #include "../ApplicationManager.h"
 #include "../DEFS.h"
 #include <cstdlib>
-#include <ctime>
 #include "../Figures/CCircle.h"
 #include "../Figures/CSquare.h"
 #include "../Figures/CHexa.h"
@@ -77,18 +76,36 @@ void SelectTheShape::ReadActionParameters()
 
 void SelectTheShape::Execute()
 {
-	int TrueAns = 0, WrongAns = 0;
+	int TrueAns = 0, WrongAns = 0, i = 0;
 	CFigure** pick = new CFigure * [FigCount];
 	Output* pOut = pManager->GetOutput();
+
+	pManager->show();
+	pManager->UpdateInterface();
 	if (FigCount == 0)
 		pOut->PrintMessage("Please Draw Some Shapes");
 	else
 	{
 		GetValidShape();
-		for (int i = 0; i < FigCount; i++)
+		while (1)
 		{
 			ReadActionParameters();
 			pick[i] = pManager->GetFigure(p.x, p.y);
+			while (pick[i] == NULL)
+			{
+				ReadActionParameters();
+				if (EndExecute() == TO_DRAW)
+				{
+					pManager->ExecuteAction(TO_DRAW);
+					break;
+				}
+				else if (EndExecute() == RESET)
+				{
+					pManager->ExecuteAction(RESET);
+					break;
+				}
+				pick[i] = pManager->GetFigure(p.x, p.y);
+			}
 			if (EndExecute() == TO_DRAW)
 			{
 				pManager->ExecuteAction(TO_DRAW);
@@ -99,18 +116,11 @@ void SelectTheShape::Execute()
 				pManager->ExecuteAction(RESET);
 				break;
 			}
-			while (pick[i] == NULL)
-			{
-				ReadActionParameters();
-				pick[i] = pManager->GetFigure(p.x, p.y);
-			}
 			if (pick[i])
 			{
-				pick[i]->ChngDrawClr(UI.BkGrndColor);
-				if (pick[i]->IsFilled())
-					pick[i]->ChngFillClr(UI.BkGrndColor);
+				pick[i]->SetHide(true);
+				pManager->UpdateInterface();
 			}
-			pManager->UpdateInterface();
 			if (dynamic_cast<CRectangle*>(pick[i]) && randshape == REC)
 			{
 				TrueAns++;
@@ -146,6 +156,7 @@ void SelectTheShape::Execute()
 				pOut->PrintMessage("True Answers: " + to_string(TrueAns) + " Wrong Answers: " + to_string(WrongAns));
 				break;
 			}
+			i++;
 
 		}
 	}

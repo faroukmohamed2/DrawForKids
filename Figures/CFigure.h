@@ -13,7 +13,7 @@ protected:
 	int ID;		//Each figure has an ID
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
-	
+	bool hide;
 	/// Add more parameters if needed.
 	
 	void SavePoint(ofstream& OutFile, Point& point);
@@ -25,13 +25,14 @@ public:
 	bool IsFilled();
 	virtual string GetName() const = 0;
 	int GetId() const;
-
+	void SetHide(bool);
+	bool IsHide() const;
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
 	virtual void PrintInfo(Output* pOut) = 0;
 
 	virtual void Draw(Output* pOut) const  = 0 ;		//Draw the figure
-	
+	color GetFigColor() const;
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 	virtual bool PointBelong(int x , int y) = 0;

@@ -19,7 +19,7 @@ private:
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
-
+	int id = -1;
 public:	
 	int acttype;//test
 	ApplicationManager(); 
@@ -35,6 +35,8 @@ public:
 	CFigure* IsSelected() const;
 	void DeleteFigure(int);          //Search for a figure given a point inside the figure
 	void show();
+	void hide(int);
+	color GetFigColor(int);
 	// -- Interface Management Functions
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output

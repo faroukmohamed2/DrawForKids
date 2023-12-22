@@ -4,6 +4,7 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 { 
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
 	Selected = false;
+	hide = false;
 }
 
 CFigure::CFigure(int id)
@@ -23,11 +24,26 @@ int CFigure::GetId() const {
 	return ID;
 }
 
+void CFigure::SetHide(bool Hide)
+{
+	hide = Hide;
+}
+
+bool CFigure::IsHide() const
+{
+	return hide;
+}
+
 void CFigure::SetSelected(bool s)
 {	Selected = s; }
 
 bool CFigure::IsSelected() const
 {	return Selected; }
+
+color CFigure::GetFigColor() const
+{
+	return FigGfxInfo.FillClr;
+}
 
 void CFigure::ChngDrawClr(color Dclr)
 {	FigGfxInfo.DrawClr = Dclr; }

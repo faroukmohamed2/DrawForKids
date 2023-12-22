@@ -54,7 +54,7 @@ void ChangeColorAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 
-	pOut->PrintMessage("Change the default drawing clor to: " + ColorName);
+	pOut->PrintMessage("Change the default drawing color to: " + ColorName);
 
 }
 
