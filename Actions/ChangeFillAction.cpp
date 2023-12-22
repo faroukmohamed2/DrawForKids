@@ -16,6 +16,7 @@ ChangeFillAction::ChangeFillAction(ApplicationManager* pApp, ActionType ChngStyl
 
 	else if (ChngStyle == Pencile_Tool)
 		ReqStyle = Border;
+
 	UndoValidity = true;
 }
 

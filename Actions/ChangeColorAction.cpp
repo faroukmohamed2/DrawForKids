@@ -45,6 +45,7 @@ ChangeColorAction::ChangeColorAction(ApplicationManager* pApp, ActionType TheCol
 	default:
 		break;
 	}
+	UndoValidity = false;
 }
 
 void ChangeColorAction::ReadActionParameters()
@@ -63,6 +64,19 @@ void ChangeColorAction::ReadActionParameters()
 void ChangeColorAction::Execute()
 {
 	ReadActionParameters();
+	lastColor = UI.DrawColor;
 	UI.DrawColor = SelectedColor;
+	
+}
 
+void ChangeColorAction::undo()
+{
+	Output* pOut = pManager->GetOutput();
+	UI.DrawColor = lastColor;
+	pOut->PrintMessage(" ");
+}
+void ChangeColorAction::redo()
+{
+	lastColor = UI.DrawColor;
+	UI.DrawColor = SelectedColor;
 }
