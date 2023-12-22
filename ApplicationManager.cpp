@@ -19,6 +19,8 @@
 #include "Actions/SelectTheShape.h"
 #include "Actions/RestartAction.h" 
 #include "Actions/SelectTheColor.h"
+#include"Actions/UndoAction.h"
+#include"Actions/RedoAction.h"
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -27,10 +29,14 @@ ApplicationManager::ApplicationManager()
 	pIn = pOut->CreateInput();
 	
 	FigCount = 0;
-		
+	CountofUndoed = 0;
+	ActionsCount = 0;
 	//Create an array of figure pointers and set them to NULL		
 	for(int i=0; i<MaxFigCount; i++)
 		FigList[i] = NULL;	
+
+	for (int i = 0; i < 5; i++)
+		last5Actions[i] = NULL;
 }
 
 //==================================================================================//
@@ -120,6 +126,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case RESET:
 			pAct = new Restart(this);
 			break;
+		case UNDO:
+			pAct = new UndoAction(this);
+			break;
+		case REDO:
+			pAct = new RedoAction(this);
+
 		case EXIT:
 			///create ExitAction here
 			
@@ -133,6 +145,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	if(pAct != NULL)
 	{
 		pAct->Execute();//Execute
+		addAction(pAct);
 		//delete pAct;	//You may need to change this line depending to your implementation
 		pAct = NULL;
 	}
@@ -255,6 +268,61 @@ void ApplicationManager::UpdateInterface() const
 		if (FigList[i] && !FigList[i]->IsHide())
 			FigList[i]->Draw(pOut);
 				//Call Draw function (virtual member fn)
+}
+
+void ApplicationManager::addAction(Action* ptr)
+{
+	
+
+	if (ptr->GetUndoValidity()) {
+
+		while (CountofUndoed != 0)
+		{
+			delete last5Actions[ActionsCount - 1];
+			CountofUndoed--;
+			ActionsCount--;
+		}
+
+
+		if (ActionsCount < 5)
+		{
+			last5Actions[ActionsCount++] = ptr;
+		}
+
+		else {
+			delete last5Actions[0];
+			for (int i = 0; i < 3; i++)
+			{
+				last5Actions[i] = last5Actions[i + 1];
+			}
+
+			last5Actions[4] = ptr;
+		}
+	}
+}
+
+void ApplicationManager::UndoLastAction()
+{   
+	int i = ActionsCount - CountofUndoed - 1;
+	if (ActionsCount == 0||i<0)
+	{
+		pOut->PrintMessage("you can't undo anymore");
+		return;
+	}
+
+	last5Actions[i]->undo();
+	CountofUndoed++;
+}
+
+void ApplicationManager::RedoLastAction()
+{
+	if (CountofUndoed == 0) {
+
+		pOut->PrintMessage("you can't redo");
+		return;
+	}
+	last5Actions[ActionsCount - CountofUndoed]->redo();
+	CountofUndoed--;
 }
 
 void ApplicationManager::show()

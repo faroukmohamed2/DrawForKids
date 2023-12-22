@@ -9,8 +9,10 @@ class ApplicationManager; //forward class declaration
 //Base class for all possible actions
 class Action
 {
+
 protected:
 	ApplicationManager *pManager;	//Actions needs AppMngr to do their job
+	bool UndoValidity;
 
 public:
 
@@ -21,7 +23,9 @@ public:
 	
 	//Execute action (code depends on action type)
 	virtual void Execute() =0;
-
+	bool GetUndoValidity() { return UndoValidity; }
+	virtual void undo() {}
+	virtual void redo() {}
 };
 
 #endif

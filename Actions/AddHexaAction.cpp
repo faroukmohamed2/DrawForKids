@@ -42,7 +42,23 @@ void AddHexaAction::Execute()
 	CHexa* R = new CHexa(P1, HexaGfxInfo);
 
 	//Add the rectangle to the list of figures
-	int ID = pManager->AddFigure(R);
+	ID = pManager->AddFigure(R);
+	R->SetId(ID);
+	
+}
+
+void AddHexaAction::undo()
+{
+	pManager->DeleteFigure(ID);
+	
+}
+
+void AddHexaAction::redo()
+{
+	CHexa* R = new CHexa(P1, HexaGfxInfo);
+
+
+	ID = pManager->AddFigure(R);
 	R->SetId(ID);
 	
 }

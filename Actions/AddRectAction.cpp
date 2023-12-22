@@ -6,8 +6,10 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddRectAction::AddRectAction(ApplicationManager * pApp):Action(pApp)
-{}
+AddRectAction::AddRectAction(ApplicationManager* pApp) :Action(pApp)
+{
+	UndoValidity = 1;
+}
 
 void AddRectAction::ReadActionParameters() 
 {	
@@ -46,7 +48,20 @@ void AddRectAction::Execute()
 	CRectangle *R=new CRectangle(P1, P2, RectGfxInfo);
 
 	//Add the rectangle to the list of figures
-	int ID = pManager->AddFigure(R);
+	ID = pManager->AddFigure(R);
 	R->SetId(ID);
 
+}
+
+void AddRectAction::undo()
+{
+	pManager->DeleteFigure(ID);
+}
+
+void AddRectAction::redo()
+{
+
+	CRectangle* R = new CRectangle(P1, P2, RectGfxInfo);
+	ID = pManager->AddFigure(R);
+	R->SetId(ID);
 }

@@ -7,7 +7,9 @@
 #include "..\GUI\Output.h"
 
 AddCircleAction::AddCircleAction(ApplicationManager * pApp):Action(pApp)
-{}
+{
+	UndoValidity = true;
+}
 
 void AddCircleAction::ReadActionParameters() 
 {	
@@ -46,6 +48,22 @@ void AddCircleAction::Execute()
 	CCircle*R=new CCircle(P1, P2, CircleGfxInfo);
 
 	//Add the rectangle to the list of figures
-	int ID = pManager->AddFigure(R);
+	ID = pManager->AddFigure(R);
 	R->SetId(ID);
+}
+
+void AddCircleAction::undo()
+{
+	pManager->DeleteFigure(ID);
+	
+}
+
+void AddCircleAction::redo()
+{
+	CCircle* R = new CCircle(P1, P2, CircleGfxInfo);
+
+
+	ID = pManager->AddFigure(R);
+	R->SetId(ID);
+	
 }

@@ -6,7 +6,7 @@
 
 SelectAction::SelectAction(ApplicationManager* pApp):Action(pApp)
 {
-
+	UndoValidity = false;
 }
 
 void SelectAction::ReadActionParameters()

@@ -59,6 +59,11 @@ void CCircle::PrintInfo(Output*pOut)
 	pOut->PrintMessage(msg);
 }
 
+Point CCircle::getlocation()
+{
+	return P1;
+}
+
 string CCircle::GetName() const {
 	return "CIRC";
 }

@@ -17,7 +17,7 @@ public:
 	virtual bool PointBelong(int, int);
 	void Move(Point);
 	virtual void PrintInfo(Output*pOut);
-
+	virtual Point getlocation();
 	string GetName() const;
 	void Save(ofstream& OutFile);
 	void Load(ifstream& Infile);

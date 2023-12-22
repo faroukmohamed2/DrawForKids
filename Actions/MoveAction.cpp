@@ -6,6 +6,8 @@
 
 MoveAction::MoveAction(ApplicationManager* pApp) :Action(pApp)
 {
+	UndoValidity = true;
+	
 }
 
 void MoveAction::ReadActionParameters()
@@ -14,6 +16,7 @@ void MoveAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 	ToMove = pManager->IsSelected();
+	lastLoaction = ToMove->getlocation();
 	if (ToMove != NULL) {
 
 		pOut->PrintMessage("Move figures tool is selected , please select the new location");
@@ -21,7 +24,7 @@ void MoveAction::ReadActionParameters()
 
 		pIn->GetPointClicked(NewLocation.x, NewLocation.y);
 		pIn->getValidDrawPoint(NewLocation);
-
+		
 		pOut->PrintMessage("Figure moved successfully");
 
 
@@ -43,4 +46,11 @@ void MoveAction::Execute()
 		pOut->ClearDrawArea();
 		ToMove->Move(NewLocation);
 	}
+}
+
+void MoveAction::undo()
+{
+	Output* pOut = pManager->GetOutput();
+	pOut->ClearDrawArea();
+	ToMove->Move(lastLoaction);
 }

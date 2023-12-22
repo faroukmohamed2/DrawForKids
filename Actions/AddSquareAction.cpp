@@ -8,6 +8,7 @@
 
 AddSquareAction::AddSquareAction(ApplicationManager* pApp):Action (pApp)
 {
+	UndoValidity = true;
 }
 
 void AddSquareAction::ReadActionParameters()
@@ -36,6 +37,22 @@ void AddSquareAction::Execute()
 	CSquare* R = new CSquare(P1, SquareGfxInfo);
 
 	//Add the rectangle to the list of figures
-	int ID = pManager->AddFigure(R);
+	ID = pManager->AddFigure(R);
 	R->SetId(ID);
+}
+
+void AddSquareAction::undo()
+{
+	pManager->DeleteFigure(ID);
+	
+}
+
+void AddSquareAction::redo()
+{
+	CSquare* R = new CSquare(P1, SquareGfxInfo);
+
+
+	ID = pManager->AddFigure(R);
+	R->SetId(ID);
+	
 }

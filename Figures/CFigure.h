@@ -36,6 +36,7 @@ public:
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 	virtual bool PointBelong(int x , int y) = 0;
+	virtual Point getlocation() { return Point(); }
 	 bool IsInTriangle(Point , Point , Point , Point );
 	 double CalcAreaTriangle(Point, Point, Point);
 	 void SetId(int);
