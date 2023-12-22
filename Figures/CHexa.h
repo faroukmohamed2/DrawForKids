@@ -11,6 +11,7 @@ private:
 public:
 	CHexa(Point, GfxInfo FigureGfxInfo);
 	CHexa(int id);
+	CFigure* clone();
 	static int GetHexCount();
 	virtual void Draw(Output* pOut) const;
 	virtual bool PointBelong(int, int);

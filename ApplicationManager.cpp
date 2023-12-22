@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <thread>
 #include "Actions/ChangeColorAction.h"
 #include "Actions/ChangeFillAction.h"
 #include "Actions/DeleteFigAction.h"
@@ -21,6 +22,8 @@
 #include "Actions/SelectTheColor.h"
 #include"Actions/UndoAction.h"
 #include"Actions/RedoAction.h"
+#include "Actions/StartRecordingAction.h"
+
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -132,6 +135,16 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case REDO:
 			pAct = new RedoAction(this);
 			break;
+
+		case START_RECORD:
+			pAct = new StartRecordingAction(this);
+			break;
+		case STOP_RECORD:
+			StopRectording();
+			break;
+		case PLAY_RECORD:
+			PlayRecord();
+			break;
 		case EXIT:
 			///create ExitAction here
 			
@@ -185,6 +198,38 @@ int ApplicationManager::GetFigCount() const
 	return FigCount ;
 }
 
+//==================================================================================//
+//						       Record System Functions								//
+//==================================================================================//
+void ApplicationManager::StartRecording(){
+	isRecording = true;
+	InitRecordFigureList = new CFigure * [FigCount];
+	for (int i = 0; i < FigCount; i++) {
+		InitRecordFigureList[i] = FigList[i]->clone();
+	}
+	InitRecordFigureListCount = FigCount;
+}
+void ApplicationManager::StopRectording(){
+	isRecording = false;
+}
+void ApplicationManager::PlayRecord(){
+	for (int i = 0; i < FigCount; i++) {
+		FigList[i] = NULL;
+	}
+
+	for (int i = 0; i < InitRecordFigureListCount; i++) {
+		FigList[i] = InitRecordFigureList[i];
+	}
+
+	UpdateInterface();
+
+	for (int i = 0; i < RecordedActionListCount; i++) {
+		RecordedActionList[i]->redo();
+		UpdateInterface();
+
+		Sleep(1 * 1000);
+	}
+}
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
@@ -283,7 +328,9 @@ void ApplicationManager::UpdateInterface() const
 
 void ApplicationManager::addAction(Action* ptr)
 {
-	
+	if (isRecording) {
+		RecordedActionList[RecordedActionListCount++] = ptr;
+	}
 
 	if (ptr->GetUndoValidity()) {
 

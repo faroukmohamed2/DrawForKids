@@ -2,6 +2,11 @@
 #include <cmath>
 #include <fstream>
 int CCircle::CircCount = 0;
+
+CFigure* CCircle::clone() {
+	return new CCircle(*this);
+}
+
 int CCircle::GetCircCount()
 {
 	return CircCount;

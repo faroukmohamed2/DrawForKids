@@ -5,6 +5,7 @@
 #include "Figures\CFigure.h"
 #include "GUI\input.h"
 #include "GUI\output.h"
+#include "Actions/Action.h"
 //#include "Figures/CSquare.h"
 #include"Actions/Action.h"
 //Main class that manages everything in the application.
@@ -19,6 +20,15 @@ private:
 	Action* last5Actions[5];
 	int CountofUndoed;
 	int ActionsCount;
+
+	//Recording Variables
+	bool isRecording = false;
+	Action* RecordedActionList[MaxFigCount];
+	int RecordedActionListCount = 0;
+	CFigure** InitRecordFigureList;
+	int InitRecordFigureListCount;
+
+
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
@@ -66,6 +76,11 @@ public:
 	int GetFigCount() const;
 
 
+
+	//RecordSystem
+	void StartRecording();
+	void StopRectording();
+	void PlayRecord();
 };
 
 #endif

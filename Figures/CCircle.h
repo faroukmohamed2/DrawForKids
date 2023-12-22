@@ -9,6 +9,8 @@ private:
 	Point P2;
 	static int CircCount;
 public:
+	CFigure* clone();
+
 	static int GetCircCount();
 	CCircle(Point, Point, GfxInfo FigureGfxInfo);
 	CCircle(int id);

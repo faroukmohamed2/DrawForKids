@@ -13,6 +13,8 @@ public:
 	CSquare(Point, GfxInfo FigureGfxInfo);
 	CSquare(int id);
 
+	CFigure* clone();
+
 	virtual void Draw(Output* pOut) const;
 	virtual bool PointBelong(int, int);
 	virtual void PrintInfo(Output*pOut);

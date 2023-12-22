@@ -22,6 +22,9 @@ protected:
 public:
 	CFigure(GfxInfo FigureGfxInfo);
 	CFigure(int id);
+
+	virtual CFigure* clone() = 0;
+
 	bool IsFilled();
 	virtual string GetName() const = 0;
 	int GetId() const;
