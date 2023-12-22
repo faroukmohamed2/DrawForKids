@@ -59,6 +59,11 @@ void CSquare::Move(Point NewLocation)
 	Center.y = NewLocation.y;
 }
 
+Point CSquare::getlocation()
+{
+	return Center;
+}
+
 int CSquare::GetSquCount()
 {
 	return SquCount;

@@ -11,6 +11,8 @@ void DeleteFigAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 	ToDelete = pManager->IsSelected();
+	Refrence = ToDelete;
+	FigID = ToDelete->GetId();
 	if (ToDelete != NULL) {
 
 		pOut->PrintMessage("The figure is deleted succefully");
@@ -25,13 +27,29 @@ void DeleteFigAction::ReadActionParameters()
 
 void DeleteFigAction::Execute()
 {
-		Output* pOut = pManager->GetOutput();
-		ReadActionParameters();
+	Output* pOut = pManager->GetOutput();
+	ReadActionParameters();
 
-	if (CanExecute) {		
+	if (CanExecute) {
 		ToDelete->SetSelected(false);
-		ToDelete->Delete(pOut);
+		//ToDelete->Delete(pOut);
 		pManager->DeleteFigure(ToDelete->GetID());
 	}
 
+}
+
+void DeleteFigAction::undo()
+{
+	Output* pOut = pManager->GetOutput();
+	Refrence->SetHide(false);
+	pManager->AddFigure(Refrence);
+	
+}
+
+void DeleteFigAction::redo()
+{
+	Output* pOut = pManager->GetOutput();
+	Refrence->SetHide(true);
+	//Refrence->Delete(pOut);
+	pManager->DeleteFigure(FigID);
 }

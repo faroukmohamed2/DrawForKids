@@ -62,6 +62,6 @@ void AddRectAction::redo()
 {
 
 	CRectangle* R = new CRectangle(P1, P2, RectGfxInfo);
-	ID = pManager->AddFigure(R);
 	R->SetId(ID);
+	pManager->AddFigure(R);
 }

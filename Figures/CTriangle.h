@@ -18,6 +18,7 @@ public:
 	string GetName() const;
 	void Save(ofstream& OutFile);
 	void Load(ifstream& Infile);
+	Point getlocation();
 	static int GetTriCount();
 	virtual ~CTriangle();
 };

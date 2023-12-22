@@ -42,6 +42,14 @@ void CTriangle::Load(ifstream& file) {
 
 }
 
+Point CTriangle::getlocation()
+{
+	Point Center;
+	Center.x = (Corner1.x + Corner2.x + Corner3.x) / 3;
+	Center.y = (Corner1.y + Corner2.y + Corner3.y) / 3;
+	return Center;
+}
+
 
 void CTriangle::Move(Point NewLocation)
 {

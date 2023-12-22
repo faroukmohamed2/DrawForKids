@@ -16,6 +16,7 @@ public:
 	virtual bool PointBelong(int, int);
 	void GetCorners(Point [] , Point );
 	void Move(Point);
+	Point getlocation();
 	virtual void PrintInfo(Output*pOut);
 	string GetName() const;
 	void Save(ofstream& OutFile);

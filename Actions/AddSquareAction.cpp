@@ -52,7 +52,7 @@ void AddSquareAction::redo()
 	CSquare* R = new CSquare(P1, SquareGfxInfo);
 
 
-	ID = pManager->AddFigure(R);
 	R->SetId(ID);
+	pManager->AddFigure(R);
 	
 }

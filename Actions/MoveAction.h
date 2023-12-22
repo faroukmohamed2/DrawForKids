@@ -11,6 +11,7 @@ class MoveAction : public Action {
 	CFigure* ToMove;
 	Point NewLocation;
 	Point lastLoaction;
+	int FigID;
 public:
 	MoveAction(ApplicationManager* pApp);
 
@@ -18,5 +19,5 @@ public:
 
 	virtual void Execute();
 	virtual void undo();
-	
+	virtual void redo();
 };

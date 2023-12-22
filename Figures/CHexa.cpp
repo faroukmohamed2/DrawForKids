@@ -41,6 +41,10 @@ void CHexa::Move(Point NewLocation)
 	Center.x = NewLocation.x;
 	Center.y = NewLocation.y;
 }
+Point CHexa::getlocation()
+{
+	return Center;
+}
 void CHexa::PrintInfo(Output*pOut)
 {
 	string ID, type, center , msg;

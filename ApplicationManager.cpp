@@ -131,7 +131,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case REDO:
 			pAct = new RedoAction(this);
-
+			break;
 		case EXIT:
 			///create ExitAction here
 			
@@ -211,6 +211,8 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 			}
 		}
 	}
+
+	
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
 
@@ -220,6 +222,15 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 
 	return NULL;
 }
+
+	CFigure* ApplicationManager::GetFigure(int id)
+	{
+		for (int i = 0; i < FigCount; i++)
+			if (FigList[i]->GetID() == id)
+				return FigList[i];
+		return NULL;
+	}
+
 CFigure* ApplicationManager::IsSelected() const
 {
 	for (int i = 0; i < FigCount; i++)
@@ -237,14 +248,14 @@ void ApplicationManager::DeleteFigure(int deleteID)
 			break;
 		}
 	}
-	delete FigList[toDelete];
+	//delete FigList[toDelete];
 	FigList[toDelete] = NULL;
 
-	while (toDelete != FigCount-1) {
+	while (toDelete != FigCount - 1) {
 
 		FigList[toDelete] = FigList[toDelete + 1];
 		FigList[toDelete + 1] = NULL;
-        toDelete++;
+		toDelete++;
 	}
 	FigCount--;
 }
@@ -265,7 +276,7 @@ void ApplicationManager::UpdateInterface() const
 	pOut->DrawRect(p1, p2, gfxInfo);
 
 	for(int i=0; i<FigCount; i++)
-		if (FigList[i] && !FigList[i]->IsHide())
+		if (FigList[i]  && !FigList[i]->IsHide())
 			FigList[i]->Draw(pOut);
 				//Call Draw function (virtual member fn)
 }

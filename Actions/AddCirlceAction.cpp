@@ -61,9 +61,7 @@ void AddCircleAction::undo()
 void AddCircleAction::redo()
 {
 	CCircle* R = new CCircle(P1, P2, CircleGfxInfo);
-
-
-	ID = pManager->AddFigure(R);
+    	
 	R->SetId(ID);
-	
+	pManager->AddFigure(R);
 }

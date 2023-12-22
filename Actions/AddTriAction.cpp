@@ -69,7 +69,7 @@ void AddTriAction::redo()
 	CTriangle* R = new CTriangle(P1, P2, P3, TriGfxInfo);
 
 
-	ID = pManager->AddFigure(R);
 	R->SetId(ID);
+	pManager->AddFigure(R);
 	
 }

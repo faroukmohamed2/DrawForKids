@@ -57,8 +57,7 @@ void AddHexaAction::redo()
 {
 	CHexa* R = new CHexa(P1, HexaGfxInfo);
 
-
-	ID = pManager->AddFigure(R);
 	R->SetId(ID);
+	pManager->AddFigure(R);
 	
 }
