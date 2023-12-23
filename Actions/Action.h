@@ -13,6 +13,7 @@ class Action
 protected:
 	ApplicationManager *pManager;	//Actions needs AppMngr to do their job
 	bool UndoValidity;
+	bool Recordable;
 
 public:
 
@@ -26,6 +27,8 @@ public:
 	bool GetUndoValidity() { return UndoValidity; }
 	virtual void undo() {}
 	virtual void redo() {}
+
+	bool isRecordable() { return Recordable; }
 };
 
 #endif

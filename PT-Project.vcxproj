@@ -194,7 +194,9 @@
     <ClCompile Include="GUI\Output.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Actions\StartRecordingAction.cpp" />
+    <ClCompile Include="Actions\Rercording\StartRecordingAction.cpp" />
+    <ClCompile Include="Actions\Rercording\StopRecordingAction.cpp" />
+    <ClCompile Include="Actions\Rercording\PlayRecordAction.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -249,7 +251,9 @@
     <ClInclude Include="GUI\UI_Info.h" />
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="DEFS.h" />
-    <ClInclude Include="Actions\StartRecordingAction.h" />
+    <ClInclude Include="Actions\Rercording\StartRecordingAction.h" />
+    <ClInclude Include="Actions\Rercording\StopRecordingAction.h" />
+    <ClInclude Include="Actions\Rercording\PlayRecordAction.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>

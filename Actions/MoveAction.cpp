@@ -7,7 +7,7 @@
 MoveAction::MoveAction(ApplicationManager* pApp) :Action(pApp)
 {
 	UndoValidity = true;
-	
+	Recordable = true;
 }
 
 void MoveAction::ReadActionParameters()

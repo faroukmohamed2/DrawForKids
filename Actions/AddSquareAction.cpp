@@ -9,6 +9,7 @@
 AddSquareAction::AddSquareAction(ApplicationManager* pApp):Action (pApp)
 {
 	UndoValidity = true;
+	Recordable = true;
 }
 
 void AddSquareAction::ReadActionParameters()

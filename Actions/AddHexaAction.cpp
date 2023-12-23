@@ -7,7 +7,9 @@
 #include "..\GUI\Output.h"
 
 AddHexaAction::AddHexaAction(ApplicationManager* pApp) :Action(pApp)
-{}
+{
+	Recordable = true;
+}
 
 void AddHexaAction::ReadActionParameters()
 {

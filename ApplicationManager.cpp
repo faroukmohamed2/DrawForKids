@@ -20,9 +20,11 @@
 #include "Actions/SelectTheShape.h"
 #include "Actions/RestartAction.h" 
 #include "Actions/SelectTheColor.h"
-#include"Actions/UndoAction.h"
-#include"Actions/RedoAction.h"
-#include "Actions/StartRecordingAction.h"
+#include "Actions/UndoAction.h"
+#include "Actions/RedoAction.h"
+#include "Actions/Rercording/StartRecordingAction.h"
+#include "Actions/Rercording/StopRecordingAction.h"
+#include "Actions/Rercording/PlayRecordAction.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -135,21 +137,18 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case REDO:
 			pAct = new RedoAction(this);
 			break;
-
 		case START_RECORD:
 			pAct = new StartRecordingAction(this);
 			break;
 		case STOP_RECORD:
-			StopRectording();
+			pAct = new StopRecordingAction(this);
 			break;
 		case PLAY_RECORD:
-			PlayRecord();
+			pAct = new PlayRecordAction(this);
 			break;
 		case EXIT:
 			///create ExitAction here
-			
 			break;
-		
 		case STATUS:	//a click on the status bar ==> no action
 			return;
 	}
@@ -201,34 +200,31 @@ int ApplicationManager::GetFigCount() const
 //==================================================================================//
 //						       Record System Functions								//
 //==================================================================================//
+bool ApplicationManager::IsRecording() const {
+	return isRecording;
+}
+
+bool ApplicationManager::IsRecordClipAvailable() const {
+	return RecordedActionCount != 0;
+}
+
 void ApplicationManager::StartRecording(){
 	isRecording = true;
-	InitRecordFigureList = new CFigure * [FigCount];
-	for (int i = 0; i < FigCount; i++) {
-		InitRecordFigureList[i] = FigList[i]->clone();
-	}
-	InitRecordFigureListCount = FigCount;
 }
 void ApplicationManager::StopRectording(){
 	isRecording = false;
 }
 void ApplicationManager::PlayRecord(){
-	for (int i = 0; i < FigCount; i++) {
-		FigList[i] = NULL;
-	}
-
-	for (int i = 0; i < InitRecordFigureListCount; i++) {
-		FigList[i] = InitRecordFigureList[i];
-	}
-
-	UpdateInterface();
-
-	for (int i = 0; i < RecordedActionListCount; i++) {
-		RecordedActionList[i]->redo();
+	for (int i = 0; i < RecordedActionCount; i++) {
+		RecordedAction[i]->redo();
+		delete RecordedAction[i];
+		pOut->PrintMessage(to_string(i / 60) + ":" + to_string(i % 60) + " / " + to_string(RecordedActionCount / 60) + ":" + to_string(RecordedActionCount % 60));
 		UpdateInterface();
 
 		Sleep(1 * 1000);
 	}
+
+	RecordedActionCount = 0;
 }
 //==================================================================================//
 //						Figures Management Functions								//
@@ -328,8 +324,14 @@ void ApplicationManager::UpdateInterface() const
 
 void ApplicationManager::addAction(Action* ptr)
 {
-	if (isRecording) {
-		RecordedActionList[RecordedActionListCount++] = ptr;
+	if (isRecording && ptr->isRecordable()) {
+		if (RecordedActionCount < MaxRecordActionCount) {
+				RecordedAction[RecordedActionCount++] = ptr;
+		}
+		else {
+			pOut->PrintMessage("Recording limit exceeded, Recording stopped.");
+			StopRectording();
+		}
 	}
 
 	if (ptr->GetUndoValidity()) {
@@ -360,7 +362,7 @@ void ApplicationManager::addAction(Action* ptr)
 }
 
 void ApplicationManager::UndoLastAction()
-{   
+{
 	int i = ActionsCount - CountofUndoed - 1;
 	if (ActionsCount == 0||i<0)
 	{
