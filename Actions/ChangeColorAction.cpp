@@ -16,6 +16,8 @@
 
 ChangeColorAction::ChangeColorAction(ApplicationManager* pApp, ActionType TheColor) :Action(pApp)
 {
+	Recordable = true;
+
 	switch (TheColor)
 	{
 	case DRW_Red:

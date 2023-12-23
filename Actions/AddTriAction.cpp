@@ -11,6 +11,7 @@
 AddTriAction::AddTriAction(ApplicationManager* pApp) : Action (pApp)
 {
 	UndoValidity = true;
+	Recordable = true;
 }
 
 void AddTriAction::ReadActionParameters()

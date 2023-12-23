@@ -9,6 +9,7 @@
 AddRectAction::AddRectAction(ApplicationManager* pApp) :Action(pApp)
 {
 	UndoValidity = 1;
+	Recordable = true;
 }
 
 void AddRectAction::ReadActionParameters() 

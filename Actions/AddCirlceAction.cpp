@@ -9,6 +9,7 @@
 AddCircleAction::AddCircleAction(ApplicationManager * pApp):Action(pApp)
 {
 	UndoValidity = true;
+	Recordable = true;
 }
 
 void AddCircleAction::ReadActionParameters() 

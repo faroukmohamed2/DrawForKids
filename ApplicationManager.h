@@ -8,10 +8,11 @@
 #include "Actions/Action.h"
 //#include "Figures/CSquare.h"
 #include"Actions/Action.h"
+
 //Main class that manages everything in the application.
 class ApplicationManager
 {
-	enum { MaxFigCount = 200 };	//Max no of figures
+	enum { MaxFigCount = 200, MaxRecordActionCount = 20 };	//Max no of figures
 	int FigID = 0;
 private:
 	int FigCount;		//Actual number of figures
@@ -23,10 +24,10 @@ private:
 
 	//Recording Variables
 	bool isRecording = false;
-	Action* RecordedActionList[MaxFigCount];
-	int RecordedActionListCount = 0;
-	CFigure** InitRecordFigureList;
-	int InitRecordFigureListCount;
+	Action* RecordedAction[MaxRecordActionCount];
+	int RecordedActionCount = 0;
+	CFigure** RecordedFigures;
+	int RecordedFiguresCount;
 
 
 	//Pointers to Input and Output classes
@@ -81,6 +82,8 @@ public:
 	void StartRecording();
 	void StopRectording();
 	void PlayRecord();
+	bool IsRecording() const;
+	bool IsRecordClipAvailable() const;
 };
 
 #endif

@@ -5,6 +5,7 @@
 RedoAction::RedoAction(ApplicationManager* pApp) :Action(pApp)
 {
 	UndoValidity = false;
+	Recordable = true;
 }
 
 void RedoAction::ReadActionParameters()

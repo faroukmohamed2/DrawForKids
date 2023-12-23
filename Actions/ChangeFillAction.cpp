@@ -11,6 +11,8 @@
 
 ChangeFillAction::ChangeFillAction(ApplicationManager* pApp, ActionType ChngStyle) :Action(pApp)
 {
+	Recordable = true;
+
 	if (ChngStyle == Fill_Tool)
 		ReqStyle = Fill;
 
