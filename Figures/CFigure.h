@@ -42,6 +42,7 @@ public:
 	virtual Point getlocation() { return Point(); }
 	 bool IsInTriangle(Point , Point , Point , Point );
 	 double CalcAreaTriangle(Point, Point, Point);
+	 color GetborderColor();
 	 void SetId(int);
 	 int GetID();
 	 void Delete(Output* pOut) ;

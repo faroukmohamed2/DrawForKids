@@ -99,20 +99,18 @@ void ChangeFillAction::Execute()
 	if (CanExecute) {
 
 		if (ReqStyle == Fill) {
-
+			lastSelected = pManager->GetFigure(FGindex)->GetFigColor();
 			pManager->GetFigure(FGindex)->ChngFillClr(SelectedColor);
 			pManager->GetFigure(FGindex)->SetSelected(!(pManager->GetFigure(FGindex)->IsSelected()));
-			lastSelected = UI.FillColor;
-			UI.FillColor = SelectedColor;
+			//UI.FillColor = SelectedColor;
 
 
 		}
 		else if (ReqStyle == Border) {
-
+			lastSelected = pManager->GetFigure(FGindex)->GetborderColor();
 			pManager->GetFigure(FGindex)->ChngDrawClr(SelectedColor);
 			pManager->GetFigure(FGindex)->SetSelected(!(pManager->GetFigure(FGindex)->IsSelected()));
-			lastSelected = UI.DrawColor;
-			UI.DrawColor = SelectedColor;
+			//UI.DrawColor = SelectedColor;
 
 		}
 
@@ -143,15 +141,15 @@ void ChangeFillAction::redo()
 	if (ReqStyle == Fill) {
 
 		pManager->GetFigure(FGindex)->ChngFillClr(SelectedColor);
-		lastSelected = UI.FillColor;
-		UI.FillColor = SelectedColor;
+		//lastSelected = UI.FillColor;
+		//UI.FillColor = SelectedColor;
 
 	}
 	else if (ReqStyle == Border) {
 
 		pManager->GetFigure(FGindex)->ChngDrawClr(SelectedColor);
-		lastSelected = UI.DrawColor;
-		UI.DrawColor = SelectedColor;
+		//lastSelected = UI.DrawColor;
+		//UI.DrawColor = SelectedColor;
 
 	}
 	

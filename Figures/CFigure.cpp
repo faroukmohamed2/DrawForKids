@@ -130,6 +130,11 @@ bool CFigure::getfillstate()
 	return FigGfxInfo.isFilled;
 }
 
+color CFigure::GetborderColor()
+{
+	return FigGfxInfo.DrawClr;
+}
+
 CFigure::~CFigure() {}
 
 
