@@ -45,7 +45,7 @@ ChangeColorAction::ChangeColorAction(ApplicationManager* pApp, ActionType TheCol
 	default:
 		break;
 	}
-	UndoValidity = false;
+	UndoValidity = true;
 }
 
 void ChangeColorAction::ReadActionParameters()

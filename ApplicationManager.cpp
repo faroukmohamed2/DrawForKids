@@ -349,7 +349,7 @@ void ApplicationManager::addAction(Action* ptr)
 
 		else {
 			delete last5Actions[0];
-			for (int i = 0; i < 3; i++)
+			for (int i = 0; i < 4; i++)
 			{
 				last5Actions[i] = last5Actions[i + 1];
 			}
