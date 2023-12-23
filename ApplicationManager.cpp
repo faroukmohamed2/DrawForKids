@@ -25,7 +25,7 @@
 #include "Actions/Rercording/StartRecordingAction.h"
 #include "Actions/Rercording/StopRecordingAction.h"
 #include "Actions/Rercording/PlayRecordAction.h"
-
+#include"Actions/ClearAllAction.h"
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -36,6 +36,7 @@ ApplicationManager::ApplicationManager()
 	FigCount = 0;
 	CountofUndoed = 0;
 	ActionsCount = 0;
+	SelectedFig = NULL;
 	//Create an array of figure pointers and set them to NULL		
 	for(int i=0; i<MaxFigCount; i++)
 		FigList[i] = NULL;	
@@ -146,6 +147,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case PLAY_RECORD:
 			pAct = new PlayRecordAction(this);
 			break;
+		case ClearBoard:
+			pAct = new ClearAllAction(this);
+			break;
 		case EXIT:
 			///create ExitAction here
 			break;
@@ -206,6 +210,39 @@ bool ApplicationManager::IsRecording() const {
 
 bool ApplicationManager::IsRecordClipAvailable() const {
 	return RecordedActionCount != 0;
+}
+
+void ApplicationManager::ClearAll()
+{
+	for (int i = 0; i < FigCount; i++)//delete all the figures
+	{
+		delete FigList[i];
+		FigList[i] = NULL;
+	}
+	FigCount = 0;
+	for (int i = 0; i < ActionsCount; i++)//reset the undo and redo history
+	{
+		delete last5Actions[i];
+		last5Actions[i] = NULL;
+	}
+	ActionsCount = 0;
+	CountofUndoed = 0;
+	FigID = 0;
+	id = -1;
+	if (SelectedFig != NULL)
+	{
+		delete SelectedFig;
+		SelectedFig = NULL;
+   }
+	for (int i = 0; i < RecordedActionCount; i++)//reset recording history
+	{
+		delete RecordedAction[i];
+		RecordedAction[i] = NULL;
+	}
+	RecordedActionCount = 0;
+	
+	pOut->ClearDrawArea();
+	pOut->PrintMessage("you clear all figures");
 }
 
 void ApplicationManager::StartRecording(){

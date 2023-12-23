@@ -26,8 +26,7 @@ private:
 	bool isRecording = false;
 	Action* RecordedAction[MaxRecordActionCount];
 	int RecordedActionCount = 0;
-	CFigure** RecordedFigures;
-	int RecordedFiguresCount;
+
 
 
 	//Pointers to Input and Output classes
@@ -84,6 +83,7 @@ public:
 	void PlayRecord();
 	bool IsRecording() const;
 	bool IsRecordClipAvailable() const;
+	void ClearAll();
 };
 
 #endif

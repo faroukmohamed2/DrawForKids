@@ -137,6 +137,7 @@
     <ClCompile Include="Actions\ChangeFillAction.cpp" />
     <ClCompile Include="Actions\ChangeToDrawModeAction.cpp" />
     <ClCompile Include="Actions\ChangeToPlayModeAction.cpp" />
+    <ClCompile Include="Actions\ClearAllAction.cpp" />
     <ClCompile Include="Actions\LoadAction.cpp" />
     <ClCompile Include="Actions\RedoAction.cpp" />
     <ClCompile Include="Actions\RestartAction.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="Actions\ChangeFillAction.h" />
     <ClInclude Include="Actions\ChangeToDrawModeAction.h" />
     <ClInclude Include="Actions\ChangeToPlayModeAction.h" />
+    <ClInclude Include="Actions\ClearAllAction.h" />
     <ClInclude Include="Actions\RedoAction.h" />
     <ClInclude Include="Actions\UndoAction.h" />
     <ClInclude Include="Actions\LoadAction.h" />
