@@ -19,6 +19,7 @@
 #include "Actions/SelectTheShape.h"
 #include "Actions/RestartAction.h" 
 #include "Actions/SelectTheColor.h"
+#include "Actions/SelectColorShape.h"
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -119,6 +120,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case RESET:
 			pAct = new Restart(this);
+			break;
+		case FIG_TYP_COL:
+			pAct = new SelectColorShape(this);
 			break;
 		case EXIT:
 			///create ExitAction here
@@ -261,6 +265,12 @@ void ApplicationManager::show()
 {
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->SetHide(false);
+}
+
+CFigure* ApplicationManager::GetFigure(int i)
+{
+	if (FigList[i])
+		return FigList[i];
 }
 
 color ApplicationManager::GetFigColor(int i)

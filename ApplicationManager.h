@@ -42,7 +42,7 @@ public:
 	Output *GetOutput() const; //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window	
 	void ReloadFigures() const;
-
+	CFigure* GetFigure(int i);
 	//Save system
 	void SaveAll(ofstream &file) const;
 	void LoadAll(CFigure** list, int count);

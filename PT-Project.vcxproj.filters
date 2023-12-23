@@ -187,6 +187,7 @@
     <ClCompile Include="Actions\SelectTheShape.cpp" />
     <ClCompile Include="Actions\RestartAction.cpp" />
     <ClCompile Include="Actions\SelectTheColor.cpp" />
+    <ClCompile Include="Actions\SelectColorShape.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -313,6 +314,7 @@
     <ClInclude Include="Actions\SelectTheShape.h" />
     <ClInclude Include="Actions\RestartAction.h" />
     <ClInclude Include="Actions\SelectTheColor.h" />
+    <ClInclude Include="Actions\SelectColorShape.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
