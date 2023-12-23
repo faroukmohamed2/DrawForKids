@@ -16,10 +16,10 @@ void MoveAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 	ToMove = pManager->IsSelected();
-	lastLoaction = ToMove->getlocation();
-	FigID = ToMove->GetID();
+	
 	if (ToMove != NULL) {
-
+		lastLoaction = ToMove->getlocation();
+		FigID = ToMove->GetID();
 		pOut->PrintMessage("Move figures tool is selected , please select the new location");
 		CanExecute = true;
 
@@ -51,14 +51,18 @@ void MoveAction::Execute()
 
 void MoveAction::undo()
 {
-	Output* pOut = pManager->GetOutput();
-	pOut->ClearDrawArea();
-	pManager->GetFigure(FigID)->Move(lastLoaction);
+	if (CanExecute) {
+		Output* pOut = pManager->GetOutput();
+		pOut->ClearDrawArea();
+		pManager->GetFigure(FigID)->Move(lastLoaction);
+	}
 }
 
 void MoveAction::redo()
 {
-	Output* pOut = pManager->GetOutput();
-	pOut->ClearDrawArea();
-	pManager->GetFigure(FigID)->Move(NewLocation);
+	if (CanExecute) {
+		Output* pOut = pManager->GetOutput();
+		pOut->ClearDrawArea();
+		pManager->GetFigure(FigID)->Move(NewLocation);
+	}
 }
