@@ -16,6 +16,8 @@
 
 ChangeColorAction::ChangeColorAction(ApplicationManager* pApp, ActionType TheColor) :Action(pApp)
 {
+	Recordable = true;
+
 	switch (TheColor)
 	{
 	case DRW_Red:
@@ -45,6 +47,7 @@ ChangeColorAction::ChangeColorAction(ApplicationManager* pApp, ActionType TheCol
 	default:
 		break;
 	}
+	UndoValidity = true;
 }
 
 void ChangeColorAction::ReadActionParameters()
@@ -63,6 +66,19 @@ void ChangeColorAction::ReadActionParameters()
 void ChangeColorAction::Execute()
 {
 	ReadActionParameters();
+	lastColor = UI.DrawColor;
 	UI.DrawColor = SelectedColor;
+	
+}
 
+void ChangeColorAction::undo()
+{
+	Output* pOut = pManager->GetOutput();
+	UI.DrawColor = lastColor;
+	pOut->PrintMessage(" ");
+}
+void ChangeColorAction::redo()
+{
+	lastColor = UI.DrawColor;
+	UI.DrawColor = SelectedColor;
 }

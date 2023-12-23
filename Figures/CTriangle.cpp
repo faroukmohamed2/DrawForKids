@@ -10,6 +10,10 @@ CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo) :CFigu
 
 CTriangle::CTriangle(int id) : CFigure(id) {}
 
+CFigure* CTriangle::clone() {
+	return new CTriangle(*this);
+}
+
 void CTriangle::Draw(Output* pOut) const
 {
 		
@@ -40,6 +44,14 @@ void CTriangle::Load(ifstream& file) {
 	LoadPoint(file, Corner3);
 	CFigure::Load(file);
 
+}
+
+Point CTriangle::getlocation()
+{
+	Point Center;
+	Center.x = (Corner1.x + Corner2.x + Corner3.x) / 3;
+	Center.y = (Corner1.y + Corner2.y + Corner3.y) / 3;
+	return Center;
 }
 
 

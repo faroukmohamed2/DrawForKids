@@ -7,6 +7,8 @@ class DeleteFigAction : public Action {
 private:
 	bool CanExecute;
 	CFigure* ToDelete;
+	CFigure* Refrence;
+	int  FigID;
 public:
 	DeleteFigAction(ApplicationManager* pApp);
 
@@ -15,6 +17,10 @@ public:
 
 	//Add rectangle to the ApplicationManager
 	virtual void Execute();
+
+	virtual void undo();
+
+	virtual void redo();
 
 };
 

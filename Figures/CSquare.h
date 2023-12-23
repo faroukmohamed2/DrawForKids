@@ -13,6 +13,8 @@ public:
 	CSquare(Point, GfxInfo FigureGfxInfo);
 	CSquare(int id);
 
+	CFigure* clone();
+
 	virtual void Draw(Output* pOut) const;
 	virtual bool PointBelong(int, int);
 	virtual void PrintInfo(Output*pOut);
@@ -20,6 +22,7 @@ public:
 	void Save(ofstream& OutFile);
 	void Load(ifstream& Infile);
 	void Move(Point);
+	Point getlocation();
 	static int GetSquCount();
 	virtual ~CSquare();
 };

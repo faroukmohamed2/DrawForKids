@@ -2,6 +2,11 @@
 #include <cmath>
 #include <fstream>
 int CCircle::CircCount = 0;
+
+CFigure* CCircle::clone() {
+	return new CCircle(*this);
+}
+
 int CCircle::GetCircCount()
 {
 	return CircCount;
@@ -57,6 +62,11 @@ void CCircle::PrintInfo(Output*pOut)
 	center = '(' + to_string(P1.x) + ',' + to_string(P1.y) + ')';
 	msg = "Shape ID: " + ID + "   Type: " + type + "   Center: " + center + "   Radius: " + radius;
 	pOut->PrintMessage(msg);
+}
+
+Point CCircle::getlocation()
+{
+	return P1;
 }
 
 string CCircle::GetName() const {

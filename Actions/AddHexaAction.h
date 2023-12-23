@@ -6,7 +6,7 @@ class AddHexaAction : public Action {
 
 	Point P1;
 	GfxInfo HexaGfxInfo;
-
+	int ID;
 public:
 	AddHexaAction(ApplicationManager* pApp);
 
@@ -15,5 +15,7 @@ public:
 
 	//Add rectangle to the ApplicationManager
 	virtual void Execute();
+	virtual void undo();
+	virtual void redo();
 
 };

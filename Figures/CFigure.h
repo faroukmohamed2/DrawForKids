@@ -22,6 +22,9 @@ protected:
 public:
 	CFigure(GfxInfo FigureGfxInfo);
 	CFigure(int id);
+
+	virtual CFigure* clone() = 0;
+
 	bool IsFilled();
 	virtual string GetName() const = 0;
 	int GetId() const;
@@ -36,11 +39,14 @@ public:
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 	virtual bool PointBelong(int x , int y) = 0;
+	virtual Point getlocation() { return Point(); }
 	 bool IsInTriangle(Point , Point , Point , Point );
 	 double CalcAreaTriangle(Point, Point, Point);
+	 color GetborderColor();
 	 void SetId(int);
 	 int GetID();
 	 void Delete(Output* pOut) ;
+	 bool getfillstate();
 	 virtual void Move(Point) = 0;
 	 
 	///The following functions should be supported by the figure class

@@ -11,11 +11,15 @@
 
 ChangeFillAction::ChangeFillAction(ApplicationManager* pApp, ActionType ChngStyle) :Action(pApp)
 {
+	Recordable = true;
+
 	if (ChngStyle == Fill_Tool)
 		ReqStyle = Fill;
 
 	else if (ChngStyle == Pencile_Tool)
 		ReqStyle = Border;
+
+	UndoValidity = true;
 }
 
 void ChangeFillAction::ReadActionParameters()
@@ -24,8 +28,11 @@ void ChangeFillAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 	ToChange = pManager->IsSelected();
-	if (ToChange != NULL) {
+	
 
+	if (ToChange != NULL) {
+		FGindex = pManager->IsSelected()->GetID();
+		lastFillstate = ToChange->getfillstate();
 		if (ReqStyle == Fill)
 			pOut->PrintMessage("changing the fill color of the selected shape, please choose a color");
 		else if (ReqStyle == Border)
@@ -92,16 +99,61 @@ void ChangeFillAction::Execute()
 	if (CanExecute) {
 
 		if (ReqStyle == Fill) {
-			ToChange->ChngFillClr(SelectedColor);
-			ToChange->SetSelected(!(ToChange->IsSelected()));
-			UI.FillColor = SelectedColor;
+			lastSelected = pManager->GetFigure(FGindex)->GetFigColor();
+			pManager->GetFigure(FGindex)->ChngFillClr(SelectedColor);
+			pManager->GetFigure(FGindex)->SetSelected(!(pManager->GetFigure(FGindex)->IsSelected()));
+			//UI.FillColor = SelectedColor;
+
+
 		}
 		else if (ReqStyle == Border) {
-			ToChange->ChngDrawClr(SelectedColor);
-			ToChange->SetSelected(!(ToChange->IsSelected()));
+			lastSelected = pManager->GetFigure(FGindex)->GetborderColor();
+			pManager->GetFigure(FGindex)->ChngDrawClr(SelectedColor);
+			pManager->GetFigure(FGindex)->SetSelected(!(pManager->GetFigure(FGindex)->IsSelected()));
+			//UI.DrawColor = SelectedColor;
 
 		}
+	}
+	
+}
+
+void ChangeFillAction::undo()
+{
+	Output* pOut = pManager->GetOutput();
+	if (CanExecute) {
+		if (ReqStyle == Fill) {
+			if (lastFillstate) {
+
+				pManager->GetFigure(FGindex)->ChngFillClr(lastSelected);
+
+			}
+			else pManager->GetFigure(FGindex)->ChngFillClr(UI.BkGrndColor);
+		}
+		else if (ReqStyle == Border) {
+			pManager->GetFigure(FGindex)->ChngDrawClr(lastSelected);
 
 
+		}
+	}
+	else { pOut->PrintMessage("You didn't select a figure to undo it"); }
+}
+
+void ChangeFillAction::redo()
+{
+	if (CanExecute) {
+		if (ReqStyle == Fill) {
+
+			pManager->GetFigure(FGindex)->ChngFillClr(SelectedColor);
+			//lastSelected = UI.FillColor;
+			//UI.FillColor = SelectedColor;
+
+		}
+		else if (ReqStyle == Border) {
+
+			pManager->GetFigure(FGindex)->ChngDrawClr(SelectedColor);
+			//lastSelected = UI.DrawColor;
+			//UI.DrawColor = SelectedColor;
+
+		}
 	}
 }

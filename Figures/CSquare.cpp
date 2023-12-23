@@ -8,6 +8,10 @@ CSquare::CSquare(Point TheMiddle, GfxInfo FigureGfxInfo) : CFigure (FigureGfxInf
 
 CSquare::CSquare(int id) : CFigure(id) {}
 
+CFigure* CSquare::clone() {
+	return new CSquare(*this);
+}
+
 void CSquare::Draw(Output* pOut) const
 {
 	pOut->DrawSquare(Center, FigGfxInfo, Selected);
@@ -57,6 +61,11 @@ void CSquare::Move(Point NewLocation)
 {
 	Center.x = NewLocation.x;
 	Center.y = NewLocation.y;
+}
+
+Point CSquare::getlocation()
+{
+	return Center;
 }
 
 int CSquare::GetSquCount()

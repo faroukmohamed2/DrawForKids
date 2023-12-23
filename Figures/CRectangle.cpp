@@ -5,9 +5,15 @@ CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo):CFigure(Figure
 	Corner1 = P1;
 	Corner2 = P2;
 	RecCount++;
+	
+
 }
 
 CRectangle::CRectangle(int id) : CFigure(id) {}
+
+CFigure* CRectangle::clone() {
+	return new CRectangle(*this);
+}
 
 void CRectangle::Draw(Output* pOut) const
 {
@@ -70,11 +76,12 @@ void CRectangle::Load(ifstream& file) {
 
 void CRectangle::Move(Point NewLocation)
 {
+	
 	Point Center;
 
 	Center.x = (Corner1.x + Corner2.x) / 2;
 	Center.y = (Corner1.y + Corner2.y) / 2;
-
+	
 	
 
 	double DistanceX = NewLocation.x - Center.x;
@@ -89,6 +96,16 @@ void CRectangle::Move(Point NewLocation)
 	
 
 }
+
+Point CRectangle::getlocation()
+{
+	Point Center;
+
+	Center.x = (Corner1.x + Corner2.x) / 2;
+	Center.y = (Corner1.y + Corner2.y) / 2;
+	return Center;
+}
+
 
 int CRectangle::GetRecCount()
 {

@@ -137,7 +137,9 @@
     <ClCompile Include="Actions\ChangeFillAction.cpp" />
     <ClCompile Include="Actions\ChangeToDrawModeAction.cpp" />
     <ClCompile Include="Actions\ChangeToPlayModeAction.cpp" />
+    <ClCompile Include="Actions\ClearAllAction.cpp" />
     <ClCompile Include="Actions\LoadAction.cpp" />
+    <ClCompile Include="Actions\RedoAction.cpp" />
     <ClCompile Include="Actions\RestartAction.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
     <ClCompile Include="Actions\DeleteFigAction.cpp" />
@@ -146,6 +148,7 @@
     <ClCompile Include="Actions\SelectColorShape.cpp" />
     <ClCompile Include="Actions\SelectTheColor.cpp" />
     <ClCompile Include="Actions\SelectTheShape.cpp" />
+    <ClCompile Include="Actions\UndoAction.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
     <ClCompile Include="CMUgraphicsLib\colors.cpp" />
@@ -193,6 +196,9 @@
     <ClCompile Include="GUI\Output.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Actions\Rercording\StartRecordingAction.cpp" />
+    <ClCompile Include="Actions\Rercording\StopRecordingAction.cpp" />
+    <ClCompile Include="Actions\Rercording\PlayRecordAction.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +210,9 @@
     <ClInclude Include="Actions\ChangeFillAction.h" />
     <ClInclude Include="Actions\ChangeToDrawModeAction.h" />
     <ClInclude Include="Actions\ChangeToPlayModeAction.h" />
+    <ClInclude Include="Actions\ClearAllAction.h" />
+    <ClInclude Include="Actions\RedoAction.h" />
+    <ClInclude Include="Actions\UndoAction.h" />
     <ClInclude Include="Actions\LoadAction.h" />
     <ClInclude Include="Actions\RestartAction.h" />
     <ClInclude Include="Actions\SaveAction.h" />
@@ -246,6 +255,9 @@
     <ClInclude Include="GUI\UI_Info.h" />
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="DEFS.h" />
+    <ClInclude Include="Actions\Rercording\StartRecordingAction.h" />
+    <ClInclude Include="Actions\Rercording\StopRecordingAction.h" />
+    <ClInclude Include="Actions\Rercording\PlayRecordAction.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>

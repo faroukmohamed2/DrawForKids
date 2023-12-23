@@ -8,6 +8,10 @@ CHexa::CHexa(Point P1, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 
 CHexa::CHexa(int id) : CFigure(id) {}
 
+CFigure* CHexa::clone() {
+	return new CHexa(*this);
+}
+
 int CHexa::GetHexCount()
 {
 	return HexCount;
@@ -40,6 +44,10 @@ void CHexa::Move(Point NewLocation)
 {
 	Center.x = NewLocation.x;
 	Center.y = NewLocation.y;
+}
+Point CHexa::getlocation()
+{
+	return Center;
 }
 void CHexa::PrintInfo(Output*pOut)
 {

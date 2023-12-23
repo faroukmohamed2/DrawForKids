@@ -9,9 +9,13 @@ private:
 	Point Corner1;	
 	Point Corner2;
 	static int RecCount;
+	
+
 public:
 	CRectangle(Point , Point, GfxInfo FigureGfxInfo );
 	CRectangle(int id);
+
+	CFigure* clone();
 
 	virtual void Draw(Output* pOut) const;
 	virtual bool PointBelong(int, int);
@@ -21,6 +25,7 @@ public:
 	void Save(ofstream& OutFile);
 	void Load(ifstream& Infile);
 	void Move(Point);
+	Point getlocation();
 	static int GetRecCount();
 	virtual ~CRectangle();
 };

@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <thread>
 #include "Actions/ChangeColorAction.h"
 #include "Actions/ChangeFillAction.h"
 #include "Actions/DeleteFigAction.h"
@@ -20,6 +21,12 @@
 #include "Actions/RestartAction.h" 
 #include "Actions/SelectTheColor.h"
 #include "Actions/SelectColorShape.h"
+#include "Actions/UndoAction.h"
+#include "Actions/RedoAction.h"
+#include "Actions/Rercording/StartRecordingAction.h"
+#include "Actions/Rercording/StopRecordingAction.h"
+#include "Actions/Rercording/PlayRecordAction.h"
+#include"Actions/ClearAllAction.h"
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -28,10 +35,15 @@ ApplicationManager::ApplicationManager()
 	pIn = pOut->CreateInput();
 	
 	FigCount = 0;
-		
+	CountofUndoed = 0;
+	ActionsCount = 0;
+	SelectedFig = NULL;
 	//Create an array of figure pointers and set them to NULL		
 	for(int i=0; i<MaxFigCount; i++)
 		FigList[i] = NULL;	
+
+	for (int i = 0; i < 5; i++)
+		last5Actions[i] = NULL;
 }
 
 //==================================================================================//
@@ -124,11 +136,27 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case FIG_TYP_COL:
 			pAct = new SelectColorShape(this);
 			break;
+		case UNDO:
+			pAct = new UndoAction(this);
+			break;
+		case REDO:
+			pAct = new RedoAction(this);
+			break;
+		case START_RECORD:
+			pAct = new StartRecordingAction(this);
+			break;
+		case STOP_RECORD:
+			pAct = new StopRecordingAction(this);
+			break;
+		case PLAY_RECORD:
+			pAct = new PlayRecordAction(this);
+			break;
+		case ClearBoard:
+			pAct = new ClearAllAction(this);
+			break;
 		case EXIT:
 			///create ExitAction here
-			
 			break;
-		
 		case STATUS:	//a click on the status bar ==> no action
 			return;
 	}
@@ -137,6 +165,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	if(pAct != NULL)
 	{
 		pAct->Execute();//Execute
+		addAction(pAct);
 		//delete pAct;	//You may need to change this line depending to your implementation
 		pAct = NULL;
 	}
@@ -177,6 +206,68 @@ int ApplicationManager::GetFigCount() const
 }
 
 //==================================================================================//
+//						       Record System Functions								//
+//==================================================================================//
+bool ApplicationManager::IsRecording() const {
+	return isRecording;
+}
+
+bool ApplicationManager::IsRecordClipAvailable() const {
+	return RecordedActionCount != 0;
+}
+
+void ApplicationManager::ClearAll()
+{
+	for (int i = 0; i < FigCount; i++)//delete all the figures
+	{
+		delete FigList[i];
+		FigList[i] = NULL;
+	}
+	FigCount = 0;
+	for (int i = 0; i < ActionsCount; i++)//reset the undo and redo history
+	{
+		delete last5Actions[i];
+		last5Actions[i] = NULL;
+	}
+	ActionsCount = 0;
+	CountofUndoed = 0;
+	FigID = 0;
+	id = -1;
+	if (SelectedFig != NULL)
+	{
+		delete SelectedFig;
+		SelectedFig = NULL;
+   }
+	for (int i = 0; i < RecordedActionCount; i++)//reset recording history
+	{
+		delete RecordedAction[i];
+		RecordedAction[i] = NULL;
+	}
+	RecordedActionCount = 0;
+	
+	pOut->ClearDrawArea();
+	pOut->PrintMessage("you clear all figures");
+}
+
+void ApplicationManager::StartRecording(){
+	isRecording = true;
+}
+void ApplicationManager::StopRectording(){
+	isRecording = false;
+}
+void ApplicationManager::PlayRecord(){
+	for (int i = 0; i < RecordedActionCount; i++) {
+		RecordedAction[i]->redo();
+		delete RecordedAction[i];
+		pOut->PrintMessage(to_string(i / 60) + ":" + to_string(i % 60) + " / " + to_string(RecordedActionCount / 60) + ":" + to_string(RecordedActionCount % 60));
+		UpdateInterface();
+
+		Sleep(1 * 1000);
+	}
+
+	RecordedActionCount = 0;
+}
+//==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
 
@@ -202,6 +293,8 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 			}
 		}
 	}
+
+	
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
 
@@ -211,6 +304,15 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 
 	return NULL;
 }
+
+	CFigure* ApplicationManager::GetFigure(int id)
+	{
+		for (int i = 0; i < FigCount; i++)
+			if (FigList[i]->GetID() == id)
+				return FigList[i];
+		return NULL;
+	}
+
 CFigure* ApplicationManager::IsSelected() const
 {
 	for (int i = 0; i < FigCount; i++)
@@ -228,14 +330,14 @@ void ApplicationManager::DeleteFigure(int deleteID)
 			break;
 		}
 	}
-	delete FigList[toDelete];
+	//delete FigList[toDelete];
 	FigList[toDelete] = NULL;
 
-	while (toDelete != FigCount-1) {
+	while (toDelete != FigCount - 1) {
 
 		FigList[toDelete] = FigList[toDelete + 1];
 		FigList[toDelete + 1] = NULL;
-        toDelete++;
+		toDelete++;
 	}
 	FigCount--;
 }
@@ -256,9 +358,72 @@ void ApplicationManager::UpdateInterface() const
 	pOut->DrawRect(p1, p2, gfxInfo);
 
 	for(int i=0; i<FigCount; i++)
-		if (FigList[i] && !FigList[i]->IsHide())
+		if (FigList[i]  && !FigList[i]->IsHide())
 			FigList[i]->Draw(pOut);
 				//Call Draw function (virtual member fn)
+}
+
+void ApplicationManager::addAction(Action* ptr)
+{
+	if (isRecording && ptr->isRecordable()) {
+		if (RecordedActionCount < MaxRecordActionCount) {
+				RecordedAction[RecordedActionCount++] = ptr;
+		}
+		else {
+			pOut->PrintMessage("Recording limit exceeded, Recording stopped.");
+			StopRectording();
+		}
+	}
+
+	if (ptr->GetUndoValidity()) {
+
+		while (CountofUndoed != 0)
+		{
+			delete last5Actions[ActionsCount - 1];
+			CountofUndoed--;
+			ActionsCount--;
+		}
+
+
+		if (ActionsCount < 5)
+		{
+			last5Actions[ActionsCount++] = ptr;
+		}
+
+		else {
+			delete last5Actions[0];
+			for (int i = 0; i < 4; i++)
+			{
+				last5Actions[i] = last5Actions[i + 1];
+			}
+
+			last5Actions[4] = ptr;
+		}
+	}
+}
+
+void ApplicationManager::UndoLastAction()
+{
+	int i = ActionsCount - CountofUndoed - 1;
+	if (ActionsCount == 0||i<0)
+	{
+		pOut->PrintMessage("you can't undo anymore");
+		return;
+	}
+
+	last5Actions[i]->undo();
+	CountofUndoed++;
+}
+
+void ApplicationManager::RedoLastAction()
+{
+	if (CountofUndoed == 0) {
+
+		pOut->PrintMessage("you can't redo");
+		return;
+	}
+	last5Actions[ActionsCount - CountofUndoed]->redo();
+	CountofUndoed--;
 }
 
 void ApplicationManager::show()
@@ -267,11 +432,6 @@ void ApplicationManager::show()
 		FigList[i]->SetHide(false);
 }
 
-CFigure* ApplicationManager::GetFigure(int i)
-{
-	if (FigList[i])
-		return FigList[i];
-}
 
 color ApplicationManager::GetFigColor(int i)
 {

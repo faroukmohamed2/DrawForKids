@@ -10,6 +10,8 @@
 
 AddTriAction::AddTriAction(ApplicationManager* pApp) : Action (pApp)
 {
+	UndoValidity = true;
+	Recordable = true;
 }
 
 void AddTriAction::ReadActionParameters()
@@ -53,6 +55,22 @@ void AddTriAction::Execute()
 	CTriangle* R = new CTriangle(P1, P2, P3 , TriGfxInfo);
 
 	//Add the rectangle to the list of figures
-	int ID = pManager->AddFigure(R);
+	ID = pManager->AddFigure(R);
 	R->SetId(ID);
+}
+
+void AddTriAction::undo()
+{
+	pManager->DeleteFigure(ID);
+
+}
+
+void AddTriAction::redo()
+{
+	CTriangle* R = new CTriangle(P1, P2, P3, TriGfxInfo);
+
+
+	R->SetId(ID);
+	pManager->AddFigure(R);
+	
 }

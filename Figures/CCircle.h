@@ -9,6 +9,8 @@ private:
 	Point P2;
 	static int CircCount;
 public:
+	CFigure* clone();
+
 	static int GetCircCount();
 	CCircle(Point, Point, GfxInfo FigureGfxInfo);
 	CCircle(int id);
@@ -17,7 +19,7 @@ public:
 	virtual bool PointBelong(int, int);
 	void Move(Point);
 	virtual void PrintInfo(Output*pOut);
-
+	virtual Point getlocation();
 	string GetName() const;
 	void Save(ofstream& OutFile);
 	void Load(ifstream& Infile);
