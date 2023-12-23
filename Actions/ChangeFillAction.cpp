@@ -28,11 +28,11 @@ void ChangeFillAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 	ToChange = pManager->IsSelected();
-	FGindex = pManager->IsSelected()->GetID();
-	lastFillstate = ToChange->getfillstate();
+	
 
 	if (ToChange != NULL) {
-
+		FGindex = pManager->IsSelected()->GetID();
+		lastFillstate = ToChange->getfillstate();
 		if (ReqStyle == Fill)
 			pOut->PrintMessage("changing the fill color of the selected shape, please choose a color");
 		else if (ReqStyle == Border)
@@ -113,44 +113,47 @@ void ChangeFillAction::Execute()
 			//UI.DrawColor = SelectedColor;
 
 		}
-
-
 	}
+	
 }
 
 void ChangeFillAction::undo()
 {
-	if (ReqStyle == Fill) {
-		if (lastFillstate) {
+	Output* pOut = pManager->GetOutput();
+	if (CanExecute) {
+		if (ReqStyle == Fill) {
+			if (lastFillstate) {
 
-			pManager->GetFigure(FGindex)->ChngFillClr(lastSelected);
+				pManager->GetFigure(FGindex)->ChngFillClr(lastSelected);
+
+			}
+			else pManager->GetFigure(FGindex)->ChngFillClr(UI.BkGrndColor);
+		}
+		else if (ReqStyle == Border) {
+			pManager->GetFigure(FGindex)->ChngDrawClr(lastSelected);
+
 
 		}
-		else pManager->GetFigure(FGindex)->ChngFillClr(UI.BkGrndColor);
 	}
-	else if (ReqStyle == Border) {
-		pManager->GetFigure(FGindex)->ChngDrawClr(lastSelected);
-
-
-	}
-	
+	else { pOut->PrintMessage("You didn't select a figure to undo it"); }
 }
 
 void ChangeFillAction::redo()
 {
-	if (ReqStyle == Fill) {
+	if (CanExecute) {
+		if (ReqStyle == Fill) {
 
-		pManager->GetFigure(FGindex)->ChngFillClr(SelectedColor);
-		//lastSelected = UI.FillColor;
-		//UI.FillColor = SelectedColor;
+			pManager->GetFigure(FGindex)->ChngFillClr(SelectedColor);
+			//lastSelected = UI.FillColor;
+			//UI.FillColor = SelectedColor;
 
+		}
+		else if (ReqStyle == Border) {
+
+			pManager->GetFigure(FGindex)->ChngDrawClr(SelectedColor);
+			//lastSelected = UI.DrawColor;
+			//UI.DrawColor = SelectedColor;
+
+		}
 	}
-	else if (ReqStyle == Border) {
-
-		pManager->GetFigure(FGindex)->ChngDrawClr(SelectedColor);
-		//lastSelected = UI.DrawColor;
-		//UI.DrawColor = SelectedColor;
-
-	}
-	
 }
