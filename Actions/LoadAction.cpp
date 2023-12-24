@@ -27,7 +27,7 @@ void LoadAction::ReadActionParameters() {
 //Execute action (code depends on action type)
 void LoadAction::Execute() {
 	ReadActionParameters();
-
+	
 	Input* input = pManager->GetInput();
 	Output* output = pManager->GetOutput();
 	ifstream file(name);
@@ -63,6 +63,7 @@ void LoadAction::Execute() {
 	}
 
 	pManager->LoadAll(figurs, count);
+	pManager->show();
 	pManager->UpdateInterface();
 
 	output->PrintMessage("Loaded " + std::to_string(count) + " Figures");

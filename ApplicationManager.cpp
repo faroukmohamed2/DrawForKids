@@ -405,7 +405,7 @@ void ApplicationManager::addAction(Action* ptr)
 void ApplicationManager::UndoLastAction()
 {
 	int i = ActionsCount - CountofUndoed - 1;
-	if (ActionsCount == 0||i<0)
+	if (ActionsCount == 0||i < 0)
 	{
 		pOut->PrintMessage("you can't undo anymore");
 		return;

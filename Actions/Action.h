@@ -25,8 +25,8 @@ public:
 	//Execute action (code depends on action type)
 	virtual void Execute() =0;
 	bool GetUndoValidity() { return UndoValidity; }
-	virtual void undo() {}
-	virtual void redo() {}
+	virtual void undo() {};
+	virtual void redo() {};
 
 	bool isRecordable() { return Recordable; }
 };
