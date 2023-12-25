@@ -16,8 +16,11 @@ SelectTheColor::SelectTheColor(ApplicationManager* pApp): Action(pApp)
 	oranges = 0;
 	blacks = 0;
 	uncol = 0; 
+	WrongAns = 0;
+	TrueAns = 0;
 	FigCount = pManager->GetFigCount();
 	CountColors();
+	UndoValidity = false;
 }
 void SelectTheColor::CountColors()
 {
@@ -73,8 +76,7 @@ void SelectTheColor::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
-	pManager->show();
-	pManager->UpdateInterface();
+
 	if (FigCount != 0)
 	{
 		switch (randcol)
@@ -108,9 +110,11 @@ void SelectTheColor::ReadActionParameters()
 
 void SelectTheColor::Execute()
 {
-	int TrueAns = 0, WrongAns = 0, i = 0;
+	int i = 0;
 	CFigure** pick = new CFigure * [FigCount];
 	Output* pOut = pManager->GetOutput();
+	pManager->show();
+	pManager->UpdateInterface();
 
 	if (FigCount == 0 || uncol == FigCount)
 		pOut->PrintMessage("Please Draw Some Colored Shapes");
@@ -123,66 +127,27 @@ void SelectTheColor::Execute()
 			pick[i] = pManager->GetFigure(p.x, p.y);
 			while (pick[i] == NULL)
 			{
+				if (EndExecute() > 0)
+				{
+					pOut->PrintMessage("True Answers: " + to_string(TrueAns) + " Wrong Answers: " + to_string(WrongAns));
+					break;
+				}
 				ReadActionParameters();
-				if (EndExecute() == TO_DRAW)
-				{
-					pManager->ExecuteAction(TO_DRAW);
-					break;
-				}
-				else if (EndExecute() == RESET)
-				{
-					pManager->ExecuteAction(RESET);
-					break;
-				}
 				pick[i] = pManager->GetFigure(p.x, p.y);
 			}
-			if (EndExecute() == TO_DRAW)
+
+			if (EndExecute() > 0)
 			{
-				pManager->ExecuteAction(TO_DRAW);
+				pOut->PrintMessage("True Answers: " + to_string(TrueAns) + " Wrong Answers: " + to_string(WrongAns));
 				break;
 			}
-			else if (EndExecute() == RESET)
-			{
-				pManager->ExecuteAction(RESET);
-				break;
-			}
+
 			if (pick[i])
 			{
 				pick[i]->SetHide(true);
 				pManager->UpdateInterface();
 			}
-			if (pick[i]->GetFigColor() == RED && randcol == RD)
-			{
-				TrueAns++;
-				reds--;
-			}
-			else if (pick[i]->GetFigColor() == ORANGE && randcol == ORNGE)
-			{
-				TrueAns++;
-				oranges--;
-			}
-			else if (pick[i]->GetFigColor() == YELLOW && randcol == YLLOW)
-			{
-				TrueAns++;
-				yellows--;
-			}
-			else if (pick[i]->GetFigColor() == BLACK && randcol ==	BLCK)
-			{
-				TrueAns++;
-				blacks--;
-			}
-			else if (pick[i]->GetFigColor() == GREEN && randcol == GRN)
-			{
-				TrueAns++;
-				greens--;
-			}
-			else if (pick[i]->GetFigColor() == BLUE && randcol == BLU)
-			{
-				TrueAns++;
-				blues--;
-			}
-			else
-				WrongAns++;
+			Result(pick[i]);
 			if (randcol == NotExist(randcol))
 			{
 
@@ -192,8 +157,45 @@ void SelectTheColor::Execute()
 			i++;
 		}
 	}
+	delete pick;
 }
-ActionType SelectTheColor::EndExecute()
+
+void SelectTheColor::Result(CFigure* pick)
+{
+	if (pick->GetFigColor() == RED && randcol == RD)
+	{
+		TrueAns++;
+		reds--;
+	}
+	else if (pick->GetFigColor() == ORANGE && randcol == ORNGE)
+	{
+		TrueAns++;
+		oranges--;
+	}
+	else if (pick->GetFigColor() == YELLOW && randcol == YLLOW)
+	{
+		TrueAns++;
+		yellows--;
+	}
+	else if (pick->GetFigColor() == BLACK && randcol == BLCK)
+	{
+		TrueAns++;
+		blacks--;
+	}
+	else if (pick->GetFigColor() == GREEN && randcol == GRN)
+	{
+		TrueAns++;
+		greens--;
+	}
+	else if (pick->GetFigColor() == BLUE && randcol == BLU)
+	{
+		TrueAns++;
+		blues--;
+	}
+	else
+		WrongAns++;
+}
+int SelectTheColor::EndExecute()
 {
 
 	if (p.y < UI.ToolBarHeight)
@@ -202,9 +204,14 @@ ActionType SelectTheColor::EndExecute()
 			return TO_DRAW;
 		if (p.x > UI.MenuItemWidth * 9 && p.x < UI.MenuItemWidth * 11)
 			return RESET;
+		if (p.x > 0 && p.x < UI.MenuItemWidth * 2)
+			return FIG_TYP;
+		if (p.x > UI.MenuItemWidth * 6 && p.x < UI.MenuItemWidth * 8)
+			return FIG_TYP_COL;
+		return -1;
 	}
+	return -1;
 }
-
 SelectTheColor::~SelectTheColor()
 {
 	delete colors;

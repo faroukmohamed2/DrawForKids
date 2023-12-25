@@ -125,35 +125,39 @@ void ChangeFillAction::undo()
 			if (lastFillstate) {
 
 				pManager->GetFigure(FGindex)->ChngFillClr(lastSelected);
+				pOut->PrintMessage("the change fill color of the figure action is undoed ");
 
 			}
 			else pManager->GetFigure(FGindex)->ChngFillClr(UI.BkGrndColor);
 		}
 		else if (ReqStyle == Border) {
 			pManager->GetFigure(FGindex)->ChngDrawClr(lastSelected);
-
+			pOut->PrintMessage("the change border color of the figure action is undoed ");
 
 		}
 	}
-	else { pOut->PrintMessage("You didn't select a figure to undo it"); }
+	else { pOut->PrintMessage("you didn't select a figure to change its color so you can't undo the action"); }
 }
 
 void ChangeFillAction::redo()
 {
+	Output* pOut = pManager->GetOutput();
 	if (CanExecute) {
 		if (ReqStyle == Fill) {
 
 			pManager->GetFigure(FGindex)->ChngFillClr(SelectedColor);
 			//lastSelected = UI.FillColor;
 			//UI.FillColor = SelectedColor;
-
+			pOut->PrintMessage("the change fill color of the figure action is redoed ");
 		}
 		else if (ReqStyle == Border) {
 
 			pManager->GetFigure(FGindex)->ChngDrawClr(SelectedColor);
 			//lastSelected = UI.DrawColor;
 			//UI.DrawColor = SelectedColor;
-
+			pOut->PrintMessage("the change border color of the figure action is redoed ");
 		}
 	}
+	else pOut->PrintMessage("you didn't select a figure to change its color so you can't redo the action");
+	
 }

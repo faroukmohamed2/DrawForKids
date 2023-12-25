@@ -62,6 +62,7 @@ public:
 
 
 
+
 	
 
 
@@ -84,6 +85,7 @@ public:
 	bool IsRecording() const;
 	bool IsRecordClipAvailable() const;
 	void ClearAll();
+	void ClearRecordingHistory();
 };
 
 #endif

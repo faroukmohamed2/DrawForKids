@@ -1,7 +1,7 @@
 #include "StartRecordingAction.h"
 #include "../../ApplicationManager.h"
 
-StartRecordingAction::StartRecordingAction(ApplicationManager * pApp) :Action(pApp) {}
+StartRecordingAction::StartRecordingAction(ApplicationManager* pApp) :Action(pApp) { UndoValidity = false; }
 
 void StartRecordingAction::ReadActionParameters() {
 

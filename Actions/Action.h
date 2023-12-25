@@ -26,7 +26,7 @@ public:
 	virtual void Execute() =0;
 	bool GetUndoValidity() { return UndoValidity; }
 	virtual void undo() {}
-	virtual void redo() {}
+	virtual void redo() { this->Execute(); }
 
 	bool isRecordable() { return Recordable; }
 };

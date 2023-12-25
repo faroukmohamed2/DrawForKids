@@ -1,7 +1,7 @@
 #include "StopRecordingAction.h"
 #include "../../ApplicationManager.h"
 
-StopRecordingAction::StopRecordingAction(ApplicationManager* pApp) :Action(pApp) {}
+StopRecordingAction::StopRecordingAction(ApplicationManager* pApp) :Action(pApp) { UndoValidity = false; }
 
 void StopRecordingAction::ReadActionParameters() {
 

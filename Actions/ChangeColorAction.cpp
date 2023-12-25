@@ -75,10 +75,12 @@ void ChangeColorAction::undo()
 {
 	Output* pOut = pManager->GetOutput();
 	UI.DrawColor = lastColor;
-	pOut->PrintMessage(" ");
+	pOut->PrintMessage("the default color changing action is undoed");
 }
 void ChangeColorAction::redo()
 {
+	Output* pOut = pManager->GetOutput();
 	lastColor = UI.DrawColor;
 	UI.DrawColor = SelectedColor;
+	pOut->PrintMessage("the default color changing action is redoed");
 }

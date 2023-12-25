@@ -5,6 +5,7 @@
 
 ChangeToDrawModeAction::ChangeToDrawModeAction(ApplicationManager* pApp) :Action(pApp)
 {
+	UndoValidity = false;
 }
 
 void ChangeToDrawModeAction::ReadActionParameters()
@@ -24,4 +25,6 @@ void ChangeToDrawModeAction::Execute()
 	}
 
 }
+
+
 

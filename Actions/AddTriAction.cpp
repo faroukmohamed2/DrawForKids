@@ -61,16 +61,16 @@ void AddTriAction::Execute()
 
 void AddTriAction::undo()
 {
+	Output* pOut = pManager->GetOutput();
 	pManager->DeleteFigure(ID);
-
+	pOut->PrintMessage("the add Triangle action is undoed ");
 }
 
 void AddTriAction::redo()
-{
+{ 
+	Output* pOut = pManager->GetOutput();
 	CTriangle* R = new CTriangle(P1, P2, P3, TriGfxInfo);
-
-
 	R->SetId(ID);
 	pManager->AddFigure(R);
-	
+	pOut->PrintMessage("the add Triangle action is redoed ");
 }

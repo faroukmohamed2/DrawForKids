@@ -3,7 +3,9 @@
 #include "Action.h"
 #include "../DEFS.h"
 ChangeToPlayModeAction::ChangeToPlayModeAction(ApplicationManager* pApp) :Action(pApp)
-{}
+{
+	UndoValidity = false;
+}
 void ChangeToPlayModeAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();

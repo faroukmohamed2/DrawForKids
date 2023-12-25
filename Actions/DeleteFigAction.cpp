@@ -13,11 +13,11 @@ void DeleteFigAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 	ToDelete = pManager->IsSelected();
-	Refrence = ToDelete;
-	FigID = ToDelete->GetId();
+	
 	if (ToDelete != NULL) {
 
 		pOut->PrintMessage("The figure is deleted succefully");
+		FigID = ToDelete->GetId();
 		CanExecute = true;
 	}
 
@@ -43,15 +43,29 @@ void DeleteFigAction::Execute()
 void DeleteFigAction::undo()
 {
 	Output* pOut = pManager->GetOutput();
-	Refrence->SetHide(false);
-	pManager->AddFigure(Refrence);
-	
+	if (CanExecute) {
+		
+		ToDelete->SetHide(false);
+		pManager->AddFigure(ToDelete);
+		pOut->PrintMessage("the delete figure action is undoed ");
+	}
+	else pOut->PrintMessage("you didn't select a figure to delete so you can't undo the action ");
+
 }
 
 void DeleteFigAction::redo()
 {
 	Output* pOut = pManager->GetOutput();
-	Refrence->SetHide(true);
-	//Refrence->Delete(pOut);
-	pManager->DeleteFigure(FigID);
+	if (CanExecute) {
+		ToDelete->SetHide(true);
+		//Refrence->Delete(pOut);
+		pManager->DeleteFigure(FigID);
+		pOut->PrintMessage("the delete figure action is redoed ");
+	}
+	else pOut->PrintMessage("you didn't select a figure to delete so you can't redo the action ");
+}
+
+DeleteFigAction::~DeleteFigAction()
+{
+	delete ToDelete;
 }

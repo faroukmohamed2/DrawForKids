@@ -1,7 +1,9 @@
 #include "RestartAction.h"
 #include "../ApplicationManager.h"
 Restart::Restart(ApplicationManager* pApp):Action(pApp)
-{}
+{
+	UndoValidity = false;
+}
 
 void Restart::ReadActionParameters()
 {

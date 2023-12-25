@@ -51,18 +51,22 @@ void MoveAction::Execute()
 
 void MoveAction::undo()
 {
+	Output* pOut = pManager->GetOutput();
 	if (CanExecute) {
-		Output* pOut = pManager->GetOutput();
 		pOut->ClearDrawArea();
 		pManager->GetFigure(FigID)->Move(lastLoaction);
+		pOut->PrintMessage("the move figure action is undoed ");
 	}
+   else pOut->PrintMessage("you didn't select a figure to move so you can't undo the action ");
 }
 
 void MoveAction::redo()
 {
+	Output* pOut = pManager->GetOutput();
 	if (CanExecute) {
-		Output* pOut = pManager->GetOutput();
 		pOut->ClearDrawArea();
 		pManager->GetFigure(FigID)->Move(NewLocation);
+		pOut->PrintMessage("the move figure action is redoed ");
 	}
+	else pOut->PrintMessage("you didn't select a figure to move so you can't redo the action ");
 }

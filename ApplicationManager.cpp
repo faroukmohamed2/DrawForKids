@@ -20,6 +20,7 @@
 #include "Actions/SelectTheShape.h"
 #include "Actions/RestartAction.h" 
 #include "Actions/SelectTheColor.h"
+#include "Actions/SelectColorShape.h"
 #include "Actions/UndoAction.h"
 #include "Actions/RedoAction.h"
 #include "Actions/Rercording/StartRecordingAction.h"
@@ -135,6 +136,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case RESET:
 			pAct = new Restart(this);
 			break;
+		case FIG_TYP_COL:
+			pAct = new SelectColorShape(this);
+			break;
 		case UNDO:
 			pAct = new UndoAction(this);
 			break;
@@ -165,7 +169,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{
 		pAct->Execute();//Execute
 		addAction(pAct);
-		//delete pAct;	//You may need to change this line depending to your implementation
+		if (!pAct->isRecordable() || !pAct->GetUndoValidity())
+		{
+			delete pAct;
+		}
 		pAct = NULL;
 	}
 }
@@ -237,16 +244,22 @@ void ApplicationManager::ClearAll()
 		delete SelectedFig;
 		SelectedFig = NULL;
    }
+	
+	
+	pOut->ClearDrawArea();
+	pOut->PrintMessage("you clear all figures");
+}
+
+void ApplicationManager::ClearRecordingHistory()
+{
 	for (int i = 0; i < RecordedActionCount; i++)//reset recording history
 	{
 		delete RecordedAction[i];
 		RecordedAction[i] = NULL;
 	}
 	RecordedActionCount = 0;
-	
-	pOut->ClearDrawArea();
-	pOut->PrintMessage("you clear all figures");
 }
+
 
 void ApplicationManager::StartRecording(){
 	isRecording = true;
@@ -260,7 +273,6 @@ void ApplicationManager::PlayRecord(){
 		delete RecordedAction[i];
 		pOut->PrintMessage(to_string(i / 60) + ":" + to_string(i % 60) + " / " + to_string(RecordedActionCount / 60) + ":" + to_string(RecordedActionCount % 60));
 		UpdateInterface();
-
 		Sleep(1 * 1000);
 	}
 
@@ -370,6 +382,7 @@ void ApplicationManager::addAction(Action* ptr)
 		}
 		else {
 			pOut->PrintMessage("Recording limit exceeded, Recording stopped.");
+			delete ptr;
 			StopRectording();
 		}
 	}
@@ -399,12 +412,13 @@ void ApplicationManager::addAction(Action* ptr)
 			last5Actions[4] = ptr;
 		}
 	}
+	
 }
 
 void ApplicationManager::UndoLastAction()
 {
 	int i = ActionsCount - CountofUndoed - 1;
-	if (ActionsCount == 0||i<0)
+	if (ActionsCount == 0||i < 0)
 	{
 		pOut->PrintMessage("you can't undo anymore");
 		return;
@@ -430,6 +444,7 @@ void ApplicationManager::show()
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->SetHide(false);
 }
+
 
 color ApplicationManager::GetFigColor(int i)
 {

@@ -7,5 +7,6 @@ public:
 	ChangeToDrawModeAction(ApplicationManager* pApp);
 	virtual void ReadActionParameters();
 	virtual void Execute();
+	
 };
 #endif

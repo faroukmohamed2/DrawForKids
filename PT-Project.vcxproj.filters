@@ -17,6 +17,9 @@
     <ClCompile Include="Actions\MoveAction.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
     <ClCompile Include="Actions\SelectTheColor.cpp" />
+<<<<<<< HEAD
+    <ClCompile Include="Actions\SelectColorShape.cpp" />
+=======
     <ClCompile Include="Actions\SelectTheShape.cpp" />
     <ClCompile Include="Actions\UndoAction.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
@@ -71,6 +74,7 @@
     <ClCompile Include="Actions\Rercording\StopRecordingAction.cpp" />
     <ClCompile Include="Actions\Rercording\PlayRecordAction.cpp" />
     <ClCompile Include="Actions\ClearAllAction.cpp" />
+>>>>>>> d2c7fde3a57d9e88d7f1167474a3540566b81625
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\AddCircleAction.h" />
@@ -90,6 +94,9 @@
     <ClInclude Include="Actions\MoveAction.h" />
     <ClInclude Include="Actions\SelectAction.h" />
     <ClInclude Include="Actions\SelectTheColor.h" />
+<<<<<<< HEAD
+    <ClInclude Include="Actions\SelectColorShape.h" />
+=======
     <ClInclude Include="Actions\SelectTheShape.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />
@@ -129,6 +136,7 @@
     <ClInclude Include="Actions\Rercording\StopRecordingAction.h" />
     <ClInclude Include="Actions\Rercording\PlayRecordAction.h" />
     <ClInclude Include="Actions\ClearAllAction.h" />
+>>>>>>> d2c7fde3a57d9e88d7f1167474a3540566b81625
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

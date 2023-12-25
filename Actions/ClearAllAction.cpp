@@ -16,5 +16,6 @@ void ClearAllAction::Execute()
 {
 
 	pManager->ClearAll();
+	pManager->ClearRecordingHistory();
 
 }

@@ -55,14 +55,17 @@ void AddRectAction::Execute()
 }
 
 void AddRectAction::undo()
-{
+{ 
+	Output* pOut = pManager->GetOutput();
 	pManager->DeleteFigure(ID);
+	pOut->PrintMessage("the add Rectangle action is undoed ");
 }
 
 void AddRectAction::redo()
 {
-
+	Output* pOut = pManager->GetOutput();
 	CRectangle* R = new CRectangle(P1, P2, RectGfxInfo);
 	R->SetId(ID);
 	pManager->AddFigure(R);
+	pOut->PrintMessage("the add Rectangle action is redoed ");
 }

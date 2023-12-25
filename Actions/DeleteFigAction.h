@@ -7,7 +7,6 @@ class DeleteFigAction : public Action {
 private:
 	bool CanExecute;
 	CFigure* ToDelete;
-	CFigure* Refrence;
 	int  FigID;
 public:
 	DeleteFigAction(ApplicationManager* pApp);
@@ -21,6 +20,7 @@ public:
 	virtual void undo();
 
 	virtual void redo();
+	~DeleteFigAction();
 
 };
 

@@ -55,14 +55,17 @@ void AddCircleAction::Execute()
 
 void AddCircleAction::undo()
 {
+	Output* pOut = pManager->GetOutput();
 	pManager->DeleteFigure(ID);
+	pOut->PrintMessage("the add circle action is undoed ");
 	
 }
 
 void AddCircleAction::redo()
 {
+	Output* pOut = pManager->GetOutput();
 	CCircle* R = new CCircle(P1, P2, CircleGfxInfo);
-    	
 	R->SetId(ID);
 	pManager->AddFigure(R);
+	pOut->PrintMessage("the add circle action is redoed ");
 }

@@ -51,15 +51,16 @@ void AddHexaAction::Execute()
 
 void AddHexaAction::undo()
 {
+	Output* pOut = pManager->GetOutput();
 	pManager->DeleteFigure(ID);
-	
+	pOut->PrintMessage("the add hexagon action is undoed ");
 }
 
 void AddHexaAction::redo()
 {
+	Output* pOut = pManager->GetOutput();
 	CHexa* R = new CHexa(P1, HexaGfxInfo);
-
 	R->SetId(ID);
 	pManager->AddFigure(R);
-	
+	pOut->PrintMessage("the add Hexagon action is redoed ");
 }

@@ -1,7 +1,7 @@
 #include "PlayRecordAction.h"
 #include "../../ApplicationManager.h"
 
-PlayRecordAction::PlayRecordAction(ApplicationManager* pApp) :Action(pApp) {}
+PlayRecordAction::PlayRecordAction(ApplicationManager* pApp) :Action(pApp) { UndoValidity = false; }
 
 void PlayRecordAction::ReadActionParameters() {
 
@@ -12,7 +12,7 @@ void PlayRecordAction::Execute() {
 	Output* out = pManager->GetOutput();
 	if (pManager->IsRecordClipAvailable()) {
 		out->PrintMessage("Started playing the record ...");
-		//TODO: pManager->ClearAll();
+		pManager->ClearAll();
 		pManager->PlayRecord();
 		out->PrintMessage("Finished playing, You can start drawing now.");
 	}

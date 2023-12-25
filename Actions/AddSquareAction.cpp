@@ -44,16 +44,16 @@ void AddSquareAction::Execute()
 
 void AddSquareAction::undo()
 {
+	Output* pOut = pManager->GetOutput();
 	pManager->DeleteFigure(ID);
-	
+	pOut->PrintMessage("the add Square action is undoed ");
 }
 
 void AddSquareAction::redo()
 {
+	Output* pOut = pManager->GetOutput();
 	CSquare* R = new CSquare(P1, SquareGfxInfo);
-
-
 	R->SetId(ID);
 	pManager->AddFigure(R);
-	
+	pOut->PrintMessage("the add Square action is redoed ");
 }
