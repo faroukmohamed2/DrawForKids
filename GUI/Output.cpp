@@ -248,7 +248,10 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 
 
 	pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);//call the function that draw a rectangle and we will pass to it the 2 corners and style
-	
+	if (UI.InterfaceMode == MODE_DRAW)
+		CreateDrawToolBar();			//we redraw the tool bar becaue of the case . a part of the hexagon is in the region of tool bar
+	else
+		CreatePlayToolBar();
 }
 
 
@@ -308,7 +311,10 @@ void Output::DrawTrig(Point P1, Point P2, Point P3, GfxInfo TrigGfxInfo, bool se
 
 
 	pWind->DrawTriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, style);//call the triangle draw function and pass to it the 3 vertices and the style
-	
+	if (UI.InterfaceMode == MODE_DRAW)
+		CreateDrawToolBar();			//we redraw the tool bar becaue of the case . a part of the hexagon is in the region of tool bar
+	else
+		CreatePlayToolBar();
 }
 
 void Output::DrawHexa(Point P1,int length, GfxInfo HexaGfxInfo, bool selected) const
