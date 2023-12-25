@@ -16,7 +16,7 @@ private:
 	enum Style { Border, Fill };
 	Style  ReqStyle;
 	int FGindex;
-	bool lastFillstate;
+	bool lastFillstate;// we will use it in the undo and redo action
 
 public:
 	ChangeFillAction(ApplicationManager* pApp, ActionType);
@@ -27,8 +27,8 @@ public:
 	//Add rectangle to the ApplicationManager
 	virtual void Execute();
 
-	virtual void undo();
+	virtual void undo();//the undo action of changing color of the figure(border and fill)
 
-	virtual void redo();
+	virtual void redo();//the redo action of changing color of the figure(border and fill)
 
 };

@@ -3,7 +3,9 @@
 #include <limits>
 #include <iostream>
 
-ResizeAction::ResizeAction(ApplicationManager* pApp) : Action(pApp) {};
+ResizeAction::ResizeAction(ApplicationManager* pApp) : Action(pApp)
+{ UndoValidity = true;//making the action undoable
+}
 void ResizeAction::ReadActionParameters() {
 	Input* input = pManager->GetInput();
 	Output* output = pManager->GetOutput();

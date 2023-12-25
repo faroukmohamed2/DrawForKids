@@ -8,7 +8,7 @@
 
 AddSquareAction::AddSquareAction(ApplicationManager* pApp):Action (pApp)
 {
-	UndoValidity = true;
+	UndoValidity = true;//making the action undoable
 	Recordable = true;
 }
 
@@ -45,15 +45,15 @@ void AddSquareAction::Execute()
 void AddSquareAction::undo()
 {
 	Output* pOut = pManager->GetOutput();
-	pManager->DeleteFigure(ID);
+	pManager->DeleteFigure(ID);//in the undo of this acction we delete the figure
 	pOut->PrintMessage("the add Square action is undoed ");
 }
 
 void AddSquareAction::redo()
 {
 	Output* pOut = pManager->GetOutput();
-	CSquare* R = new CSquare(P1, SquareGfxInfo);
-	R->SetId(ID);
-	pManager->AddFigure(R);
+	CSquare* R = new CSquare(P1, SquareGfxInfo);;//in the redo of this action we return the square with its info
+	R->SetId(ID);//setting the id of the square with its intial id
+	pManager->AddFigure(R);//adding the square to the fig list
 	pOut->PrintMessage("the add Square action is redoed ");
 }

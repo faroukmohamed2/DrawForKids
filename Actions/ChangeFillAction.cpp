@@ -19,7 +19,7 @@ ChangeFillAction::ChangeFillAction(ApplicationManager* pApp, ActionType ChngStyl
 	else if (ChngStyle == Pencile_Tool)
 		ReqStyle = Border;
 
-	UndoValidity = true;
+	UndoValidity = true;//making the action undoable
 }
 
 void ChangeFillAction::ReadActionParameters()
@@ -102,7 +102,6 @@ void ChangeFillAction::Execute()
 			lastSelected = pManager->GetFigure(FGindex)->GetFigColor();
 			pManager->GetFigure(FGindex)->ChngFillClr(SelectedColor);
 			pManager->GetFigure(FGindex)->SetSelected(!(pManager->GetFigure(FGindex)->IsSelected()));
-			//UI.FillColor = SelectedColor;
 
 
 		}
@@ -110,7 +109,7 @@ void ChangeFillAction::Execute()
 			lastSelected = pManager->GetFigure(FGindex)->GetborderColor();
 			pManager->GetFigure(FGindex)->ChngDrawClr(SelectedColor);
 			pManager->GetFigure(FGindex)->SetSelected(!(pManager->GetFigure(FGindex)->IsSelected()));
-			//UI.DrawColor = SelectedColor;
+			
 
 		}
 	}
@@ -120,18 +119,20 @@ void ChangeFillAction::Execute()
 void ChangeFillAction::undo()
 {
 	Output* pOut = pManager->GetOutput();
-	if (CanExecute) {
-		if (ReqStyle == Fill) {
-			if (lastFillstate) {
+	if (CanExecute) {//if there was a figure to chang its color
+		if (ReqStyle == Fill) {//if we changed the fill color
+			if (lastFillstate)//checking that the figure was filled or not before excuting the change color action
+			{
 
-				pManager->GetFigure(FGindex)->ChngFillClr(lastSelected);
+				pManager->GetFigure(FGindex)->ChngFillClr(lastSelected);//return it to the last fill color before changing it
 				pOut->PrintMessage("the change fill color of the figure action is undoed ");
 
 			}
-			else pManager->GetFigure(FGindex)->ChngFillClr(UI.BkGrndColor);
+			else pManager->GetFigure(FGindex)->setfillstate(false);//retrun it to non filled if it is not filled before changing the fill color
+		
 		}
-		else if (ReqStyle == Border) {
-			pManager->GetFigure(FGindex)->ChngDrawClr(lastSelected);
+		else if (ReqStyle == Border) {//if we changed the border color
+			pManager->GetFigure(FGindex)->ChngDrawClr(lastSelected);//return it to last border color before changing
 			pOut->PrintMessage("the change border color of the figure action is undoed ");
 
 		}
@@ -143,18 +144,14 @@ void ChangeFillAction::redo()
 {
 	Output* pOut = pManager->GetOutput();
 	if (CanExecute) {
-		if (ReqStyle == Fill) {
+		if (ReqStyle == Fill) {//in case of fill changing
 
-			pManager->GetFigure(FGindex)->ChngFillClr(SelectedColor);
-			//lastSelected = UI.FillColor;
-			//UI.FillColor = SelectedColor;
+			pManager->GetFigure(FGindex)->ChngFillClr(SelectedColor);//redo the action and return the color to the selected one
 			pOut->PrintMessage("the change fill color of the figure action is redoed ");
 		}
-		else if (ReqStyle == Border) {
+		else if (ReqStyle == Border) {//in case of border changing
 
-			pManager->GetFigure(FGindex)->ChngDrawClr(SelectedColor);
-			//lastSelected = UI.DrawColor;
-			//UI.DrawColor = SelectedColor;
+			pManager->GetFigure(FGindex)->ChngDrawClr(SelectedColor);//redo the action and return the color to the selected one
 			pOut->PrintMessage("the change border color of the figure action is redoed ");
 		}
 	}

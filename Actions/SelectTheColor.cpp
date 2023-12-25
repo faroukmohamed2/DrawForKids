@@ -20,7 +20,7 @@ SelectTheColor::SelectTheColor(ApplicationManager* pApp): Action(pApp)
 	TrueAns = 0;
 	FigCount = pManager->GetFigCount();
 	CountColors();
-	UndoValidity = false;
+	UndoValidity = false;//making the action non-undoable
 }
 void SelectTheColor::CountColors()
 {

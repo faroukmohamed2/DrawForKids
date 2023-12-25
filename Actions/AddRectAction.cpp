@@ -8,7 +8,7 @@
 
 AddRectAction::AddRectAction(ApplicationManager* pApp) :Action(pApp)
 {
-	UndoValidity = 1;
+	UndoValidity = true;//making the action undoable
 	Recordable = true;
 }
 
@@ -57,15 +57,15 @@ void AddRectAction::Execute()
 void AddRectAction::undo()
 { 
 	Output* pOut = pManager->GetOutput();
-	pManager->DeleteFigure(ID);
+	pManager->DeleteFigure(ID);//in the undo of this acction we delete the figure
 	pOut->PrintMessage("the add Rectangle action is undoed ");
 }
 
 void AddRectAction::redo()
 {
 	Output* pOut = pManager->GetOutput();
-	CRectangle* R = new CRectangle(P1, P2, RectGfxInfo);
-	R->SetId(ID);
-	pManager->AddFigure(R);
+	CRectangle* R = new CRectangle(P1, P2, RectGfxInfo);//in the redo of this action we return the rectangle with its info
+	R->SetId(ID);//setting the id of the rectangle with its intial id
+	pManager->AddFigure(R);//adding the rectangle to fig list
 	pOut->PrintMessage("the add Rectangle action is redoed ");
 }

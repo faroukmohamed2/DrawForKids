@@ -19,7 +19,7 @@ SelectTheShape::SelectTheShape(ApplicationManager *pApp):Action(pApp)
 	FigCount = pManager->GetFigCount();
 	TrueAns = 0;
 	WrongAns = 0;
-	UndoValidity = false;
+	UndoValidity = false;//making the action non-undoable
 }
 
 int SelectTheShape::NotExist(int rand)

@@ -10,7 +10,7 @@
 
 AddTriAction::AddTriAction(ApplicationManager* pApp) : Action (pApp)
 {
-	UndoValidity = true;
+	UndoValidity = true;//making the action undoable
 	Recordable = true;
 }
 

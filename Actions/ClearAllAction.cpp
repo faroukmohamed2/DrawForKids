@@ -4,7 +4,7 @@
 
 ClearAllAction::ClearAllAction(ApplicationManager* pApp) :Action(pApp)
 {
-	UndoValidity = false;
+	UndoValidity = false;//making the action non-undoable
 }
 
 void ClearAllAction::ReadActionParameters()

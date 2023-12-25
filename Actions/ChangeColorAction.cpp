@@ -17,7 +17,7 @@
 ChangeColorAction::ChangeColorAction(ApplicationManager* pApp, ActionType TheColor) :Action(pApp)
 {
 	Recordable = true;
-
+   UndoValidity = true; //making the action undoable
 	switch (TheColor)
 	{
 	case DRW_Red:
@@ -47,7 +47,7 @@ ChangeColorAction::ChangeColorAction(ApplicationManager* pApp, ActionType TheCol
 	default:
 		break;
 	}
-	UndoValidity = true;
+	
 }
 
 void ChangeColorAction::ReadActionParameters()
@@ -66,7 +66,7 @@ void ChangeColorAction::ReadActionParameters()
 void ChangeColorAction::Execute()
 {
 	ReadActionParameters();
-	lastColor = UI.DrawColor;
+	lastColor = UI.DrawColor;//assigning the lastcolor by the user interface current color before the changing
 	UI.DrawColor = SelectedColor;
 	
 }
@@ -74,13 +74,13 @@ void ChangeColorAction::Execute()
 void ChangeColorAction::undo()
 {
 	Output* pOut = pManager->GetOutput();
-	UI.DrawColor = lastColor;
+	UI.DrawColor = lastColor;//return the default color to the last color before the changing
 	pOut->PrintMessage("the default color changing action is undoed");
 }
 void ChangeColorAction::redo()
 {
 	Output* pOut = pManager->GetOutput();
 	lastColor = UI.DrawColor;
-	UI.DrawColor = SelectedColor;
+	UI.DrawColor = SelectedColor;//redo the action and make the default color to the selected one
 	pOut->PrintMessage("the default color changing action is redoed");
 }

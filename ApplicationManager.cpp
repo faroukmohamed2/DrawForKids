@@ -173,7 +173,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{
 		pAct->Execute();//Execute
 		addAction(pAct);
-		if (!pAct->isRecordable() || !pAct->GetUndoValidity())
+		if (!pAct->isRecordable() && !pAct->GetUndoValidity())//we check that we didn't need the action to be recorded or undided
 		{
 			delete pAct;
 		}
@@ -214,6 +214,96 @@ int ApplicationManager::GetFigCount() const
 
 	return FigCount ;
 }
+//==================================================================================//
+//						       undo and redo System Functions				    	//
+//==================================================================================//
+
+void ApplicationManager::addAction(Action* ptr)
+{
+	if (isRecording && ptr->isRecordable()) {//adding action to the record history
+		if (RecordedActionCount < MaxRecordActionCount) {
+			RecordedAction[RecordedActionCount++] = ptr;
+		}
+		else {
+			pOut->PrintMessage("Recording limit exceeded, Recording stopped.");
+			delete ptr;
+			StopRectording();
+		}
+	}
+
+	if (ptr->GetUndoValidity())//check that the current action is able to be undid
+	{
+
+		while (CountofUndoed != 0)//if we add an action we check that we remove that undid actions before it
+		{
+			delete last5Actions[ActionsCount - 1];//delete the undid action
+			CountofUndoed--;//decrement the number of undidactions
+			ActionsCount--;//decrement the number of actions in the last5actions array
+		}
+
+
+		if (ActionsCount < 5)//if the array of actions is not full
+		{
+			last5Actions[ActionsCount++] = ptr;//put the current action in the last empty element
+		}
+
+		else {//if the array of actions is full
+			delete last5Actions[0];//delete the first element is the array because now we can't it
+			for (int i = 0; i < 4; i++)
+			{
+				last5Actions[i] = last5Actions[i + 1];//replace every element with the next element
+			}
+
+			last5Actions[4] = ptr;//now we will assign the last action with current action
+		}
+	}
+
+}
+
+
+void ApplicationManager::UndoLastAction()
+{
+	int i = ActionsCount - CountofUndoed - 1;//a counter used to know what is the current index that we in
+	if (ActionsCount == 0 || i < 0)//checking that we don't make any actions or the number of undos is>5
+	{
+		pOut->PrintMessage("you can't undo anymore");
+		return;
+	}
+
+	last5Actions[i]->undo();//otherwise we will call the virtual function of the undo of the current action
+	                        ////every actions is responsible to undo itself (the app manager only call the function)///
+	CountofUndoed++;       ////increment the count of the undid actions
+}
+
+
+
+
+void ApplicationManager::RedoLastAction()
+{
+	if (CountofUndoed == 0) {//checking that if there isn't any undid actions
+
+		pOut->PrintMessage("you can't redo");
+		return;
+	}
+	last5Actions[ActionsCount - CountofUndoed]->redo();//otherwise we will call the virtual function of the redo of the current action
+	////every actions is responsible to redo itself (the app manager only call the function)///
+	CountofUndoed--; ////decrement the count of the undid actions
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //==================================================================================//
 //						       Record System Functions								//
@@ -383,70 +473,9 @@ void ApplicationManager::UpdateInterface() const
 				//Call Draw function (virtual member fn)
 }
 
-void ApplicationManager::addAction(Action* ptr)
-{
-	if (isRecording && ptr->isRecordable()) {
-		if (RecordedActionCount < MaxRecordActionCount) {
-				RecordedAction[RecordedActionCount++] = ptr;
-		}
-		else {
-			pOut->PrintMessage("Recording limit exceeded, Recording stopped.");
-			delete ptr;
-			StopRectording();
-		}
-	}
-
-	if (ptr->GetUndoValidity()) {
-
-		while (CountofUndoed != 0)
-		{
-			delete last5Actions[ActionsCount - 1];
-			CountofUndoed--;
-			ActionsCount--;
-		}
 
 
-		if (ActionsCount < 5)
-		{
-			last5Actions[ActionsCount++] = ptr;
-		}
 
-		else {
-			delete last5Actions[0];
-			for (int i = 0; i < 4; i++)
-			{
-				last5Actions[i] = last5Actions[i + 1];
-			}
-
-			last5Actions[4] = ptr;
-		}
-	}
-	
-}
-
-void ApplicationManager::UndoLastAction()
-{
-	int i = ActionsCount - CountofUndoed - 1;
-	if (ActionsCount == 0||i < 0)
-	{
-		pOut->PrintMessage("you can't undo anymore");
-		return;
-	}
-
-	last5Actions[i]->undo();
-	CountofUndoed++;
-}
-
-void ApplicationManager::RedoLastAction()
-{
-	if (CountofUndoed == 0) {
-
-		pOut->PrintMessage("you can't redo");
-		return;
-	}
-	last5Actions[ActionsCount - CountofUndoed]->redo();
-	CountofUndoed--;
-}
 
 void ApplicationManager::show()
 {

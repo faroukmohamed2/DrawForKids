@@ -4,7 +4,8 @@
 #include <fstream>
 #include <iostream>
 
-SaveAction::SaveAction(ApplicationManager* pApp) : Action(pApp) { UndoValidity = false; }
+SaveAction::SaveAction(ApplicationManager* pApp) : Action(pApp) { UndoValidity = false;//making the action non-undoable
+}
 
 
 void SaveAction::ReadActionParameters () {

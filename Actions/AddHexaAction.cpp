@@ -8,6 +8,7 @@
 
 AddHexaAction::AddHexaAction(ApplicationManager* pApp) :Action(pApp)
 {
+	UndoValidity = true;//making the action undoable
 	Recordable = true;
 }
 
@@ -52,15 +53,15 @@ void AddHexaAction::Execute()
 void AddHexaAction::undo()
 {
 	Output* pOut = pManager->GetOutput();
-	pManager->DeleteFigure(ID);
+	pManager->DeleteFigure(ID);//in the undo of this acction we delete the figure
 	pOut->PrintMessage("the add hexagon action is undoed ");
 }
 
 void AddHexaAction::redo()
 {
 	Output* pOut = pManager->GetOutput();
-	CHexa* R = new CHexa(P1, HexaGfxInfo);
-	R->SetId(ID);
-	pManager->AddFigure(R);
+	CHexa* R = new CHexa(P1, HexaGfxInfo);//in the redo of this action we return the hexagon with its info
+	R->SetId(ID);                         //setting the id of the hexagon with its intial id
+	pManager->AddFigure(R);//adding the hexagon to the fig list
 	pOut->PrintMessage("the add Hexagon action is redoed ");
 }

@@ -43,9 +43,12 @@ public:
 	 bool IsInTriangle(Point , Point , Point , Point );
 	 double CalcAreaTriangle(Point, Point, Point);
 	 color GetborderColor();
+	 
 	 void SetId(int);
 	 int GetID();
 	 void Delete(Output* pOut) ;
+	 void setfillstate(bool state);
+	 void setfillstate();
 	 bool getfillstate();
 	 virtual void Move(Point) = 0;
 

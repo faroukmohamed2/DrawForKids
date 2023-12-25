@@ -12,7 +12,9 @@
 #include "../Figures/CSquare.h"
 #include "../Figures/CTriangle.h"
 
-LoadAction::LoadAction(ApplicationManager* pApp) : Action(pApp) { UndoValidity = false; }	//constructor
+LoadAction::LoadAction(ApplicationManager* pApp) : Action(pApp) 
+{ UndoValidity = false;//making the action non-undoable
+}	//constructor
 
 	//Reads parameters required for action to execute (code depends on action type)
 void LoadAction::ReadActionParameters() {

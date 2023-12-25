@@ -133,6 +133,11 @@ void CFigure::Delete(Output* pOut)
 	ChngFillClr(UI.BkGrndColor);
 	this->Draw(pOut);
 }
+void CFigure::setfillstate(bool state)
+{
+	FigGfxInfo.isFilled = state;
+}
+
 bool CFigure::getfillstate()
 {
 	return FigGfxInfo.isFilled;

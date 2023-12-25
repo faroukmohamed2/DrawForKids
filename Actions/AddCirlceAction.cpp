@@ -8,7 +8,7 @@
 
 AddCircleAction::AddCircleAction(ApplicationManager * pApp):Action(pApp)
 {
-	UndoValidity = true;
+	UndoValidity = true;//this action is undoable
 	Recordable = true;
 }
 
@@ -56,7 +56,7 @@ void AddCircleAction::Execute()
 void AddCircleAction::undo()
 {
 	Output* pOut = pManager->GetOutput();
-	pManager->DeleteFigure(ID);
+	pManager->DeleteFigure(ID);//in the undo of this acction we delete the figure
 	pOut->PrintMessage("the add circle action is undoed ");
 	
 }
@@ -64,8 +64,8 @@ void AddCircleAction::undo()
 void AddCircleAction::redo()
 {
 	Output* pOut = pManager->GetOutput();
-	CCircle* R = new CCircle(P1, P2, CircleGfxInfo);
-	R->SetId(ID);
-	pManager->AddFigure(R);
+	CCircle* R = new CCircle(P1, P2, CircleGfxInfo);//in the redo of this action we return the circle with its info
+	R->SetId(ID);       //(the same id of the circle before undoing)      
+	pManager->AddFigure(R); //adding the figure to the fig list
 	pOut->PrintMessage("the add circle action is redoed ");
 }

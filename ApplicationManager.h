@@ -18,9 +18,11 @@ private:
 	int FigCount;		//Actual number of figures
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 	CFigure* SelectedFig; //Pointer to the selected figure
-	Action* last5Actions[5];
-	int CountofUndoed;
-	int ActionsCount;
+
+	//undo and redo variables
+	Action* last5Actions[5];//this array is pointed to that last five actions that excuted (but is undoable)->we use it in the undo and redo
+	int CountofUndoed;//the count of the undid actions 
+	int ActionsCount;//the current number of the actions in the last five actions array
 
 	//Recording Variables
 	bool isRecording = false;
@@ -55,21 +57,21 @@ public:
 	// -- Interface Management Functions
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
-	void UpdateInterface() const;	//Redraws all the drawing window	
-	void addAction(Action* ptr);
-	void UndoLastAction();
-	void RedoLastAction();
+	void UpdateInterface() const;	//Redraws all the drawing window
 	void ReloadFigures() const;
+
+
+	//undo and redo system
+	void addAction(Action* ptr);//this function is used to add an action to the array of the last 5 actions
+	void UndoLastAction();//undo the last action in the last five action array(every action is responsible to undo itself)
+	void RedoLastAction();//redo the last undid action in the last five action array(every action is responsible to redo itself)
+
+
 
 
 
 
 	
-
-
-
-
-
 
 
 	//Save system
@@ -85,6 +87,8 @@ public:
 	void PlayRecord();
 	bool IsRecording() const;
 	bool IsRecordClipAvailable() const;
+
+	//Clear all system
 	void ClearAll();
 	void ClearRecordingHistory();
 };

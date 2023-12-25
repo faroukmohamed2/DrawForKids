@@ -25,7 +25,7 @@ SelectColorShape::SelectColorShape(ApplicationManager* pApp):Action(pApp)
 	}
 	CountCols();
 	Countsh();
-	UndoValidity = false;
+	UndoValidity = false;//making the action non-undoable
 }
 
 void SelectColorShape::CountCols()

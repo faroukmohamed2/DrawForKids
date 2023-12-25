@@ -71,10 +71,8 @@
     <ClCompile Include="Actions\Rercording\StartRecordingAction.cpp" />
     <ClCompile Include="Actions\Rercording\StopRecordingAction.cpp" />
     <ClCompile Include="Actions\Rercording\PlayRecordAction.cpp" />
-    <ClCompile Include="Actions\ClearAllAction.cpp" />
->>>>>>> d2c7fde3a57d9e88d7f1167474a3540566b81625
-    <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Actions\ResizeAction.cpp" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\AddCircleAction.h" />
@@ -133,10 +131,8 @@
     <ClInclude Include="Actions\Rercording\StartRecordingAction.h" />
     <ClInclude Include="Actions\Rercording\StopRecordingAction.h" />
     <ClInclude Include="Actions\Rercording\PlayRecordAction.h" />
-    <ClInclude Include="Actions\ClearAllAction.h" />
->>>>>>> d2c7fde3a57d9e88d7f1167474a3540566b81625
-    <ClInclude Include="Utils.h" />
     <ClInclude Include="Actions\ResizeAction.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

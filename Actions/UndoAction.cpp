@@ -3,7 +3,7 @@
 
 UndoAction::UndoAction(ApplicationManager* pApp) :Action(pApp)
 {
-	UndoValidity = false;
+	UndoValidity = false; //making the action non-undoable
 	Recordable = true;
 }
 

@@ -2,7 +2,7 @@
 
 DeleteFigAction::DeleteFigAction(ApplicationManager* pApp) :Action(pApp)
 {
-	UndoValidity = true;
+	UndoValidity = true;//making the action undoable
 	Recordable = true;
 }
 
@@ -34,7 +34,6 @@ void DeleteFigAction::Execute()
 
 	if (CanExecute) {
 		ToDelete->SetSelected(false);
-		//ToDelete->Delete(pOut);
 		pManager->DeleteFigure(ToDelete->GetID());
 	}
 
@@ -43,26 +42,25 @@ void DeleteFigAction::Execute()
 void DeleteFigAction::undo()
 {
 	Output* pOut = pManager->GetOutput();
-	if (CanExecute) {
+	if (CanExecute) {//if there was a selected figure to delete 
 		
 		ToDelete->SetHide(false);
-		pManager->AddFigure(ToDelete);
+		pManager->AddFigure(ToDelete);//returned the figure to the fig list
 		pOut->PrintMessage("the delete figure action is undoed ");
 	}
-	else pOut->PrintMessage("you didn't select a figure to delete so you can't undo the action ");
+	else pOut->PrintMessage("you didn't select a figure to delete so you can't undo the action ");//in case we press the undo without selecting a figure
 
 }
 
 void DeleteFigAction::redo()
 {
 	Output* pOut = pManager->GetOutput();
-	if (CanExecute) {
+	if (CanExecute) {//if there was a selected figure to delete
 		ToDelete->SetHide(true);
-		//Refrence->Delete(pOut);
-		pManager->DeleteFigure(FigID);
+		pManager->DeleteFigure(FigID);//redoing the action and deleting the figure
 		pOut->PrintMessage("the delete figure action is redoed ");
 	}
-	else pOut->PrintMessage("you didn't select a figure to delete so you can't redo the action ");
+	else pOut->PrintMessage("you didn't select a figure to delete so you can't redo the action ");//in case we press the undo without selecting a figure
 }
 
 DeleteFigAction::~DeleteFigAction()

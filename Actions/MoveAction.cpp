@@ -6,7 +6,7 @@
 
 MoveAction::MoveAction(ApplicationManager* pApp) :Action(pApp)
 {
-	UndoValidity = true;
+	UndoValidity = true;//making the action undoable
 	Recordable = true;
 }
 
@@ -52,21 +52,21 @@ void MoveAction::Execute()
 void MoveAction::undo()
 {
 	Output* pOut = pManager->GetOutput();
-	if (CanExecute) {
+	if (CanExecute) {//if there was a selected figure to move
 		pOut->ClearDrawArea();
-		pManager->GetFigure(FigID)->Move(lastLoaction);
+		pManager->GetFigure(FigID)->Move(lastLoaction);//in the undo action we return the figure to its previous location
 		pOut->PrintMessage("the move figure action is undoed ");
 	}
-   else pOut->PrintMessage("you didn't select a figure to move so you can't undo the action ");
+   else pOut->PrintMessage("you didn't select a figure to move so you can't undo the action ");//in the case of we press the undo action without selecting a figure
 }
 
 void MoveAction::redo()
 {
 	Output* pOut = pManager->GetOutput();
-	if (CanExecute) {
+	if (CanExecute) {//if there was a selected figure to move
 		pOut->ClearDrawArea();
-		pManager->GetFigure(FigID)->Move(NewLocation);
+		pManager->GetFigure(FigID)->Move(NewLocation);//in the redo action we return the figure to its last location
 		pOut->PrintMessage("the move figure action is redoed ");
 	}
-	else pOut->PrintMessage("you didn't select a figure to move so you can't redo the action ");
+	else pOut->PrintMessage("you didn't select a figure to move so you can't redo the action ");//in the case of we press the redo action without selecting a figure
 }

@@ -4,7 +4,7 @@
 #include "../DEFS.h"
 ChangeToPlayModeAction::ChangeToPlayModeAction(ApplicationManager* pApp) :Action(pApp)
 {
-	UndoValidity = false;
+	UndoValidity = false;//making the action non-undoable
 }
 void ChangeToPlayModeAction::ReadActionParameters()
 {

@@ -8,8 +8,7 @@ class ChangeColorAction : public Action {
 private:
 	color SelectedColor;
 	string ColorName;
-	string lastColorName;
-	color lastColor;
+	color lastColor;//the last default color before undoing the action
 
 public:
 	ChangeColorAction(ApplicationManager* pApp, ActionType);
@@ -20,8 +19,8 @@ public:
 	//Add rectangle to the ApplicationManager
 	virtual void Execute();
 
-	virtual void undo();
+	virtual void undo();//the undo of the changing default color action
 
-	virtual void redo();
+	virtual void redo();//the redo of the changing default color action
 
 };

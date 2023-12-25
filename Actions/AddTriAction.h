@@ -17,8 +17,8 @@ public:
 
 	//Add rectangle to the ApplicationManager
 	virtual void Execute();
-	virtual void undo();
-	virtual void redo();
+	virtual void undo();//the undo of add triangle action 
+	virtual void redo();//the redo of add triangle action
 };
 
 

@@ -17,6 +17,6 @@ public :
 	virtual void ReadActionParameters();
 
 	virtual void Execute();
-	virtual void undo();
-	virtual void redo();
+	virtual void undo();//the undo of add square action
+	virtual void redo();//the redo of add square action
 };
