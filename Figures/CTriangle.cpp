@@ -14,6 +14,11 @@ CFigure* CTriangle::clone() {
 	return new CTriangle(*this);
 }
 
+Point** CTriangle::GetResizablePointsAsArray(int& count) {
+	count = 3;
+	return new Point * [] {&Corner1, &Corner2, &Corner3};
+}
+
 void CTriangle::Draw(Output* pOut) const
 {
 		

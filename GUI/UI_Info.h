@@ -39,6 +39,7 @@ enum DrawMenuItemGR // the shapes
 	ITM_Delete,
 	ITM_Redo,
 	ITM_ClearALL,
+	ITM_ResizeFigure,
 	// group 3 count = 7
 
 	ITM_Start,
@@ -61,7 +62,7 @@ enum DrawMenuItemGR // the shapes
 
 #define NumGR1 5
 #define NumGR2 6
-#define NumGR3 7
+#define NumGR3 8
 #define NumGR4 6
 
 

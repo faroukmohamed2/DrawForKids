@@ -35,6 +35,7 @@ enum ActionType //The actions supported (you can add more if needed)
     Delete,
     REDO,
     ClearBoard,
+    RESIZE_FIGURE,
 
     START_RECORD,// group 3 count = 7
     Selection_Tool,

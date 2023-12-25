@@ -17,7 +17,7 @@ public:
 	string GetSrting(Output* pO) const ;	 //Returns a string entered by the user
 	void getValidDrawPoint(Point& P) const;//check that the point that we click in the drawing area (neither tool nor status bar) 
 	ActionType GetUserAction() const; //Read the user click and map to an action
-
+	window* GetWindow() { return pWind; }
 	~Input();
 };
 

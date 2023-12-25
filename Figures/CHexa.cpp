@@ -3,6 +3,8 @@ int CHexa::HexCount = 0;
 CHexa::CHexa(Point P1, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	Center = P1;
+	ResizableEdge = Center;
+	ResizableEdge.x += length;
 	HexCount++;
 }
 
@@ -10,6 +12,20 @@ CHexa::CHexa(int id) : CFigure(id) {}
 
 CFigure* CHexa::clone() {
 	return new CHexa(*this);
+}
+
+Point** CHexa::GetResizablePointsAsArray(int& count) {
+	count = 1;
+	return new Point * [] {&ResizableEdge};
+}
+
+void CHexa::SetResizablePointAtIndex(int i, Point& point) {
+	
+	length = point.x - Center.x;
+	point = Center;
+	point.x += length;
+
+	CFigure::SetResizablePointAtIndex(i, point);
 }
 
 int CHexa::GetHexCount()
@@ -20,7 +36,7 @@ int CHexa::GetHexCount()
 
 void CHexa::Draw(Output* pOut) const
 {
-	pOut->DrawHexa(Center, FigGfxInfo, Selected);
+	pOut->DrawHexa(Center, length, FigGfxInfo, Selected);
 }
 
 bool CHexa::PointBelong(int x , int y )
@@ -64,15 +80,15 @@ void CHexa::PrintInfo(Output*pOut)
 
 void CHexa::GetCorners(Point Corners [6] , Point P1)
 {
-	float l = 100;            // P1 is center 
+	           // P1 is center 
 	
-	Corners[3].x = (P1.x) + l;
-	Corners[0].x = (P1.x) - l;
+	Corners[3].x = (P1.x) + length;
+	Corners[0].x = (P1.x) - length;
 	Corners[0].y = Corners[3].y = P1.y;
-	Corners[1].x = Corners[5].x = (P1.x) - (l / 2);
-	Corners[2].x = Corners[4].x = (P1.x) + (l / 2);
-	Corners[4].y = Corners[5].y = (P1.y) + (0.8660254 * l);
-	Corners[1].y = Corners[2].y = (P1.y) - (0.8660254 * l);
+	Corners[1].x = Corners[5].x = (P1.x) - (length / 2);
+	Corners[2].x = Corners[4].x = (P1.x) + (length / 2);
+	Corners[4].y = Corners[5].y = (P1.y) + (0.8660254 * length);
+	Corners[1].y = Corners[2].y = (P1.y) - (0.8660254 * length);
 }
 string CHexa::GetName() const {
 	return "HEXA";
@@ -80,14 +96,15 @@ string CHexa::GetName() const {
 
 void CHexa::Save(ofstream& file){
 	SavePoint(file, Center);
+	file << length << " ";
 	CFigure::Save(file);
 
 }
 
 void CHexa::Load(ifstream& file) {
 	LoadPoint(file, Center);
+	file >> length;
 	CFigure::Load(file);
-
 }
 
 CHexa::~CHexa()

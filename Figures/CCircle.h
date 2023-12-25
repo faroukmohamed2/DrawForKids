@@ -14,6 +14,8 @@ public:
 	static int GetCircCount();
 	CCircle(Point, Point, GfxInfo FigureGfxInfo);
 	CCircle(int id);
+	
+	Point** GetResizablePointsAsArray(int& count);
 
 	virtual void Draw(Output* pOut) const;
 	virtual bool PointBelong(int, int);

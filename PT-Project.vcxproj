@@ -18,7 +18,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -199,6 +199,7 @@
     <ClCompile Include="Actions\Rercording\StartRecordingAction.cpp" />
     <ClCompile Include="Actions\Rercording\StopRecordingAction.cpp" />
     <ClCompile Include="Actions\Rercording\PlayRecordAction.cpp" />
+    <ClCompile Include="Actions\ResizeAction.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -258,6 +259,7 @@
     <ClInclude Include="Actions\Rercording\StartRecordingAction.h" />
     <ClInclude Include="Actions\Rercording\StopRecordingAction.h" />
     <ClInclude Include="Actions\Rercording\PlayRecordAction.h" />
+    <ClInclude Include="Actions\ResizeAction.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>

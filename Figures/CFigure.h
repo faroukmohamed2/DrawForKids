@@ -48,6 +48,9 @@ public:
 	 void Delete(Output* pOut) ;
 	 bool getfillstate();
 	 virtual void Move(Point) = 0;
+
+	 virtual Point** GetResizablePointsAsArray(int& count) = 0;
+	 virtual void SetResizablePointAtIndex(int index, Point& point);
 	 
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
