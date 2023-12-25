@@ -8,7 +8,7 @@
 #include "Actions/Action.h"
 //#include "Figures/CSquare.h"
 #include"Actions/Action.h"
-
+#include<Windows.h>
 //Main class that manages everything in the application.
 class ApplicationManager
 {

@@ -70,6 +70,7 @@
     <ClCompile Include="Actions\Rercording\StartRecordingAction.cpp" />
     <ClCompile Include="Actions\Rercording\StopRecordingAction.cpp" />
     <ClCompile Include="Actions\Rercording\PlayRecordAction.cpp" />
+    <ClCompile Include="Actions\ClearAllAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\AddCircleAction.h" />
@@ -127,6 +128,7 @@
     <ClInclude Include="Actions\Rercording\StartRecordingAction.h" />
     <ClInclude Include="Actions\Rercording\StopRecordingAction.h" />
     <ClInclude Include="Actions\Rercording\PlayRecordAction.h" />
+    <ClInclude Include="Actions\ClearAllAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

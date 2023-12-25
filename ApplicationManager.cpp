@@ -26,6 +26,7 @@
 #include "Actions/Rercording/StopRecordingAction.h"
 #include "Actions/Rercording/PlayRecordAction.h"
 #include"Actions/ClearAllAction.h"
+#include<Windows.h>
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -69,7 +70,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new ChangeToDrawModeAction(this);
 			break;
 		case DRW_RECT:
+		{  PlaySound("Rectangle.wav", NULL, SND_SYNC);
 			pAct = new AddRectAction(this);
+		 }
 			break;
 		case DRW_Square:
 			pAct = new AddSquareAction(this);
