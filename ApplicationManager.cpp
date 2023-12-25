@@ -29,6 +29,8 @@
 #include"Actions/ClearAllAction.h"
 #include<Windows.h>
 #include "Actions/ResizeAction.h"
+#include"Actions/SoundOn.h"
+#include"Actions/mute.h"
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -72,9 +74,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new ChangeToDrawModeAction(this);
 			break;
 		case DRW_RECT:
-		{  PlaySound("Rectangle.wav", NULL, SND_SYNC);
 			pAct = new AddRectAction(this);
-		 }
 			break;
 		case DRW_Square:
 			pAct = new AddSquareAction(this);
@@ -161,7 +161,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case RESIZE_FIGURE:
 			pAct = new ResizeAction(this);
 			break;
+		case Sound_ON:
+			pAct = new SoundOn(this);
+			break;
+		case MUTE:
+			pAct = new mute(this);
+			break;
 		case EXIT:
+	
 			///create ExitAction here
 			break;
 		case STATUS:	//a click on the status bar ==> no action
@@ -332,7 +339,7 @@ void ApplicationManager::ClearAll()
 	ActionsCount = 0;
 	CountofUndoed = 0;
 	FigID = 0;
-	id = -1;
+	
 	if (SelectedFig != NULL)
 	{
 		delete SelectedFig;
@@ -355,6 +362,21 @@ void ApplicationManager::ClearRecordingHistory()
 	RecordedActionCount = 0;
 }
 
+void ApplicationManager::enableSound()
+{
+	SoundState = true;
+}
+
+void ApplicationManager::MuteSound()
+{
+	SoundState = false;
+}
+
+bool ApplicationManager::GetSoundState() const
+{
+	return SoundState;
+}
+
 
 void ApplicationManager::StartRecording(){
 	isRecording = true;
@@ -364,7 +386,7 @@ void ApplicationManager::StopRectording(){
 }
 void ApplicationManager::PlayRecord(){
 	for (int i = 0; i < RecordedActionCount; i++) {
-		AddAction(RecordedAction[i]);
+		addAction(RecordedAction[i]);
 		RecordedAction[i]->redo();
 		//delete RecordedAction[i];
 		pOut->PrintMessage(to_string(i / 60) + ":" + to_string(i % 60) + " / " + to_string(RecordedActionCount / 60) + ":" + to_string(RecordedActionCount % 60));

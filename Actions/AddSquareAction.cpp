@@ -17,7 +17,10 @@ void AddSquareAction::ReadActionParameters()
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-
+	if (pManager->GetSoundState())
+	{
+		PlaySound("square.wav", NULL, SND_FILENAME | SND_ASYNC);
+	}
 	pOut->PrintMessage("New Square: Click at the center of the square");
 
 	pIn->GetPointClicked(P1.x, P1.y);

@@ -29,6 +29,7 @@ public:
 	
 
 	bool isRecordable() { return Recordable; }
+
 };
 
 #endif

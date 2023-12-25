@@ -28,6 +28,8 @@ private:
 	Action* RecordedAction[MaxRecordActionCount];
 	int RecordedActionCount = 0;
 
+	//sound variables
+	bool SoundState=true;
 
 
 	//Pointers to Input and Output classes
@@ -88,6 +90,11 @@ public:
 	//Clear all system
 	void ClearAll();
 	void ClearRecordingHistory();
+
+	//Sound system
+	void enableSound();
+	void MuteSound();
+	bool GetSoundState() const;
 };
 
 #endif

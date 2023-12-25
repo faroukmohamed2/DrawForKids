@@ -15,7 +15,10 @@ void RedoAction::ReadActionParameters()
 
 void RedoAction::Execute()
 {
-
+	if (pManager->GetSoundState())
+	{
+		PlaySound("Redo.wav", NULL, SND_FILENAME | SND_ASYNC);
+	}
 	pManager->RedoLastAction();
 
 }

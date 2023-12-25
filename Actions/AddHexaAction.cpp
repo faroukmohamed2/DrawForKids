@@ -5,6 +5,7 @@
 
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
+#include<Windows.h>
 
 AddHexaAction::AddHexaAction(ApplicationManager* pApp) :Action(pApp)
 {
@@ -17,7 +18,10 @@ void AddHexaAction::ReadActionParameters()
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-
+	if (pManager->GetSoundState())
+	{
+		PlaySound("Hexagon.wav", NULL, SND_FILENAME | SND_ASYNC);
+	}
 	pOut->PrintMessage("New Hexagon: Click at The Center");
 
 	//Read 1st corner and store in point P1

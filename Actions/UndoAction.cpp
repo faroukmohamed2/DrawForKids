@@ -14,6 +14,9 @@ void UndoAction::ReadActionParameters()
 
 void UndoAction::Execute()
 {
+	if (pManager->GetSoundState())
+	{
+		PlaySound("Undo.wav", NULL, SND_FILENAME | SND_ASYNC);
+	}
 	pManager->UndoLastAction();
-
 }

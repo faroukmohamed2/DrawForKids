@@ -73,6 +73,8 @@
     <ClCompile Include="Actions\Rercording\PlayRecordAction.cpp" />
     <ClCompile Include="Actions\ResizeAction.cpp" />
     <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="Actions\SoundOn.cpp" />
+    <ClCompile Include="Actions\mute.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\AddCircleAction.h" />
@@ -133,6 +135,8 @@
     <ClInclude Include="Actions\Rercording\PlayRecordAction.h" />
     <ClInclude Include="Actions\ResizeAction.h" />
     <ClInclude Include="Utils.h" />
+    <ClInclude Include="Actions\SoundOn.h" />
+    <ClInclude Include="Actions\mute.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
