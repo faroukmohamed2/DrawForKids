@@ -26,6 +26,11 @@ void CCircle::Draw(Output* pOut) const
 	pOut->DrawCircle(P1, P2, FigGfxInfo, Selected);
 }
 
+Point** CCircle::GetResizablePointsAsArray(int& count) {
+	count = 1;
+	return new Point*[]{&P2};
+}
+
 bool CCircle::PointBelong(int x, int y)
 {
 	float Radius = sqrt(pow((P1.x) - (P2.x), 2) + pow((P1.y) - (P2.y), 2));

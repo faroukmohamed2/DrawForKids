@@ -17,6 +17,8 @@ public:
 
 	CFigure* clone();
 
+	Point** GetResizablePointsAsArray(int& count);
+
 	virtual void Draw(Output* pOut) const;
 	virtual bool PointBelong(int, int);
 	virtual void PrintInfo(Output* pOut);

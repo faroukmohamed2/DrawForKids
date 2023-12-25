@@ -47,6 +47,7 @@ public:
 	CFigure *GetFigure(int x, int y) const;
 	CFigure* GetFigure(int id);
 	CFigure* IsSelected() const;
+	CFigure* GetSelectedFigure() const;
 	void DeleteFigure(int);          //Search for a figure given a point inside the figure
 	void show();
 	void hide(int);

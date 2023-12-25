@@ -5,13 +5,20 @@
 class CSquare : public CFigure
 {
 private:
+	Point Corner;
 	Point Center;
-	const int HalfSquareLength = 70;   // this is hal
+	int HalfSquareLength = 70;   // this is hal
 	static int SquCount;
+
+	void SetCenterAndUpdateCorner(Point center);
+
 
 public:
 	CSquare(Point, GfxInfo FigureGfxInfo);
 	CSquare(int id);
+
+	Point** GetResizablePointsAsArray(int& count);
+	void SetPointAtIndex(int index, Point& point);
 
 	CFigure* clone();
 

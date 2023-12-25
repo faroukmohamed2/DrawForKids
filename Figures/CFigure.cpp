@@ -73,6 +73,14 @@ double CFigure::CalcAreaTriangle(Point P1, Point P2, Point P3 )
 	return Area;
 }
 
+void CFigure::SetResizablePointAtIndex(int index, Point& point) {
+	int count;
+	Point** points = GetResizablePointsAsArray(count);
+	if (index < count) {
+		*points[index] = point;
+	}
+}
+
 void CFigure::SavePoint(ofstream& OutFile, Point &point) {
 	OutFile << point.x << " ";
 	OutFile << point.y << " ";

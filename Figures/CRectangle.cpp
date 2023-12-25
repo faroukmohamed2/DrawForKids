@@ -15,6 +15,12 @@ CFigure* CRectangle::clone() {
 	return new CRectangle(*this);
 }
 
+Point** CRectangle::GetResizablePointsAsArray(int& count) {
+	count = 2;
+	return new Point * [] {&Corner1, &Corner2};
+}
+
+
 void CRectangle::Draw(Output* pOut) const
 {
 	//Call Output::DrawRect to draw a rectangle on the screen	

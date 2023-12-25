@@ -13,6 +13,9 @@ public:
 
 	CFigure* clone();
 
+	Point** GetResizablePointsAsArray(int& count);
+	void SetPointAtIndex(int index, Point& point);
+
 	virtual void Draw(Output* pOut) const;
 	virtual bool PointBelong(int, int);
 	void Move(Point);

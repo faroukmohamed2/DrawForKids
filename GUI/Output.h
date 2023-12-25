@@ -28,7 +28,7 @@ public:
 
 	void DrawTrig(Point P1, Point P2, Point P3, GfxInfo RectGfxInfo, bool selected) const;//Draw a triangle
 
-	void DrawHexa(Point P1, GfxInfo RectGfxInfo, bool selected) const;//Draw a Hexagon
+	void DrawHexa(Point P1, int length, GfxInfo RectGfxInfo, bool selected) const;//Draw a Hexagon
 
 	void DrawCircle(Point P1, Point P2, GfxInfo circleGfxInfo, bool selected) const;//Draw a Circle
 	

@@ -12,7 +12,7 @@ void PlayRecordAction::Execute() {
 	Output* out = pManager->GetOutput();
 	if (pManager->IsRecordClipAvailable()) {
 		out->PrintMessage("Started playing the record ...");
-		//TODO: pManager->ClearAll();
+		pManager->ClearAll();
 		pManager->PlayRecord();
 		out->PrintMessage("Finished playing, You can start drawing now.");
 	}

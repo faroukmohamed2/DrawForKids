@@ -22,7 +22,8 @@ Output::Output()
 	MenuItemImagesGR[ITM_Undo]   =(image) "images\\MenuItems\\Menu_Undo.jpg";
 	MenuItemImagesGR[ITM_Delete] =(image) "images\\MenuItems\\Menu_Del.jpg";
 	MenuItemImagesGR[ITM_Redo]   =(image) "images\\MenuItems\\Menu_Redo.jpg";
-	MenuItemImagesGR[ITM_ClearALL]=(image) "images\\MenuItems\\Menu_Clear.jpg";
+	MenuItemImagesGR[ITM_ClearALL] = (image)"images\\MenuItems\\Menu_Clear.jpg";
+	MenuItemImagesGR[ITM_ResizeFigure] = (image)"images\\MenuItems\\Menu_Border.jpg";
 	MenuItemImagesGR[ITM_Start]  =(image) "images\\MenuItems\\Menu_Start.jpg";
 	MenuItemImagesGR[ITM_Select] =(image) "images\\MenuItems\\Menu_Select.jpg";
 	MenuItemImagesGR[ITM_Stop]   =(image) "images\\MenuItems\\Menu_Stop.jpg";
@@ -304,23 +305,23 @@ void Output::DrawTrig(Point P1, Point P2, Point P3, GfxInfo TrigGfxInfo, bool se
 	
 }
 
-void Output::DrawHexa(Point P1, GfxInfo HexaGfxInfo, bool selected) const
+void Output::DrawHexa(Point P1,int length, GfxInfo HexaGfxInfo, bool selected) const
 //this function takes one point (the hexagon center)
 //and it take the graphics information of the wanted shape to draw it 
 //selected is a boolean express is used for highlighting the shape
 
 {
-	float l = 100;//it is a default number that used to calc the vertices of the hexagon with respect to the center "p1"
+	//float l = 100;//it is a default number that used to calc the vertices of the hexagon with respect to the center "p1"
 	int X[6];//the x components of the vertices
 	int Y[6];//the y components of the vertices
 /////here we calc the vertices with respect to the center by geometry
-	X[3] = (P1.x) + l;
-	X[0] = (P1.x) - l;
+	X[3] = (P1.x) + length;
+	X[0] = (P1.x) - length;
 	Y[0] = Y[3] = P1.y;
-	X[1] = X[5] = (P1.x) - (l / 2);
-	X[2] = X[4] = (P1.x) + (l / 2);
-	Y[4] = Y[5] = (P1.y) + (0.8660254 * l);
-	Y[1] = Y[2] = (P1.y) - (0.8660254 * l);
+	X[1] = X[5] = (P1.x) - (length / 2);
+	X[2] = X[4] = (P1.x) + (length / 2);
+	Y[4] = Y[5] = (P1.y) + (0.8660254 * length);
+	Y[1] = Y[2] = (P1.y) - (0.8660254 * length);
 /////////
 
 	color DrawingClr;

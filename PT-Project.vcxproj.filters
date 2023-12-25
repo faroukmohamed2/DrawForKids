@@ -9,6 +9,7 @@
     <ClCompile Include="Actions\ChangeFillAction.cpp" />
     <ClCompile Include="Actions\ChangeToDrawModeAction.cpp" />
     <ClCompile Include="Actions\ChangeToPlayModeAction.cpp" />
+    <ClCompile Include="Actions\ClearAllAction.cpp" />
     <ClCompile Include="Actions\LoadAction.cpp" />
     <ClCompile Include="Actions\RedoAction.cpp" />
     <ClCompile Include="Actions\RestartAction.cpp" />
@@ -16,10 +17,8 @@
     <ClCompile Include="Actions\DeleteFigAction.cpp" />
     <ClCompile Include="Actions\MoveAction.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
-    <ClCompile Include="Actions\SelectTheColor.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="Actions\SelectColorShape.cpp" />
-=======
+    <ClCompile Include="Actions\SelectTheColor.cpp" />
     <ClCompile Include="Actions\SelectTheShape.cpp" />
     <ClCompile Include="Actions\UndoAction.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
@@ -69,11 +68,11 @@
     <ClCompile Include="GUI\Output.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Actions\Rercording\StartRecordingAction.cpp" />
     <ClCompile Include="Actions\Rercording\StopRecordingAction.cpp" />
     <ClCompile Include="Actions\Rercording\PlayRecordAction.cpp" />
->>>>>>> d2c7fde3a57d9e88d7f1167474a3540566b81625
+    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="Actions\ResizeAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\AddCircleAction.h" />
@@ -84,6 +83,7 @@
     <ClInclude Include="Actions\ChangeFillAction.h" />
     <ClInclude Include="Actions\ChangeToDrawModeAction.h" />
     <ClInclude Include="Actions\ChangeToPlayModeAction.h" />
+    <ClInclude Include="Actions\ClearAllAction.h" />
     <ClInclude Include="Actions\RedoAction.h" />
     <ClInclude Include="Actions\UndoAction.h" />
     <ClInclude Include="Actions\LoadAction.h" />
@@ -92,10 +92,8 @@
     <ClInclude Include="Actions\DeleteFigAction.h" />
     <ClInclude Include="Actions\MoveAction.h" />
     <ClInclude Include="Actions\SelectAction.h" />
-    <ClInclude Include="Actions\SelectTheColor.h" />
-<<<<<<< HEAD
     <ClInclude Include="Actions\SelectColorShape.h" />
-=======
+    <ClInclude Include="Actions\SelectTheColor.h" />
     <ClInclude Include="Actions\SelectTheShape.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />
@@ -130,11 +128,11 @@
     <ClInclude Include="GUI\UI_Info.h" />
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="DEFS.h" />
-    <ClInclude Include="Utils.h" />
     <ClInclude Include="Actions\Rercording\StartRecordingAction.h" />
     <ClInclude Include="Actions\Rercording\StopRecordingAction.h" />
     <ClInclude Include="Actions\Rercording\PlayRecordAction.h" />
->>>>>>> d2c7fde3a57d9e88d7f1167474a3540566b81625
+    <ClInclude Include="Utils.h" />
+    <ClInclude Include="Actions\ResizeAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

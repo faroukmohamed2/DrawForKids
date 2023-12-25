@@ -27,6 +27,7 @@
 #include "Actions/Rercording/StopRecordingAction.h"
 #include "Actions/Rercording/PlayRecordAction.h"
 #include"Actions/ClearAllAction.h"
+#include "Actions/ResizeAction.h"
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -154,6 +155,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ClearBoard:
 			pAct = new ClearAllAction(this);
 			break;
+		case RESIZE_FIGURE:
+			pAct = new ResizeAction(this);
+			break;
 		case EXIT:
 			///create ExitAction here
 			break;
@@ -240,7 +244,8 @@ void ApplicationManager::ClearAll()
    }
 	for (int i = 0; i < RecordedActionCount; i++)//reset recording history
 	{
-		delete RecordedAction[i];
+		if(RecordedAction)
+			delete RecordedAction[i];
 		RecordedAction[i] = NULL;
 	}
 	RecordedActionCount = 0;
@@ -305,13 +310,17 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 	return NULL;
 }
 
-	CFigure* ApplicationManager::GetFigure(int id)
-	{
-		for (int i = 0; i < FigCount; i++)
-			if (FigList[i]->GetID() == id)
-				return FigList[i];
-		return NULL;
-	}
+CFigure* ApplicationManager::GetFigure(int id)
+{
+	for (int i = 0; i < FigCount; i++)
+		if (FigList[i]->GetID() == id)
+			return FigList[i];
+	return NULL;
+}
+
+CFigure* ApplicationManager::GetSelectedFigure() const {
+	return SelectedFig;
+}
 
 CFigure* ApplicationManager::IsSelected() const
 {

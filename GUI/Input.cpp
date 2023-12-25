@@ -61,10 +61,10 @@ ActionType Input::GetUserAction() const
 				if (itemIndex == 5)return EMPTY;
 				itemIndex--;
 			}
-			if (itemIndex > 17) {
-				if (itemIndex == 18)return EMPTY;
-				itemIndex--;
-			}
+			//if (itemIndex > 17) {
+			//	if (itemIndex == 18)return EMPTY;
+			//	itemIndex--;
+			//}
 
 			ActionType action = (ActionType)(itemIndex + DRW_RECT);
 			if (action > EMPTY) return EMPTY;
