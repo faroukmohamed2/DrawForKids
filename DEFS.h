@@ -20,15 +20,17 @@ enum ActionType //The actions supported (you can add more if needed)
     DRW_Square,
     DRW_Hexa,
     DRW_Trig,
+    // group 1 count = 5
 
-    DRW_Red,// group 1 count = 5
+    DRW_Red,
     DRW_Orange,
     DRW_Blue,
     DRW_Yellow,
     DRW_Green,
     DRW_Black,
+    // group 2 count = 6 
 
-    Pencile_Tool,// group 2 count = 6 
+    Pencile_Tool,
     Move_Tool,
     Fill_Tool,
     UNDO,
@@ -36,13 +38,18 @@ enum ActionType //The actions supported (you can add more if needed)
     REDO,
     ClearBoard,
     RESIZE_FIGURE,
+    DRAG,
+    // group 3 count = 9
 
-    START_RECORD,// group 3 count = 7
+    START_RECORD,
     Selection_Tool,
     STOP_RECORD,
     SAVE_RECORD,
     PLAY_RECORD,
     LOAD_RECORD,
+    Sound_ON,
+    MUTE,
+    // group 4 count = 8
 
     TO_DRAW,        //Switch interface to Draw mode
     TO_PLAY,        //Switch interface to Play mode

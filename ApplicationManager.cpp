@@ -364,14 +364,15 @@ void ApplicationManager::StopRectording(){
 }
 void ApplicationManager::PlayRecord(){
 	for (int i = 0; i < RecordedActionCount; i++) {
+		AddAction(RecordedAction[i]);
 		RecordedAction[i]->redo();
-		delete RecordedAction[i];
+		//delete RecordedAction[i];
 		pOut->PrintMessage(to_string(i / 60) + ":" + to_string(i % 60) + " / " + to_string(RecordedActionCount / 60) + ":" + to_string(RecordedActionCount % 60));
 		UpdateInterface();
 		Sleep(1 * 1000);
 	}
 
-	RecordedActionCount = 0;
+	//RecordedActionCount = 0;
 }
 //==================================================================================//
 //						Figures Management Functions								//
@@ -418,6 +419,7 @@ CFigure* ApplicationManager::GetFigure(int id)
 			return FigList[i];
 	return NULL;
 }
+
 
 CFigure* ApplicationManager::GetSelectedFigure() const {
 	return SelectedFig;

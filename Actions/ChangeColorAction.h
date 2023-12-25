@@ -12,6 +12,7 @@ private:
 
 public:
 	ChangeColorAction(ApplicationManager* pApp, ActionType);
+	Action* clone() const { return new ChangeColorAction(*this); }
 
 	//Reads rectangle parameters
 	virtual void ReadActionParameters();

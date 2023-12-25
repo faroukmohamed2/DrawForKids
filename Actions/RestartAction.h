@@ -6,6 +6,8 @@ class Restart : public Action
 	bool restart;
 public:
 	Restart(ApplicationManager* pApp);
+	Action* clone() const { return new Restart(*this); }
+
 	virtual void ReadActionParameters();
 	virtual void Execute();
 };

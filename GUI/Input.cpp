@@ -51,7 +51,7 @@ ActionType Input::GetUserAction() const
 
 	if (UI.InterfaceMode == MODE_DRAW)	//GUI in the DRAW mode
 	{
-		if (x < UI.MenuItemWidth * 13 && y < UI.ToolBarHeight) {
+		if (x < UI.MenuItemWidth * 15 && y < UI.ToolBarHeight) {
 
 			int ClickedItemXIndex = (x / UI.MenuItemWidth);
 			int CliekedItemYIndex = (y / UI.MenuItemHeight);
@@ -61,10 +61,10 @@ ActionType Input::GetUserAction() const
 				if (itemIndex == 5)return EMPTY;
 				itemIndex--;
 			}
-			//if (itemIndex > 17) {
-			//	if (itemIndex == 18)return EMPTY;
-			//	itemIndex--;
-			//}
+			if (itemIndex > 19) {
+				if (itemIndex == 20)return EMPTY;
+				itemIndex--;
+			}
 
 			ActionType action = (ActionType)(itemIndex + DRW_RECT);
 			if (action > EMPTY) return EMPTY;

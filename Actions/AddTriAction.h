@@ -11,6 +11,7 @@ private:
 	int ID;
 public:
 	AddTriAction(ApplicationManager* pApp);
+	Action* clone() const { return new AddTriAction(*this); }
 
 	//Reads rectangle parameters
 	virtual void ReadActionParameters();

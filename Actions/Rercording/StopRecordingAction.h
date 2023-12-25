@@ -5,6 +5,7 @@ class StopRecordingAction : public Action
 {
 public:
 	StopRecordingAction(ApplicationManager* pApp);
+	Action* clone() const { return new StopRecordingAction(*this); }
 
 	void ReadActionParameters();
 

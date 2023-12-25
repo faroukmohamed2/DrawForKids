@@ -13,6 +13,8 @@ protected:
 	enum shapes { REC, TRI, SQU, CIRC, HEX, NUM };
 public:
 	SelectTheShape(ApplicationManager* pApp);
+	Action* clone() const { return new SelectTheShape(*this); }
+
 	int NotExist(int);
 	void GetValidShape();
 	virtual void ReadActionParameters();

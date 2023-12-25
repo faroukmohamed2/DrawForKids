@@ -9,6 +9,8 @@ public:
 
 
 	RedoAction(ApplicationManager* pApp);
+	Action* clone() const { return new RedoAction(*this); }
+
 	virtual void ReadActionParameters();
 	void Execute();
 };

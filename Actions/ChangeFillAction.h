@@ -20,6 +20,7 @@ private:
 
 public:
 	ChangeFillAction(ApplicationManager* pApp, ActionType);
+	Action* clone() const { return new ChangeFillAction(*this); }
 
 	//Reads rectangle parameters
 	virtual void ReadActionParameters();

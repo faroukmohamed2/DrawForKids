@@ -10,6 +10,8 @@ public:
 
 
 	ClearAllAction(ApplicationManager* pApp);
+	Action* clone() const { return new ClearAllAction(*this); }
+
 	virtual void ReadActionParameters();
 	void Execute();
 };

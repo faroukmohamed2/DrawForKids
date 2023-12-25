@@ -12,13 +12,12 @@ class Action
 
 protected:
 	ApplicationManager *pManager;	//Actions needs AppMngr to do their job
-	bool UndoValidity;              //its a bool experssion that used to indicate the undoable actions
-	bool Recordable;
+	bool UndoValidity;
+	bool Recordable = false;
 
 public:
-
 	Action(ApplicationManager *pApp) { pManager = pApp; }	//constructor
-
+	virtual Action* clone() const = 0;
 	//Reads parameters required for action to execute (code depends on action type)
 	virtual void ReadActionParameters() =0;
 	

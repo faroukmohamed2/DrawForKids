@@ -14,6 +14,7 @@ class MoveAction : public Action {
 	int FigID;
 public:
 	MoveAction(ApplicationManager* pApp);
+	Action* clone() const { return new MoveAction(*this); }
 
 	virtual void ReadActionParameters();
 

@@ -20,6 +20,8 @@ class SelectColorShape : public Action
 	enum shapes { REC, TRI, SQU, CIRC, HEX, NUM };
 public:
 	SelectColorShape(ApplicationManager* pApp);
+	Action* clone() const { return new SelectColorShape(*this); }
+
 	void CountCols();
 	void Countsh();
 	void GetValidColShape();
