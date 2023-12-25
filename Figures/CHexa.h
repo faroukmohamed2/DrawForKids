@@ -23,6 +23,7 @@ public:
 	virtual bool PointBelong(int, int);
 	void GetCorners(Point [] , Point );
 	void Move(Point);
+	void Drag(Point, Point);
 	Point getlocation();
 	virtual void PrintInfo(Output*pOut);
 	string GetName() const;

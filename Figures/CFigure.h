@@ -51,6 +51,8 @@ public:
 	 void setfillstate();
 	 bool getfillstate();
 	 virtual void Move(Point) = 0;
+	 virtual void Drag(Point, Point) = 0;
+
 
 	 virtual Point** GetResizablePointsAsArray(int& count) = 0;
 	 virtual void SetResizablePointAtIndex(int index, Point& point);

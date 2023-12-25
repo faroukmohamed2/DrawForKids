@@ -56,6 +56,18 @@ void CCircle::Move(Point NewLocation)
 
 
 }
+void CCircle::Drag(Point NewLocation, Point OldLocation)
+{
+	double DiffrenceX = NewLocation.x - OldLocation.x;
+	double DiffrenceY = NewLocation.y - OldLocation.y;
+
+	P1.x += DiffrenceX;
+	P1.y += DiffrenceY;
+	P2.x += DiffrenceX;
+	P2.y += DiffrenceY;
+
+
+}
 
 void CCircle::PrintInfo(Output*pOut)
 {

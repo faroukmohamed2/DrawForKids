@@ -31,6 +31,8 @@
 #include "Actions/ResizeAction.h"
 #include"Actions/SoundOn.h"
 #include"Actions/mute.h"
+#include "Actions/DragAction.h"
+
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -163,6 +165,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case Sound_ON:
 			pAct = new SoundOn(this);
+			break;
+		case DRAG:
+			pAct = new DragAction(this);
 			break;
 		case MUTE:
 			pAct = new mute(this);

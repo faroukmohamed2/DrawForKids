@@ -29,6 +29,7 @@ public:
 	void Save(ofstream& OutFile);
 	void Load(ifstream& Infile);
 	void Move(Point);
+	void Drag(Point, Point);
 	Point getlocation();
 	static int GetSquCount();
 	virtual ~CSquare();
