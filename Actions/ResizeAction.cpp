@@ -85,7 +85,9 @@ void ResizeAction::Execute(){
 }
 void ResizeAction::undo() {
 	CFigure* figure = pManager->GetFigure(figId);
-	figure->SetResizablePointAtIndex(pointIndexToMove, StartPoint);
+	if (figure) {
+		figure->SetResizablePointAtIndex(pointIndexToMove, StartPoint);
+	}
 }
 
 void ResizeAction::redo() {

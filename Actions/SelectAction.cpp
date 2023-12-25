@@ -22,10 +22,6 @@ void SelectAction::ReadActionParameters()
 
 
 	pOut->ClearStatusBar();
-
-
-
-
 }
 
 void SelectAction::Execute()
@@ -47,11 +43,14 @@ void SelectAction::Execute()
 		TheSelected->SetSelected(!(TheSelected->IsSelected()));
 		TheSelected->PrintInfo(pOut);
 	}
-
+	selectedFigure = TheSelected;
 	TheSelected = NULL;
 	OldSelected = NULL;
-	
-
-	
-
 } 
+
+void SelectAction::redo() {
+	if (selectedFigure) {
+		selectedFigure->ChngDrawClr(MAGENTA);
+		selectedFigure->SetSelected(selectedFigure->IsSelected());
+	}
+}

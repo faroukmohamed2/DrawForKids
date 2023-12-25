@@ -32,7 +32,6 @@ private:
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
-	int id = -1;
 public:	
 	int acttype;//test
 	ApplicationManager(); 
@@ -56,28 +55,15 @@ public:
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window	
-	void addAction(Action* ptr);
+	void AddAction(Action* ptr);
 	void UndoLastAction();
 	void RedoLastAction();
 	void ReloadFigures() const;
-
-
-
-
-	
-
-
-
-
-
-
 
 	//Save system
 	void SaveAll(ofstream &file) const;
 	void LoadAll(CFigure** list, int count);
 	int GetFigCount() const;
-
-
 
 	//RecordSystem
 	void StartRecording();

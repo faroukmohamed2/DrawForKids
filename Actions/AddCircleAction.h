@@ -11,6 +11,7 @@ private :
 	int ID;
 public :
 	AddCircleAction(ApplicationManager* pApp);
+	Action* clone() const { return new AddCircleAction(*this); }
 
 	//Reads rectangle parameters
 	virtual void ReadActionParameters();

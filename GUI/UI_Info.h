@@ -52,7 +52,7 @@ enum DrawMenuItemGR // the shapes
 
 
 
-
+	ITM_Sound,
 	ITM_Game,
 	ITM_EXIT,		//Exit item
 

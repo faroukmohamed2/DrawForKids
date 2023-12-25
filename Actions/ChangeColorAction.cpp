@@ -1,18 +1,9 @@
 #include "ChangeColorAction.h"
 
 #include "..\Figures\CRectangle.h"
-
 #include "..\ApplicationManager.h"
-
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
-
-
-
-
-
-
-
 
 ChangeColorAction::ChangeColorAction(ApplicationManager* pApp, ActionType TheColor) :Action(pApp)
 {

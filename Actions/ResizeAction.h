@@ -11,6 +11,8 @@ class ResizeAction :
 
 public:
 	ResizeAction(ApplicationManager* pApp);
+	Action* clone() const { return new ResizeAction(*this); }
+
 	void ReadActionParameters();
 	void Execute();
 	void undo();

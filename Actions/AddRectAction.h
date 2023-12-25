@@ -12,7 +12,7 @@ private:
 	int ID;
 public:
 	AddRectAction(ApplicationManager *pApp);
-
+	Action* clone() const { return new AddRectAction(*this); }
 	//Reads rectangle parameters
 	virtual void ReadActionParameters();
 	

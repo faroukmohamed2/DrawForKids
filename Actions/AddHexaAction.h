@@ -9,7 +9,7 @@ class AddHexaAction : public Action {
 	int ID;
 public:
 	AddHexaAction(ApplicationManager* pApp);
-
+	Action* clone() const { return new AddHexaAction(*this); }
 	//Reads rectangle parameters
 	virtual void ReadActionParameters();
 

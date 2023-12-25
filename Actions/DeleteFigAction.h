@@ -10,6 +10,7 @@ private:
 	int  FigID;
 public:
 	DeleteFigAction(ApplicationManager* pApp);
+	Action* clone() const { return new DeleteFigAction(*this); }
 
 	//Reads rectangle parameters
 	virtual void ReadActionParameters();

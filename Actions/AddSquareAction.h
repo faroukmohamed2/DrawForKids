@@ -13,6 +13,7 @@ private:
 
 public :
 	AddSquareAction(ApplicationManager* pApp);
+	Action* clone() const { return new AddSquareAction(*this); }
 
 	virtual void ReadActionParameters();
 

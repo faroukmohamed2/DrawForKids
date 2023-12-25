@@ -14,6 +14,8 @@ protected:
 	enum Col {RD, BLU, GRN, BLCK, ORNGE, YLLOW, NUM};
 public:
 	SelectTheColor(ApplicationManager* pApp);
+	Action* clone() const { return new SelectTheColor(*this); }
+
 	int GetValidColor();
 	int NotExist(int);
 	virtual void ReadActionParameters(); 

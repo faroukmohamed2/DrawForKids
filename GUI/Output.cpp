@@ -23,7 +23,7 @@ Output::Output()
 	MenuItemImagesGR[ITM_Delete] =(image) "images\\MenuItems\\Menu_Del.jpg";
 	MenuItemImagesGR[ITM_Redo]   =(image) "images\\MenuItems\\Menu_Redo.jpg";
 	MenuItemImagesGR[ITM_ClearALL] = (image)"images\\MenuItems\\Menu_Clear.jpg";
-	MenuItemImagesGR[ITM_ResizeFigure] = (image)"images\\MenuItems\\Menu_Border.jpg";
+	MenuItemImagesGR[ITM_ResizeFigure] = (image)"images\\MenuItems\\resize.jpg";
 	MenuItemImagesGR[ITM_Start]  =(image) "images\\MenuItems\\Menu_Start.jpg";
 	MenuItemImagesGR[ITM_Select] =(image) "images\\MenuItems\\Menu_Select.jpg";
 	MenuItemImagesGR[ITM_Stop]   =(image) "images\\MenuItems\\Menu_Stop.jpg";
@@ -31,7 +31,8 @@ Output::Output()
 	MenuItemImagesGR[ITM_Play]   =(image) "images\\MenuItems\\Menu_Play.jpg";
 	MenuItemImagesGR[ITM_Load]   =(image) "images\\MenuItems\\Menu_Load.jpg";
 
-	MenuItemImagesGR[ITM_Game] =(image) "images\\MenuItems\\Menu_Game.jpeg";
+	//MenuItemImagesGR[ITM_Sound] = (image)"images\\MenuItems\\speaker.jpg";
+	MenuItemImagesGR[ITM_Game] = (image)"images\\MenuItems\\Menu_Game.jpeg";
 	MenuItemImagesGR[ITM_EXIT] =(image) "images\\MenuItems\\Menu_Exit.jpg";
 
 	PlayMenuItems[FIG_TYPE]       =(image) "images\\MenuItems\\fig_type.jpg";
@@ -125,6 +126,8 @@ void Output::CreateDrawToolBar() const
 	DrawGROUP(UpperItems, Printed , NumGR3);
 	DrawGROUP (UpperItems, Printed , NumGR4);
 	
+	Printed++;
+	//pWind->DrawImage(MenuItemImagesGR[Printed++], UI.width - (4.5 * UI.MenuItemWidth), 0, 1.5 * UI.MenuItemWidth, (UI.ToolBarHeight));
 	pWind->DrawImage(MenuItemImagesGR[Printed++], UI.width - (3 * UI.MenuItemWidth), 0, 1.5 * UI.MenuItemWidth, (UI.ToolBarHeight));
 	pWind->DrawImage(MenuItemImagesGR[Printed], UI.width - (1.5 * UI.MenuItemWidth), 0, 1.5 * UI.MenuItemWidth, UI.ToolBarHeight);
 	

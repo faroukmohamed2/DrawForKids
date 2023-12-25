@@ -5,6 +5,8 @@ class ChangeToPlayModeAction : public Action
 {
 public:
 	ChangeToPlayModeAction(ApplicationManager* pApp);
+	Action* clone() const { return new ChangeToPlayModeAction(*this); }
+
 	virtual void ReadActionParameters();
 	virtual void Execute();
 };

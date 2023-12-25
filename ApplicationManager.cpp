@@ -172,7 +172,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	if(pAct != NULL)
 	{
 		pAct->Execute();//Execute
-		addAction(pAct);
+		AddAction(pAct);
 		if (!pAct->isRecordable() || !pAct->GetUndoValidity())
 		{
 			delete pAct;
@@ -181,7 +181,46 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	}
 }
 
+void ApplicationManager::AddAction(Action* ptr)
+{
+	if (isRecording && ptr->isRecordable()) {
+		if (RecordedActionCount < MaxRecordActionCount) {
+			RecordedAction[RecordedActionCount++] = ptr->clone();
+		}
+		else {
+			pOut->PrintMessage("Recording limit exceeded, Recording stopped.");
+			//delete ptr;
+			StopRectording();
+		}
+	}
 
+	if (ptr->GetUndoValidity()) {
+
+		while (CountofUndoed != 0)
+		{
+			delete last5Actions[ActionsCount - 1];
+			CountofUndoed--;
+			ActionsCount--;
+		}
+
+
+		if (ActionsCount < 5)
+		{
+			last5Actions[ActionsCount++] = ptr;
+		}
+
+		else {
+			delete last5Actions[0];
+			for (int i = 0; i < 4; i++)
+			{
+				last5Actions[i] = last5Actions[i + 1];
+			}
+
+			last5Actions[4] = ptr;
+		}
+	}
+
+}
 
 //==================================================================================//
 //						       Save System Functions								//
@@ -226,34 +265,6 @@ bool ApplicationManager::IsRecordClipAvailable() const {
 	return RecordedActionCount != 0;
 }
 
-void ApplicationManager::ClearAll()
-{
-	for (int i = 0; i < FigCount; i++)//delete all the figures
-	{
-		delete FigList[i];
-		FigList[i] = NULL;
-	}
-	FigCount = 0;
-	for (int i = 0; i < ActionsCount; i++)//reset the undo and redo history
-	{
-		delete last5Actions[i];
-		last5Actions[i] = NULL;
-	}
-	ActionsCount = 0;
-	CountofUndoed = 0;
-	FigID = 0;
-	id = -1;
-	if (SelectedFig != NULL)
-	{
-		delete SelectedFig;
-		SelectedFig = NULL;
-   }
-	
-	
-	pOut->ClearDrawArea();
-	pOut->PrintMessage("you clear all figures");
-}
-
 void ApplicationManager::ClearRecordingHistory()
 {
 	for (int i = 0; i < RecordedActionCount; i++)//reset recording history
@@ -274,14 +285,15 @@ void ApplicationManager::StopRectording(){
 }
 void ApplicationManager::PlayRecord(){
 	for (int i = 0; i < RecordedActionCount; i++) {
+		AddAction(RecordedAction[i]);
 		RecordedAction[i]->redo();
-		delete RecordedAction[i];
+		//delete RecordedAction[i];
 		pOut->PrintMessage(to_string(i / 60) + ":" + to_string(i % 60) + " / " + to_string(RecordedActionCount / 60) + ":" + to_string(RecordedActionCount % 60));
 		UpdateInterface();
 		Sleep(1 * 1000);
 	}
 
-	RecordedActionCount = 0;
+	//RecordedActionCount = 0;
 }
 //==================================================================================//
 //						Figures Management Functions								//
@@ -362,6 +374,33 @@ void ApplicationManager::DeleteFigure(int deleteID)
 	FigCount--;
 }
 
+void ApplicationManager::ClearAll()
+{
+	for (int i = 0; i < FigCount; i++)//delete all the figures
+	{
+		delete FigList[i];
+		FigList[i] = NULL;
+	}
+	FigCount = 0;
+	for (int i = 0; i < ActionsCount; i++)//reset the undo and redo history
+	{
+		delete last5Actions[i];
+		last5Actions[i] = NULL;
+	}
+	ActionsCount = 0;
+	CountofUndoed = 0;
+	FigID = 0;
+	if (SelectedFig != NULL)
+	{
+		delete SelectedFig;
+		SelectedFig = NULL;
+	}
+
+
+	pOut->ClearDrawArea();
+	pOut->PrintMessage("you clear all figures");
+}
+
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
@@ -383,46 +422,7 @@ void ApplicationManager::UpdateInterface() const
 				//Call Draw function (virtual member fn)
 }
 
-void ApplicationManager::addAction(Action* ptr)
-{
-	if (isRecording && ptr->isRecordable()) {
-		if (RecordedActionCount < MaxRecordActionCount) {
-				RecordedAction[RecordedActionCount++] = ptr;
-		}
-		else {
-			pOut->PrintMessage("Recording limit exceeded, Recording stopped.");
-			delete ptr;
-			StopRectording();
-		}
-	}
 
-	if (ptr->GetUndoValidity()) {
-
-		while (CountofUndoed != 0)
-		{
-			delete last5Actions[ActionsCount - 1];
-			CountofUndoed--;
-			ActionsCount--;
-		}
-
-
-		if (ActionsCount < 5)
-		{
-			last5Actions[ActionsCount++] = ptr;
-		}
-
-		else {
-			delete last5Actions[0];
-			for (int i = 0; i < 4; i++)
-			{
-				last5Actions[i] = last5Actions[i + 1];
-			}
-
-			last5Actions[4] = ptr;
-		}
-	}
-	
-}
 
 void ApplicationManager::UndoLastAction()
 {
