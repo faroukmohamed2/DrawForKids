@@ -40,7 +40,8 @@ enum DrawMenuItemGR // the shapes
 	ITM_Redo,
 	ITM_ClearALL,
 	ITM_ResizeFigure,
-	// group 3 count = 7
+	ITM_Drag,
+	// group 3 count = 9
 
 	ITM_Start,
 	ITM_Select,
@@ -48,22 +49,23 @@ enum DrawMenuItemGR // the shapes
 	ITM_Save,
 	ITM_Play,
 	ITM_Load,
-	// group 4 count = 6 
-
-
-
 	ITM_Sound,
+	ITM_Mute,
+	// group 4 count = 8
+
+
+
 	ITM_Game,
 	ITM_EXIT,		//Exit item
 
-	DRAW_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
+	DRAW_ITM_COUNT			//no. of menu items ==> This should be the last line in this enum
 
 };
 
 #define NumGR1 5
 #define NumGR2 6
-#define NumGR3 8
-#define NumGR4 6
+#define NumGR3 9
+#define NumGR4 8
 
 
 enum PlayMenuItem //The items of the Play menu (you should add more items)

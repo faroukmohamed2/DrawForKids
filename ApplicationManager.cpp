@@ -341,6 +341,7 @@ CFigure* ApplicationManager::GetFigure(int id)
 	return NULL;
 }
 
+
 CFigure* ApplicationManager::GetSelectedFigure() const {
 	return SelectedFig;
 }

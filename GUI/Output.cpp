@@ -24,14 +24,17 @@ Output::Output()
 	MenuItemImagesGR[ITM_Redo]   =(image) "images\\MenuItems\\Menu_Redo.jpg";
 	MenuItemImagesGR[ITM_ClearALL] = (image)"images\\MenuItems\\Menu_Clear.jpg";
 	MenuItemImagesGR[ITM_ResizeFigure] = (image)"images\\MenuItems\\resize.jpg";
+	MenuItemImagesGR[ITM_Drag] = (image)"images\\MenuItems\\Menu_Drag.jpg";
+
 	MenuItemImagesGR[ITM_Start]  =(image) "images\\MenuItems\\Menu_Start.jpg";
 	MenuItemImagesGR[ITM_Select] =(image) "images\\MenuItems\\Menu_Select.jpg";
 	MenuItemImagesGR[ITM_Stop]   =(image) "images\\MenuItems\\Menu_Stop.jpg";
 	MenuItemImagesGR[ITM_Save]   =(image) "images\\MenuItems\\Menu_Save.jpg";
 	MenuItemImagesGR[ITM_Play]   =(image) "images\\MenuItems\\Menu_Play.jpg";
 	MenuItemImagesGR[ITM_Load]   =(image) "images\\MenuItems\\Menu_Load.jpg";
+	MenuItemImagesGR[ITM_Sound] = (image)"images\\MenuItems\\Menu_Speaker.jpg";
+	MenuItemImagesGR[ITM_Mute] = (image)"images\\MenuItems\\Menu_Mute.jpg";
 
-	//MenuItemImagesGR[ITM_Sound] = (image)"images\\MenuItems\\speaker.jpg";
 	MenuItemImagesGR[ITM_Game] = (image)"images\\MenuItems\\Menu_Game.jpeg";
 	MenuItemImagesGR[ITM_EXIT] =(image) "images\\MenuItems\\Menu_Exit.jpg";
 
@@ -116,7 +119,7 @@ void Output::CreateDrawToolBar() const
 	UI.InterfaceMode = MODE_DRAW;
 	pWind->SetPen( WHITE, 1);
 	pWind->SetBrush(WHITE);
-	pWind->DrawRectangle(UI.MenuItemWidth * 13, 0, UI.width - UI.MenuItemWidth * 2 * 1.5, UI.ToolBarHeight, FILLED);
+	pWind->DrawRectangle(UI.MenuItemWidth * 15, 0, UI.width - UI.MenuItemWidth * 2 * 1.5, UI.ToolBarHeight, FILLED);
 	
 
 	int Printed = 0; 
@@ -126,7 +129,7 @@ void Output::CreateDrawToolBar() const
 	DrawGROUP(UpperItems, Printed , NumGR3);
 	DrawGROUP (UpperItems, Printed , NumGR4);
 	
-	Printed++;
+	//Printed++;
 	//pWind->DrawImage(MenuItemImagesGR[Printed++], UI.width - (4.5 * UI.MenuItemWidth), 0, 1.5 * UI.MenuItemWidth, (UI.ToolBarHeight));
 	pWind->DrawImage(MenuItemImagesGR[Printed++], UI.width - (3 * UI.MenuItemWidth), 0, 1.5 * UI.MenuItemWidth, (UI.ToolBarHeight));
 	pWind->DrawImage(MenuItemImagesGR[Printed], UI.width - (1.5 * UI.MenuItemWidth), 0, 1.5 * UI.MenuItemWidth, UI.ToolBarHeight);

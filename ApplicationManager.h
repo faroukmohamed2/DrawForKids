@@ -6,7 +6,6 @@
 #include "GUI\input.h"
 #include "GUI\output.h"
 #include "Actions/Action.h"
-//#include "Figures/CSquare.h"
 #include"Actions/Action.h"
 #include<Windows.h>
 //Main class that manages everything in the application.
@@ -45,6 +44,7 @@ public:
 	int AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
 	CFigure *GetFigure(int x, int y) const;
 	CFigure* GetFigure(int id);
+	//int GetFigCount() const;
 	CFigure* IsSelected() const;
 	CFigure* GetSelectedFigure() const;
 	void DeleteFigure(int);          //Search for a figure given a point inside the figure

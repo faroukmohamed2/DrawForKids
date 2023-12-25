@@ -8,6 +8,7 @@ class SelectAction : public Action {
 
 	Point P1;
 	CFigure* selectedFigure;
+	bool CanExecute = false;
 
 public : 
 	SelectAction(ApplicationManager* pApp);
