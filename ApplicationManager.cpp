@@ -500,6 +500,8 @@ void ApplicationManager::UpdateInterface() const
 		if (FigList[i]  && !FigList[i]->IsHide())
 			FigList[i]->Draw(pOut);
 				//Call Draw function (virtual member fn)
+
+	pOut->ClearStatusBar();
 }
 
 

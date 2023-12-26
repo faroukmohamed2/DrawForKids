@@ -35,9 +35,6 @@ void DragAction::Execute()
 	ReadActionParameters();
 	if (CanExecute) {
 
-		//pIn->GetWindow()->UpdateBuffer();
-		//MousePoint.x = 0;
-		//MousePoint.y = 0;
 		bool start = false;
 		bool buttonDown = false;
 		bool Pointinside = false;
@@ -60,15 +57,16 @@ void DragAction::Execute()
 			TheOld.x = MousePoint.x;
 			TheOld.y = MousePoint.y;
 
-			pIn->GetWindow()->GetMouseCoord(MousePoint.x, MousePoint.y);
-
-			//pIn->GetWindow()->UpdateBuffer();
-			pManager->UpdateInterface();
-			Sleep(10);
+		pIn->GetWindow()->GetMouseCoord(MousePoint.x, MousePoint.y);
+		pIn->GetWindow()->SetBuffering(true);
+		pIn->GetWindow()->UpdateBuffer();
+		pManager->UpdateInterface();
 		}
 
-		NewLocation = MousePoint;
+		pIn->GetWindow()->SetBuffering(false);
+		pManager->UpdateInterface();
 		pOut->PrintMessage("Figure moved successfully");
+		NewLocation = MousePoint;
 	}
 }
 void DragAction::undo()

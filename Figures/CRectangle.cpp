@@ -100,7 +100,7 @@ void CRectangle::Move(Point NewLocation)
 
 }
 
-oid CRectangle::Drag(Point NewLocation, Point OldLocation)
+void CRectangle::Drag(Point NewLocation, Point OldLocation)
 {
 	double DiffrenceX = NewLocation.x - OldLocation.x;
 	double DiffrenceY = NewLocation.y - OldLocation.y;

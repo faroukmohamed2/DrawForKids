@@ -22,7 +22,7 @@ CCircle::CCircle(int id) : CFigure(id) {}
 
 void CCircle::Draw(Output* pOut) const
 {
-	//Call Output::DrawRect to draw a rectangle on the screen	
+
 	pOut->DrawCircle(P1, P2, FigGfxInfo, Selected);
 }
 

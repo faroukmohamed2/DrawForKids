@@ -59,10 +59,13 @@ void ResizeAction::ReadActionParameters() {
 		mousePoint.x -= offset.x;
 		mousePoint.y -= offset.y;
 		figure->SetResizablePointAtIndex(pointIndexToMove, mousePoint);
+		input->GetWindow()->SetBuffering(true);
+		input->GetWindow()->UpdateBuffer();
 		pManager->UpdateInterface();
-		Sleep(10);
 	}
 
+	input->GetWindow()->SetBuffering(false);
+	pManager->UpdateInterface();
 
 
 	if (pointCount > 0) {
