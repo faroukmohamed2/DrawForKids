@@ -88,8 +88,6 @@ void CRectangle::Move(Point NewLocation)
 	Center.x = (Corner1.x + Corner2.x) / 2;
 	Center.y = (Corner1.y + Corner2.y) / 2;
 	
-	
-
 	double DistanceX = NewLocation.x - Center.x;
 	double DistanceY = NewLocation.y - Center.y;
 
@@ -99,7 +97,19 @@ void CRectangle::Move(Point NewLocation)
 	Corner2.x += DistanceX;
 	Corner2.y += DistanceY;
 
-	
+
+}
+
+void CRectangle::Drag(Point NewLocation, Point OldLocation)
+{
+	double DiffrenceX = NewLocation.x - OldLocation.x;
+	double DiffrenceY = NewLocation.y - OldLocation.y;
+
+	Corner1.x += DiffrenceX;
+	Corner2.y += DiffrenceY;
+
+	Corner2.x += DiffrenceX;
+	Corner2.y += DiffrenceY;
 
 }
 

@@ -22,7 +22,7 @@ CCircle::CCircle(int id) : CFigure(id) {}
 
 void CCircle::Draw(Output* pOut) const
 {
-	//Call Output::DrawRect to draw a rectangle on the screen	
+
 	pOut->DrawCircle(P1, P2, FigGfxInfo, Selected);
 }
 
@@ -53,6 +53,18 @@ void CCircle::Move(Point NewLocation)
 	P2.y += DiffrenceY;
 
 	
+
+
+}
+void CCircle::Drag(Point NewLocation, Point OldLocation)
+{
+	double DiffrenceX = NewLocation.x - OldLocation.x;
+	double DiffrenceY = NewLocation.y - OldLocation.y;
+
+	P1.x += DiffrenceX;
+	P1.y += DiffrenceY;
+	P2.x += DiffrenceX;
+	P2.y += DiffrenceY;
 
 
 }

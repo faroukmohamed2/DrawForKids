@@ -62,15 +62,34 @@ Point CTriangle::getlocation()
 
 void CTriangle::Move(Point NewLocation)
 {
+	Point Center;
+	Center.x = (Corner1.x + Corner2.x + Corner3.x) / 3;
+	Center.y = (Corner1.y + Corner2.y + Corner3.y) / 3;
 
-	double DiffrenceX = NewLocation.x - Corner1.x;
-	double DiffrenceY = NewLocation.y - Corner1.y;
 
-	Corner1.x = NewLocation.x;
-	Corner1.y = NewLocation.y;
+	double DiffrenceX = NewLocation.x - Center.x;
+	double DiffrenceY = NewLocation.y - Center.y;
+
+	Corner1.x += DiffrenceX;
+	Corner1.y += DiffrenceY;
 
 	Corner2.x += DiffrenceX;
 	Corner2.y += DiffrenceY;
+
+	Corner3.x += DiffrenceX;
+	Corner3.y += DiffrenceY;
+}
+void CTriangle::Drag(Point NewLocation, Point OldLocation)
+{
+	double DiffrenceX = NewLocation.x - OldLocation.x;
+	double DiffrenceY = NewLocation.y - OldLocation.y;
+
+	Corner1.x += DiffrenceX;
+	Corner1.y += DiffrenceY;
+
+	Corner2.x += DiffrenceX;
+	Corner2.y += DiffrenceY;
+
 	Corner3.x += DiffrenceX;
 	Corner3.y += DiffrenceY;
 }

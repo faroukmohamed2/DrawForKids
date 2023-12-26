@@ -61,6 +61,14 @@ void CHexa::Move(Point NewLocation)
 	Center.x = NewLocation.x;
 	Center.y = NewLocation.y;
 }
+void CHexa::Drag(Point NewLocation, Point OldLocation)
+{
+	double DiffrenceX = NewLocation.x - OldLocation.x;
+	double DiffrenceY = NewLocation.y - OldLocation.y;
+
+	Center.x += DiffrenceX;
+	Center.y += DiffrenceY;
+}
 Point CHexa::getlocation()
 {
 	return Center;

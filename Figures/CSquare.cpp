@@ -102,6 +102,20 @@ void CSquare::Move(Point NewLocation)
 	SetCenterAndUpdateCorner(NewLocation);
 }
 
+void CSquare::Drag(Point NewLocation, Point OldLocation)
+{
+	double DiffrenceX = NewLocation.x - OldLocation.x;
+	double DiffrenceY = NewLocation.y - OldLocation.y;
+
+	Center.x += DiffrenceX;
+	Center.y += DiffrenceY;
+
+	Corner.x += DiffrenceX;
+	Corner.y += DiffrenceY;
+
+
+}
+
 Point CSquare::getlocation()
 {
 	return Center;
