@@ -462,7 +462,7 @@ void ApplicationManager::UpdateInterface() const
 			FigList[i]->Draw(pOut);
 				//Call Draw function (virtual member fn)
 
-	pOut->ClearStatusBar();
+	pOut->UpdateStatusBar();
 
 	//pIn->GetWindow()->UpdateBuffer();
 	//pIn->GetWindow()->SetBuffering(false);

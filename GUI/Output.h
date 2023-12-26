@@ -1,13 +1,14 @@
 #ifndef OUPTUT_H
 #define OUPTUT_H
 #include "Input.h"
-
+#include "string"
 class Output	//The application manager should have a pointer to this class
 {
 private:	
 	window* pWind;	//Pointer to the Graphics Window
 	image MenuItemImagesGR[DRAW_ITM_COUNT];
 	image PlayMenuItems[PLAY_ITM_COUNT];
+	string LastMessage;
 public:
 	Output();		
 
@@ -34,7 +35,10 @@ public:
 	
 	///Make similar functions for drawing all other figure types.
 	
-	void PrintMessage(string msg) const;	//Print a message on Status bar
+	void PrintMessage(string msg) ;	//Print a message on Status bar
+	void UpdateStatusBar();
+	void ClearMsgHistory();
+
 
 	color getCrntDrawColor() const;	//get current drwawing color
 	color getCrntFillColor() const;	//get current filling color

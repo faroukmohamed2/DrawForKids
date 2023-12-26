@@ -36,13 +36,17 @@ void AddSquareAction::ReadActionParameters()
 
 void AddSquareAction::Execute()
 {
+	Output* pOut = pManager->GetOutput();
+
 	ReadActionParameters();
 	/////////
 	CSquare* R = new CSquare(P1, SquareGfxInfo);
 
-	//Add the rectangle to the list of figures
+	
 	ID = pManager->AddFigure(R);
 	R->SetId(ID);
+	pOut->ClearMsgHistory();
+
 }
 
 void AddSquareAction::undo()

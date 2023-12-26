@@ -46,6 +46,8 @@ void AddCircleAction::ReadActionParameters()
 void AddCircleAction::Execute() 
 {
 	
+	Output* pOut = pManager->GetOutput();
+
 	ReadActionParameters();
 	
 	
@@ -54,6 +56,8 @@ void AddCircleAction::Execute()
 	
 	ID = pManager->AddFigure(R);
 	R->SetId(ID);
+	pOut->ClearMsgHistory();
+
 }
 
 void AddCircleAction::undo()

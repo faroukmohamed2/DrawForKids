@@ -42,16 +42,19 @@ void AddHexaAction::ReadActionParameters()
 //Execute the action
 void AddHexaAction::Execute()
 {
+	Output* pOut = pManager->GetOutput();
+
 	//This action needs to read some parameters first
 	ReadActionParameters();
 
-	//Create a rectangle with the parameters read from the user
+	
 	CHexa* R = new CHexa(P1, HexaGfxInfo);
 
 	//Add the rectangle to the list of figures
 	ID = pManager->AddFigure(R);
 	R->SetId(ID);
-	
+	pOut->ClearMsgHistory();
+
 }
 
 void AddHexaAction::undo()

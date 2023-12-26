@@ -45,6 +45,8 @@ void AddRectAction::ReadActionParameters()
 //Execute the action
 void AddRectAction::Execute() 
 {
+	Output* pOut = pManager->GetOutput();
+
 	//This action needs to read some parameters first
 	ReadActionParameters();
 	
@@ -54,6 +56,8 @@ void AddRectAction::Execute()
 	//Add the rectangle to the list of figures
 	ID = pManager->AddFigure(R);
 	R->SetId(ID);
+	pOut->ClearMsgHistory();
+
 
 }
 

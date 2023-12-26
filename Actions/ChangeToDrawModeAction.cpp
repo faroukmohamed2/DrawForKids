@@ -10,7 +10,7 @@ ChangeToDrawModeAction::ChangeToDrawModeAction(ApplicationManager* pApp) :Action
 
 void ChangeToDrawModeAction::ReadActionParameters()
 {
-	const Output* pOut = pManager->GetOutput();
+     Output* pOut = pManager->GetOutput();
 	pOut->PrintMessage("Changed to Draw mode");
 }
 

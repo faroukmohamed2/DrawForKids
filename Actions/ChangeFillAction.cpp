@@ -87,7 +87,11 @@ void ChangeFillAction::ReadActionParameters()
 
 
 	else {
+		if (ReqStyle == Fill)
 		pOut->PrintMessage("you must select a shape before using the fill bucket");
+		else
+		pOut->PrintMessage("you must select a shape before using the Pencil Tool");
+
 		CanExecute = false;
 	}
 }
