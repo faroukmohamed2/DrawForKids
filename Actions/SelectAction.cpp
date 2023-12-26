@@ -51,15 +51,20 @@ void SelectAction::Execute()
 			TheSelected->SetSelected(!(TheSelected->IsSelected()));
 			TheSelected->PrintInfo(pOut);
 		}
-		selectedFigure = TheSelected;
+		if (TheSelected) {
+			selectedId = TheSelected->GetID();
+		}
 		TheSelected = NULL;
 		OldSelected = NULL;
 	}
 } 
 
 void SelectAction::redo() {
-	if (selectedFigure) {
-		selectedFigure->ChngDrawClr(MAGENTA);
-		selectedFigure->SetSelected(selectedFigure->IsSelected());
+	pManager->UnSelectAll();
+	CFigure* f = pManager->GetFigure(selectedId);
+	if (f) {
+		//selectedFigure->ChngDrawClr(MAGENTA);
+		f->SetSelected(!(f->IsSelected()));
+		pManager->UpdateInterface();
 	}
 }

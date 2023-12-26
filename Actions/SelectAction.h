@@ -7,7 +7,8 @@ class SelectAction : public Action {
 
 
 	Point P1;
-	CFigure* selectedFigure;
+	//CFigure* selectedFigure;
+	int selectedId = -1;
 	bool CanExecute = false;
 
 public : 

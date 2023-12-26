@@ -2,7 +2,7 @@
 #define ACTION_H
 
 #include "..\DefS.h"
-
+#include <iostream>
 class ApplicationManager; //forward class declaration
 
 
@@ -29,6 +29,10 @@ public:
 	virtual void redo() { this->Execute(); }         //has its implementation of undo and redo
 	bool isRecordable() { return Recordable; }
 	bool GetExecuteState() { return CanExecute; }
+
+	virtual ~Action() {
+		std::cout << "Destroy action" << std::endl;
+	}
 };
 
 #endif

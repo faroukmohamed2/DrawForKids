@@ -185,7 +185,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{
 		pAct->Execute();//Execute
 		addAction(pAct);
-		if (!pAct->isRecordable() && !pAct->GetUndoValidity()&&!pAct->GetExecuteState())//we check that we didn't need the action to be recorded or undided
+		if (!pAct->isRecordable() && !pAct->GetUndoValidity() && !pAct->GetExecuteState() )//we check that we didn't need the action to be recorded or undided
 		{
 			delete pAct;
 		}
@@ -234,7 +234,7 @@ void ApplicationManager::addAction(Action* ptr)
 {
 	if (isRecording && ptr->isRecordable()) {//adding action to the record history
 		if (RecordedActionCount < MaxRecordActionCount) {
-			RecordedAction[RecordedActionCount++] = ptr;
+			RecordedAction[RecordedActionCount++] = ptr->clone();
 		}
 		else {
 			pOut->PrintMessage("Recording limit exceeded, Recording stopped.");
@@ -407,6 +407,15 @@ CFigure* ApplicationManager::IsSelected() const
 			return FigList[i];
 	return NULL;
 }
+
+void ApplicationManager::UnSelectAll() {
+	for (int i = 0; i < FigCount; i++)
+		if (FigList[i]) {
+			FigList[i]->SetSelected(false);
+		}
+			
+}
+
 void ApplicationManager::DeleteFigure(int deleteID)
 {
 	int toDelete = 0;
@@ -436,6 +445,9 @@ void ApplicationManager::DeleteFigure(int deleteID)
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {	
+	//pIn->GetWindow()->SetBuffering(true);
+	//pIn->GetWindow()->UpdateBuffer();
+
 	Point p1, p2; //Draw white background
 	p1.y = UI.ToolBarHeight;
 	p2.x = UI.width;
@@ -444,12 +456,17 @@ void ApplicationManager::UpdateInterface() const
 	gfxInfo.FillClr = UI.BkGrndColor;
 	pOut->DrawRect(p1, p2, gfxInfo);
 
+
 	for(int i=0; i<FigCount; i++)
 		if (FigList[i]  && !FigList[i]->IsHide())
 			FigList[i]->Draw(pOut);
 				//Call Draw function (virtual member fn)
 
 	pOut->ClearStatusBar();
+
+	//pIn->GetWindow()->UpdateBuffer();
+	//pIn->GetWindow()->SetBuffering(false);
+
 }
 
 void ApplicationManager::show()
@@ -503,8 +520,9 @@ void ApplicationManager::ClearRecordingHistory()
 {
 	for (int i = 0; i < RecordedActionCount; i++)//reset recording history
 	{
-		if (RecordedAction[i])//checking that the current recorded action isn't equal null
-		delete RecordedAction[i];
+		if (RecordedAction[i]) {//checking that the current recorded action isn't equal null
+			delete RecordedAction[i];
+		}
 		RecordedAction[i] = NULL;
 	}
 	RecordedActionCount = 0;//reset the count of the recorded actions

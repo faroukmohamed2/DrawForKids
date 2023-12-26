@@ -51,6 +51,7 @@ public:
 	//int GetFigCount() const;
 	CFigure* IsSelected() const;
 	CFigure* GetSelectedFigure() const;
+	void UnSelectAll();
 	void DeleteFigure(int);          //Search for a figure given a point inside the figure
 	void show();
 	void hide(int);
