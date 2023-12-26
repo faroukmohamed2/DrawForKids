@@ -29,8 +29,8 @@ private:
 	int RecordedActionCount = 0;
 
 	//sound variables
-	bool SoundState=true;
-
+	bool SoundState=true;//it is a boolean expression is used to know the current sound state
+						 //its by default  true
 
 	//Pointers to Input and Output classes
 	Input *pIn;
@@ -88,13 +88,13 @@ public:
 	bool IsRecordClipAvailable() const;
 
 	//Clear all system
-	void ClearAll();
-	void ClearRecordingHistory();
+	void ClearAll();//this functon is used to clear the figlist and the the undo and redo history
+	void ClearRecordingHistory();//this function is used to clear the recording history
 
 	//Sound system
-	void enableSound();
-	void MuteSound();
-	bool GetSoundState() const;
+	void enableSound();//this function is used to enable the sound in the SoundOn Action
+	void MuteSound();//this function is used to mute the sound in the MuteSound action
+	bool GetSoundState() const;//getter we use to know the current state of the sound 
 };
 
 #endif

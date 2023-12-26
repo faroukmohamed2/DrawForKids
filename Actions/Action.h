@@ -14,6 +14,7 @@ protected:
 	ApplicationManager *pManager;	//Actions needs AppMngr to do their job
 	bool UndoValidity;
 	bool Recordable = false;
+	bool CanExecute =true;
 
 public:
 	Action(ApplicationManager *pApp) { pManager = pApp; }	//constructor
@@ -26,10 +27,8 @@ public:
 	bool GetUndoValidity() { return UndoValidity; }//get the undo ability of the action
 	virtual void undo() {}                         //it is a pure function because every action 
 	virtual void redo() { this->Execute(); }         //has its implementation of undo and redo
-	
-
 	bool isRecordable() { return Recordable; }
-
+	bool GetExecuteState() { return CanExecute; }
 };
 
 #endif

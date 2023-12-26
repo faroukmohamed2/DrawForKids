@@ -9,7 +9,7 @@ UndoAction::UndoAction(ApplicationManager* pApp) :Action(pApp)
 
 void UndoAction::ReadActionParameters()
 {
-
+	//we didn't take any parameters form the user after clicking on the undo action
 }
 
 void UndoAction::Execute()
@@ -18,5 +18,8 @@ void UndoAction::Execute()
 	{
 		PlaySound("Undo.wav", NULL, SND_FILENAME | SND_ASYNC);
 	}
-	pManager->UndoLastAction();
+	pManager->UndoLastAction();//calling the undolastAction function in the appmanager
+	                           //and the undolastAction call the undo function of the last action in the array
+	                           //very important note (every action is responsible to undo it self)->the undolastaction only call the undo function of every action
+	                           //the undo of every action is a virtual function because every action has its implementation of the undo
 }

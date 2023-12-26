@@ -75,6 +75,7 @@
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Actions\SoundOn.cpp" />
     <ClCompile Include="Actions\mute.cpp" />
+    <ClCompile Include="Actions\ExitAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\AddCircleAction.h" />
@@ -137,6 +138,7 @@
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Actions\SoundOn.h" />
     <ClInclude Include="Actions\mute.h" />
+    <ClInclude Include="Actions\ExitAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

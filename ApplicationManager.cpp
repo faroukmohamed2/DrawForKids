@@ -31,6 +31,7 @@
 #include "Actions/ResizeAction.h"
 #include"Actions/SoundOn.h"
 #include"Actions/mute.h"
+#include"Actions/ExitAction.h"
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -167,9 +168,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case MUTE:
 			pAct = new mute(this);
 			break;
-		case EXIT:
-	
-			///create ExitAction here
+	    case EXIT:
+		  pAct = new ExitAction(this);
 			break;
 		case STATUS:	//a click on the status bar ==> no action
 			return;
@@ -180,7 +180,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{
 		pAct->Execute();//Execute
 		addAction(pAct);
-		if (!pAct->isRecordable() && !pAct->GetUndoValidity())//we check that we didn't need the action to be recorded or undided
+		if (!pAct->isRecordable() && !pAct->GetUndoValidity()&&!pAct->GetExecuteState())//we check that we didn't need the action to be recorded or undided
 		{
 			delete pAct;
 		}
@@ -238,10 +238,10 @@ void ApplicationManager::addAction(Action* ptr)
 		}
 	}
 
-	if (ptr->GetUndoValidity())//check that the current action is able to be undid
+	if (ptr->GetUndoValidity()&&ptr->GetExecuteState())//check that the current action is able to be undid
 	{
 
-		while (CountofUndoed != 0)//if we add an action we check that we remove that undid actions before it
+		while (CountofUndoed != 0)//if we add an action we check that we remove that undid actions before it and check that the action is excuted successfuly
 		{
 			delete last5Actions[ActionsCount - 1];//delete the undid action
 			CountofUndoed--;//decrement the number of undidactions
@@ -323,59 +323,7 @@ bool ApplicationManager::IsRecordClipAvailable() const {
 	return RecordedActionCount != 0;
 }
 
-void ApplicationManager::ClearAll()
-{
-	for (int i = 0; i < FigCount; i++)//delete all the figures
-	{
-		delete FigList[i];
-		FigList[i] = NULL;
-	}
-	FigCount = 0;
-	for (int i = 0; i < ActionsCount; i++)//reset the undo and redo history
-	{
-		delete last5Actions[i];
-		last5Actions[i] = NULL;
-	}
-	ActionsCount = 0;
-	CountofUndoed = 0;
-	FigID = 0;
-	
-	if (SelectedFig != NULL)
-	{
-		delete SelectedFig;
-		SelectedFig = NULL;
-   }
-	
-	
-	pOut->ClearDrawArea();
-	pOut->PrintMessage("you clear all figures");
-}
 
-void ApplicationManager::ClearRecordingHistory()
-{
-	for (int i = 0; i < RecordedActionCount; i++)//reset recording history
-	{
-		if(RecordedAction)
-			delete RecordedAction[i];
-		RecordedAction[i] = NULL;
-	}
-	RecordedActionCount = 0;
-}
-
-void ApplicationManager::enableSound()
-{
-	SoundState = true;
-}
-
-void ApplicationManager::MuteSound()
-{
-	SoundState = false;
-}
-
-bool ApplicationManager::GetSoundState() const
-{
-	return SoundState;
-}
 
 
 void ApplicationManager::StartRecording(){
@@ -497,10 +445,6 @@ void ApplicationManager::UpdateInterface() const
 				//Call Draw function (virtual member fn)
 }
 
-
-
-
-
 void ApplicationManager::show()
 {
 	for (int i = 0; i < FigCount; i++)
@@ -513,6 +457,82 @@ color ApplicationManager::GetFigColor(int i)
 	if (FigList[i])
 		return FigList[i]->GetFigColor();
 }
+
+
+//==================================================================================//
+//						         the clear all system                       		//
+//==================================================================================//
+void ApplicationManager::ClearAll()
+{
+	for (int i = 0; i < FigCount; i++)//delete all the figures
+	{
+		if (FigList[i] != NULL)//checking that the current fig in the figlist isn't equal null
+			delete FigList[i];
+		FigList[i] = NULL;
+	}
+	FigCount = 0;
+	for (int i = 0; i < ActionsCount; i++)//reset the undo and redo history
+	{
+		if (last5Actions[i] != NULL)//checking that the current  action in the last5actions array isn't equal null
+			delete last5Actions[i];
+		last5Actions[i] = NULL;
+	}
+	ActionsCount = 0;//reset the actions count in the last5actions array
+	CountofUndoed = 0;//reset the number of undid actions
+	FigID = 0;//reset the figures id
+
+	if (SelectedFig != NULL)//checking that there is a slectedfig or no
+	{
+		delete SelectedFig;
+		SelectedFig = NULL;
+	}
+
+
+	pOut->ClearDrawArea();//clearing the drawing area
+
+}
+
+void ApplicationManager::ClearRecordingHistory()
+{
+	for (int i = 0; i < RecordedActionCount; i++)//reset recording history
+	{
+		if (RecordedAction[i])//checking that the current recorded action isn't equal null
+		delete RecordedAction[i];
+		RecordedAction[i] = NULL;
+	}
+	RecordedActionCount = 0;//reset the count of the recorded actions
+}
+
+
+//==================================================================================//
+//						          the sound system                            		//
+//==================================================================================//
+
+
+void ApplicationManager::enableSound()//making the sound is open by the SoundOn Action
+{
+	SoundState = true;
+}
+
+void ApplicationManager::MuteSound()//making the sound is muted by the Mute Action
+{
+	SoundState = false;
+}
+
+bool ApplicationManager::GetSoundState() const//get the current sound state
+{
+	return SoundState;
+}
+
+
+
+
+
+
+
+
+
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
 Input *ApplicationManager::GetInput() const
@@ -524,8 +544,12 @@ Output *ApplicationManager::GetOutput() const
 //Destructor
 ApplicationManager::~ApplicationManager()
 {
-	for(int i=0; i<FigCount; i++)
-		delete FigList[i];
+	for (int i = 0; i < FigCount; i++)
+	{
+		if(FigList[i]!=NULL)
+		 delete FigList[i];
+	}
+		
 	delete pIn;
 	delete pOut;
 	

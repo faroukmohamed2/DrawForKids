@@ -7,7 +7,6 @@
 class MoveAction : public Action {
 
 
-	bool CanExecute;
 	CFigure* ToMove;
 	Point NewLocation;
 	Point lastLoaction;//we need it in the undo action

@@ -10,7 +10,6 @@ class ChangeFillAction : public Action {
 private:
 	color SelectedColor;
 	string ColorName;
-	bool CanExecute;
 	CFigure* ToChange;
 	color lastSelected;
 	enum Style { Border, Fill };

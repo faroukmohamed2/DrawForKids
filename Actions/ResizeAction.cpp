@@ -14,6 +14,7 @@ void ResizeAction::ReadActionParameters() {
 	CFigure* figure = pManager->IsSelected();
 	if (!figure) {
 		output->PrintMessage("Resize tool: Select figure first.");
+		CanExecute = false;
 		return;
 	}
 	figId = figure->GetID();
@@ -87,14 +88,20 @@ void ResizeAction::Execute(){
 }
 void ResizeAction::undo() {
 	CFigure* figure = pManager->GetFigure(figId);
+	Output* output = pManager->GetOutput();
 	if (figure) {
 		figure->SetResizablePointAtIndex(pointIndexToMove, StartPoint);
+		output->PrintMessage("the resize action is undid ");
 	}
+	
 }
 
 void ResizeAction::redo() {
 	CFigure* figure = pManager->GetFigure(figId);
+	Output* output = pManager->GetOutput();
 	if (figure) {
 		figure->SetResizablePointAtIndex(pointIndexToMove, EndPoint);
+		output->PrintMessage("the resize action is redid ");
 	}
+	
 }

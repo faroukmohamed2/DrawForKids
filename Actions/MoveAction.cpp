@@ -57,7 +57,7 @@ void MoveAction::undo()
 		pManager->GetFigure(FigID)->Move(lastLoaction);//in the undo action we return the figure to its previous location
 		pOut->PrintMessage("the move figure action is undoed ");
 	}
-   else pOut->PrintMessage("you didn't select a figure to move so you can't undo the action ");//in the case of we press the undo action without selecting a figure
+   
 }
 
 void MoveAction::redo()
@@ -68,5 +68,5 @@ void MoveAction::redo()
 		pManager->GetFigure(FigID)->Move(NewLocation);//in the redo action we return the figure to its last location
 		pOut->PrintMessage("the move figure action is redoed ");
 	}
-	else pOut->PrintMessage("you didn't select a figure to move so you can't redo the action ");//in the case of we press the redo action without selecting a figure
+	
 }

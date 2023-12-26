@@ -5,7 +5,7 @@
 class DeleteFigAction : public Action {
 
 private:
-	bool CanExecute;
+	//bool CanExecute;
 	CFigure* ToDelete;
 	int  FigID;
 public:

@@ -137,7 +137,7 @@ void ChangeFillAction::undo()
 
 		}
 	}
-	else { pOut->PrintMessage("you didn't select a figure to change its color so you can't undo the action"); }
+	
 }
 
 void ChangeFillAction::redo()
@@ -155,6 +155,6 @@ void ChangeFillAction::redo()
 			pOut->PrintMessage("the change border color of the figure action is redoed ");
 		}
 	}
-	else pOut->PrintMessage("you didn't select a figure to change its color so you can't redo the action");
+	
 	
 }
