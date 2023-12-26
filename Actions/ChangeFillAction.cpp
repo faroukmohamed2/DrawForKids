@@ -152,12 +152,13 @@ void ChangeFillAction::redo()
 
 			pManager->GetFigure(FGindex)->ChngFillClr(SelectedColor);//redo the action and return the color to the selected one
 			pOut->PrintMessage("the change fill color of the figure action is redoed ");
+			
 		}
 		else if (ReqStyle == Border) {//in case of border changing
 
 			pManager->GetFigure(FGindex)->ChngDrawClr(SelectedColor);//redo the action and return the color to the selected one
 			pOut->PrintMessage("the change border color of the figure action is redoed ");
-		}
+		}pManager->GetFigure(FGindex)->SetSelected(false);
 	}
 	
 	

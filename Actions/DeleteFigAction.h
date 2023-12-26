@@ -8,6 +8,8 @@ private:
 	//bool CanExecute;
 	CFigure* ToDelete;
 	int  FigID;
+	CFigure* copy;
+	CFigure* copy2;
 public:
 	DeleteFigAction(ApplicationManager* pApp);
 	Action* clone() const { return new DeleteFigAction(*this); }

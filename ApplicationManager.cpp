@@ -185,10 +185,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{
 		pAct->Execute();//Execute
 		addAction(pAct);
-		if (!pAct->isRecordable() && !pAct->GetUndoValidity() && !pAct->GetExecuteState() )//we check that we didn't need the action to be recorded or undided
-		{
-			delete pAct;
-		}
+		
 		pAct = NULL;
 	}
 }
@@ -256,7 +253,7 @@ void ApplicationManager::addAction(Action* ptr)
 
 		if (ActionsCount < 5)//if the array of actions is not full
 		{
-			last5Actions[ActionsCount++] = ptr;//put the current action in the last empty element
+			last5Actions[ActionsCount++] = ptr->clone();//put the current action in the last empty element
 		}
 
 		else {//if the array of actions is full
@@ -266,7 +263,7 @@ void ApplicationManager::addAction(Action* ptr)
 				last5Actions[i] = last5Actions[i + 1];//replace every element with the next element
 			}
 
-			last5Actions[4] = ptr;//now we will assign the last action with current action
+			last5Actions[4] = ptr->clone();//now we will assign the last action with current action
 		}
 	}
 
