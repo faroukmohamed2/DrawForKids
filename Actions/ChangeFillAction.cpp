@@ -105,14 +105,14 @@ void ChangeFillAction::Execute()
 		if (ReqStyle == Fill) {
 			lastSelected = pManager->GetFigure(FGindex)->GetFigColor();
 			pManager->GetFigure(FGindex)->ChngFillClr(SelectedColor);
-			pManager->GetFigure(FGindex)->SetSelected(!(pManager->GetFigure(FGindex)->IsSelected()));
+			//pManager->GetFigure(FGindex)->SetSelected(!(pManager->GetFigure(FGindex)->IsSelected()));
 
 
 		}
 		else if (ReqStyle == Border) {
 			lastSelected = pManager->GetFigure(FGindex)->GetborderColor();
 			pManager->GetFigure(FGindex)->ChngDrawClr(SelectedColor);
-			pManager->GetFigure(FGindex)->SetSelected(!(pManager->GetFigure(FGindex)->IsSelected()));
+			//pManager->GetFigure(FGindex)->SetSelected(!(pManager->GetFigure(FGindex)->IsSelected()));
 			
 
 		}

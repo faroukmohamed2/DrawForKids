@@ -64,7 +64,7 @@ public:
 
 
 	//undo and redo system
-	void addAction(Action* ptr);//this function is used to add an action to the array of the last 5 actions
+	void AddAction(Action* ptr);//this function is used to add an action to the array of the last 5 actions
 	void UndoLastAction();//undo the last action in the last five action array(every action is responsible to undo itself)
 	void RedoLastAction();//redo the last undid action in the last five action array(every action is responsible to redo itself)
 

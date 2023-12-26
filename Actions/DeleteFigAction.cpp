@@ -16,7 +16,6 @@ void DeleteFigAction::ReadActionParameters()
 	
 	if (ToDelete != NULL) {
 		copy = ToDelete->clone();
-		copy2 = ToDelete->clone();
 		FigID=pManager->IsSelected()->GetID();
 		pOut->PrintMessage("The figure is deleted succefully");
 
@@ -47,9 +46,10 @@ void DeleteFigAction::undo()
 	if (CanExecute) {//if there was a selected figure to delete 
 		
 		//copy->SetHide(false);
-		pManager->AddFigure(copy);//returned the figure to the fig list
-		copy->SetId(FigID);
-		copy->SetSelected(false);
+		CFigure* newFig = copy->clone();
+		pManager->AddFigure(newFig);//returned the figure to the fig list
+		newFig->SetId(FigID);
+		newFig->SetSelected(false);
 		pOut->PrintMessage("the delete figure action is undoed ");
 	}
 	else pOut->PrintMessage("you didn't select a figure to delete so you can't undo the action ");//in case we press the undo without selecting a figure
@@ -71,5 +71,7 @@ void DeleteFigAction::redo()
 
 DeleteFigAction::~DeleteFigAction()
 {
-	//delete ToDelete;
+	/*if(copy)
+		delete copy;
+	copy = NULL;*/
 }

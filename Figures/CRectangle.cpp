@@ -9,7 +9,9 @@ CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo):CFigure(Figure
 
 }
 
-CRectangle::CRectangle(int id) : CFigure(id) {}
+CRectangle::CRectangle(int id) : CFigure(id) {
+	RecCount++;
+}
 
 CFigure* CRectangle::clone() {
 	return new CRectangle(*this);

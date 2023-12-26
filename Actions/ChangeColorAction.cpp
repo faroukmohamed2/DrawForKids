@@ -8,7 +8,7 @@
 ChangeColorAction::ChangeColorAction(ApplicationManager* pApp, ActionType TheColor) :Action(pApp)
 {
 	Recordable = true;
-   UndoValidity = true; //making the action undoable
+	UndoValidity = true; //making the action undoable
 	switch (TheColor)
 	{
 	case DRW_Red:

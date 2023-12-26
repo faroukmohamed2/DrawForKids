@@ -1,8 +1,8 @@
 #include "DragAction.h"
 
 DragAction::DragAction(ApplicationManager* pApp) : Action(pApp) {
-
-
+	Recordable = true;
+	UndoValidity = true;
 }
 
 void DragAction::ReadActionParameters()
@@ -58,12 +58,12 @@ void DragAction::Execute()
 			TheOld.y = MousePoint.y;
 
 		pIn->GetWindow()->GetMouseCoord(MousePoint.x, MousePoint.y);
-		pIn->GetWindow()->SetBuffering(true);
-		pIn->GetWindow()->UpdateBuffer();
+		//pIn->GetWindow()->SetBuffering(true);
+		//pIn->GetWindow()->UpdateBuffer();
 		pManager->UpdateInterface();
 		}
 
-		pIn->GetWindow()->SetBuffering(false);
+		//pIn->GetWindow()->SetBuffering(false);
 		pManager->UpdateInterface();
 		pOut->PrintMessage("Figure moved successfully");
 		NewLocation = MousePoint;

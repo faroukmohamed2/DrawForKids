@@ -4,7 +4,9 @@
 #include <iostream>
 
 ResizeAction::ResizeAction(ApplicationManager* pApp) : Action(pApp)
-{ UndoValidity = true;//making the action undoable
+{ 
+	UndoValidity = true;//making the action undoable
+	Recordable = true;
 }
 void ResizeAction::ReadActionParameters() {
 	Input* input = pManager->GetInput();
@@ -60,12 +62,12 @@ void ResizeAction::ReadActionParameters() {
 		mousePoint.x -= offset.x;
 		mousePoint.y -= offset.y;
 		figure->SetResizablePointAtIndex(pointIndexToMove, mousePoint);
-		input->GetWindow()->SetBuffering(true);
-		input->GetWindow()->UpdateBuffer();
+		//input->GetWindow()->SetBuffering(true);
+		//input->GetWindow()->UpdateBuffer();
 		pManager->UpdateInterface();
 	}
 
-	input->GetWindow()->SetBuffering(false);
+	//input->GetWindow()->SetBuffering(false);
 	pManager->UpdateInterface();
 
 

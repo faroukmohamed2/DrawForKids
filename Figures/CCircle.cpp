@@ -17,7 +17,9 @@ CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxIn
 	this->P2 = P2;
 	CircCount++;
 }
-CCircle::CCircle(int id) : CFigure(id) {}
+CCircle::CCircle(int id) : CFigure(id) {
+	CircCount++;
+}
 
 
 void CCircle::Draw(Output* pOut) const

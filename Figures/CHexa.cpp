@@ -8,7 +8,9 @@ CHexa::CHexa(Point P1, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 	HexCount++;
 }
 
-CHexa::CHexa(int id) : CFigure(id) {}
+CHexa::CHexa(int id) : CFigure(id) {
+	HexCount++;
+}
 
 CFigure* CHexa::clone() {
 	return new CHexa(*this);
@@ -68,6 +70,10 @@ void CHexa::Drag(Point NewLocation, Point OldLocation)
 
 	Center.x += DiffrenceX;
 	Center.y += DiffrenceY;
+
+	ResizableEdge = Center;
+	ResizableEdge.x += length;
+
 }
 Point CHexa::getlocation()
 {

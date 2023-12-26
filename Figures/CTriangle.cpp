@@ -8,7 +8,9 @@ CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo) :CFigu
 	TriCount++;
 }
 
-CTriangle::CTriangle(int id) : CFigure(id) {}
+CTriangle::CTriangle(int id) : CFigure(id) {
+	TriCount++;
+}
 
 CFigure* CTriangle::clone() {
 	return new CTriangle(*this);

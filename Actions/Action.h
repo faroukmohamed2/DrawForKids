@@ -31,7 +31,7 @@ public:
 	bool GetExecuteState() { return CanExecute; }
 
 	virtual ~Action() {
-		std::cout << "Destroy action" << std::endl;
+		
 	}
 };
 

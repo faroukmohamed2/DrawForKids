@@ -34,6 +34,8 @@
 #include "Actions/DragAction.h"
 
 #include"Actions/ExitAction.h"
+
+
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -66,7 +68,7 @@ ActionType ApplicationManager::GetUserAction() const
 void ApplicationManager::ExecuteAction(ActionType ActType) 
 {
 	Action* pAct = NULL;
-	cout << ActType << endl;
+
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
@@ -184,7 +186,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	if(pAct != NULL)
 	{
 		pAct->Execute();//Execute
-		addAction(pAct);
+		AddAction(pAct);
 		
 		pAct = NULL;
 	}
@@ -227,7 +229,7 @@ int ApplicationManager::GetFigCount() const
 //						       undo and redo System Functions				    	//
 //==================================================================================//
 
-void ApplicationManager::addAction(Action* ptr)
+void ApplicationManager::AddAction(Action* ptr)
 {
 	if (isRecording && ptr->isRecordable()) {//adding action to the record history
 		if (RecordedActionCount < MaxRecordActionCount) {
@@ -235,7 +237,7 @@ void ApplicationManager::addAction(Action* ptr)
 		}
 		else {
 			pOut->PrintMessage("Recording limit exceeded, Recording stopped.");
-			delete ptr;
+			//delete ptr;
 			StopRectording();
 		}
 	}
@@ -325,18 +327,17 @@ bool ApplicationManager::IsRecordClipAvailable() const {
 	return RecordedActionCount != 0;
 }
 
-
-
-
 void ApplicationManager::StartRecording(){
 	isRecording = true;
 }
+
 void ApplicationManager::StopRectording(){
 	isRecording = false;
 }
+
 void ApplicationManager::PlayRecord(){
 	for (int i = 0; i < RecordedActionCount; i++) {
-		addAction(RecordedAction[i]);
+		AddAction(RecordedAction[i]);
 		RecordedAction[i]->redo();
 		//delete RecordedAction[i];
 		pOut->PrintMessage(to_string(i / 60) + ":" + to_string(i % 60) + " / " + to_string(RecordedActionCount / 60) + ":" + to_string(RecordedActionCount % 60));
@@ -366,7 +367,7 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 	for (int i = FigCount - 1; i >= 0; i--) {
 		if (FigList[i] != NULL) {
 			PointBelong = FigList[i]->PointBelong(x, y);
-			if (PointBelong) {
+			if (PointBelong && !FigList[i]->IsHide()) {
 
 				return FigList[i];
 			}
@@ -442,8 +443,7 @@ void ApplicationManager::DeleteFigure(int deleteID)
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {	
-	//pIn->GetWindow()->SetBuffering(true);
-	//pIn->GetWindow()->UpdateBuffer();
+	pIn->GetWindow()->SetBuffering(true);
 
 	Point p1, p2; //Draw white background
 	p1.y = UI.ToolBarHeight;
@@ -461,8 +461,8 @@ void ApplicationManager::UpdateInterface() const
 
 	pOut->UpdateStatusBar();
 
-	//pIn->GetWindow()->UpdateBuffer();
-	//pIn->GetWindow()->SetBuffering(false);
+	pIn->GetWindow()->UpdateBuffer();
+	pIn->GetWindow()->SetBuffering(false);
 
 }
 
@@ -517,9 +517,12 @@ void ApplicationManager::ClearRecordingHistory()
 {
 	for (int i = 0; i < RecordedActionCount; i++)//reset recording history
 	{
-		if (RecordedAction[i]) {//checking that the current recorded action isn't equal null
-			delete RecordedAction[i];
-		}
+		try {
+			if (RecordedAction[i]) {//checking that the current recorded action isn't equal null
+				delete RecordedAction[i];
+			}
+		}catch(exception  e){}
+
 		RecordedAction[i] = NULL;
 	}
 	RecordedActionCount = 0;//reset the count of the recorded actions

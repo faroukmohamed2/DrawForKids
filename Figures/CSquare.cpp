@@ -8,7 +8,9 @@ CSquare::CSquare(Point TheMiddle, GfxInfo FigureGfxInfo) : CFigure (FigureGfxInf
 	SquCount++;
 }
 
-CSquare::CSquare(int id) : CFigure(id) {}
+CSquare::CSquare(int id) : CFigure(id) {
+	SquCount++;
+}
 
 CFigure* CSquare::clone() {
 	return new CSquare(*this);
