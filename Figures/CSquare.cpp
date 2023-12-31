@@ -1,4 +1,5 @@
 #include "CSquare.h"
+
 int CSquare::SquCount = 0;
 CSquare::CSquare(Point TheMiddle, GfxInfo FigureGfxInfo) : CFigure (FigureGfxInfo)
 {
@@ -26,6 +27,7 @@ Point** CSquare::GetResizablePointsAsArray(int& count) {
 
 void CSquare::Draw(Output* pOut) const
 {
+
 	int length = max(Corner.x - Center.x, Corner.y - Center.y);
 	Point otherPoint = Center;
 	otherPoint.x -= length;

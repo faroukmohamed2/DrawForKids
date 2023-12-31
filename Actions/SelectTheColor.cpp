@@ -157,7 +157,7 @@ void SelectTheColor::Execute()
 			i++;
 		}
 	}
-	delete pick;
+	delete[] pick;
 }
 
 void SelectTheColor::Result(CFigure* pick)

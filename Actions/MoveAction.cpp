@@ -43,7 +43,7 @@ void MoveAction::Execute()
 
 	ReadActionParameters(); 
 	if (CanExecute) {
-		ToMove->SetSelected(false);
+		//ToMove->SetSelected(false);
 		pOut->ClearDrawArea();
 		ToMove->Move(NewLocation);
 	}

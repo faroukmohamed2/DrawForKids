@@ -13,6 +13,8 @@
 #include <iostream>
 #include <string>
 #include <thread>
+#include <cmath>
+#include <algorithm>
 #include "Actions/ChangeColorAction.h"
 #include "Actions/ChangeFillAction.h"
 #include "Actions/DeleteFigAction.h"
@@ -27,13 +29,20 @@
 #include "Actions/Rercording/StopRecordingAction.h"
 #include "Actions/Rercording/PlayRecordAction.h"
 #include"Actions/ClearAllAction.h"
-#include<Windows.h>
+//#include<Windows.h>
 #include "Actions/ResizeAction.h"
 #include"Actions/SoundOn.h"
 #include"Actions/mute.h"
 #include "Actions/DragAction.h"
 
 #include"Actions/ExitAction.h"
+
+#include "Figures/CRectangle.h"
+#include "Figures/CSquare.h"
+#include "Figures/CTriangle.h"
+
+#include "Figures/CHexa.h"
+#include "Figures/CCircle.h"
 
 
 //Constructor
@@ -187,7 +196,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{
 		pAct->Execute();//Execute
 		AddAction(pAct);
-		
+		delete pAct;
 		pAct = NULL;
 	}
 }
@@ -216,8 +225,11 @@ void ApplicationManager::LoadAll(CFigure** list, int count) {
 	}
 	FigCount = count;
 
-	for (int i = 0; i < count; i++)
+	for (int i = 0; i < count; i++) {
 		FigList[i] = list[i];
+		FigID = FigID > FigList[i]->GetID() ? FigID : FigList[i]->GetID();
+	}
+	FigID++;
 }
 
 int ApplicationManager::GetFigCount() const
@@ -306,9 +318,55 @@ void ApplicationManager::RedoLastAction()
 
 
 
+//==================================================================================//
+//						          Play mode Functions								//
+//==================================================================================//
 
-
-
+int ApplicationManager::GetSquareCount() {
+	int count = 0;
+	for (int i = 0; i < FigCount; i++) {
+		if (dynamic_cast<CSquare*>(FigList[i])) {
+			count++;
+		}
+	}
+	return count;
+}
+int ApplicationManager::GetRecCount() {
+	int count = 0;
+	for (int i = 0; i < FigCount; i++) {
+		if (dynamic_cast<CRectangle*>(FigList[i])) {
+			count++;
+		}
+	}
+	return count;
+}
+int ApplicationManager::GetCircleCount() {
+	int count = 0;
+	for (int i = 0; i < FigCount; i++) {
+		if (dynamic_cast<CCircle*>(FigList[i])) {
+			count++;
+		}
+	}
+	return count;
+}
+int ApplicationManager::GetTriangleCount() {
+	int count = 0;
+	for (int i = 0; i < FigCount; i++) {
+		if (dynamic_cast<CTriangle*>(FigList[i])) {
+			count++;
+		}
+	}
+	return count;
+}
+int ApplicationManager::GetHexaCount() {
+	int count = 0;
+	for (int i = 0; i < FigCount; i++) {
+		if (dynamic_cast<CHexa*>(FigList[i])) {
+			count++;
+		}
+	}
+	return count;
+}
 
 
 
@@ -508,9 +566,10 @@ void ApplicationManager::ClearAll()
 
 
 	pOut->ClearDrawArea();//clearing the drawing area
-
+	UI.DrawColor = BLUE;
+	UI.FillState = false;
+	UI.FillColor = WHITE;
 }
-
 void ApplicationManager::ClearRecordingHistory()
 {
 	for (int i = 0; i < RecordedActionCount; i++)//reset recording history

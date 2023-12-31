@@ -11,17 +11,18 @@
 SelectColorShape::SelectColorShape(ApplicationManager* pApp):Action(pApp)
 {
 	FigCount = pManager->GetFigCount();
-	shapes = new CFigure * [FigCount];
-	colors = new color[FigCount];
+	shapes = new CFigure * [200];
+	colors = new color[200];
 	CountValid = 0;
 	TrueAns = 0;
 	WrongAns = 0;
 	col = new int[FigCount];
 	sh = new int[FigCount];
+	int index = 0;
 	for (int i = 0; i < FigCount; i++)
 	{
-		shapes[i] = pManager->GetFigure(i);
-		colors[i] = pManager->GetFigColor(i);
+			shapes[i] = pManager->GetFigure(i);
+			colors[i] = pManager->GetFigColor(i);
 	}
 	CountCols();
 	Countsh();
@@ -91,6 +92,7 @@ void SelectColorShape::ReadActionParameters()
 
 	switch (randcol)
 	{
+
 	case RD:
 		outmsg = "Select all Red ";
 		break;
@@ -111,6 +113,8 @@ void SelectColorShape::ReadActionParameters()
 		break;
 	default:
 		outmsg = "Select All Uncolored ";
+		break;
+
 	}
 	switch (randshape)
 	{
@@ -186,7 +190,8 @@ void SelectColorShape::Execute()
 				break;
 			}
 		}
-		delete pick;
+		delete[]
+			pick;
 	}
 }
 int SelectColorShape::EndExecute()

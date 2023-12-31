@@ -11,16 +11,19 @@ using namespace std;
 SelectTheShape::SelectTheShape(ApplicationManager *pApp):Action(pApp)
 {
 
-	CircCount = CCircle::GetCircCount();
-	SquCount = CSquare::GetSquCount();
-	HexCount = CHexa::GetHexCount();
-	TriCount = CTriangle::GetTriCount();
-	RecCount = CRectangle::GetRecCount();
+	CircCount = pManager->GetCircleCount();
+	SquCount = pManager->GetSquareCount();
+	HexCount = pManager->GetHexaCount();
+	TriCount = pManager->GetTriangleCount();
+	RecCount = pManager->GetRecCount();
 	FigCount = pManager->GetFigCount();
 	TrueAns = 0;
 	WrongAns = 0;
 	UndoValidity = false;//making the action non-undoable
+	fig = new CFigure*[FigCount];
 }
+
+
 
 int SelectTheShape::NotExist(int rand)
 {
@@ -129,7 +132,7 @@ void SelectTheShape::Execute()
 			i++;
 
 		}
-		delete pick;
+		delete[] pick;
 	}
 }
 

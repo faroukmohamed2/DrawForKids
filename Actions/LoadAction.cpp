@@ -28,20 +28,34 @@ void LoadAction::ReadActionParameters() {
 
 //Execute action (code depends on action type)
 void LoadAction::Execute() {
-	ReadActionParameters();
-	
+	pManager->ClearAll();
+	pManager->StopRectording();
 	Input* input = pManager->GetInput();
 	Output* output = pManager->GetOutput();
+
+	try{
+	ReadActionParameters();
+	
 	ifstream file(name);
+
 
 	color draw, fill;
 	int count;
 
-	file >> draw >> fill;
+	file >> draw;
+
+	string fillId;
+	file >> fillId;
+	if (fillId == "NO-FILL")
+		UI.FillState = false;
+	else {
+		output->setCrntFillColor(NameToColor(fillId));
+		UI.FillState = true;
+	}
+
 	file >> count;
 
 	output->setCrntDrawColor(draw);
-	output->setCrntFillColor(fill);
 
 
 	CFigure** figurs = new CFigure*[count];
@@ -69,4 +83,10 @@ void LoadAction::Execute() {
 	pManager->UpdateInterface();
 
 	output->PrintMessage("Loaded " + std::to_string(count) + " Figures");
+
+	}
+	catch (exception e) {
+		output->PrintMessage("Load: Something went wrong, Please check the file name.");
+	}
+
 }

@@ -17,7 +17,7 @@ private:
 	int FigCount;		//Actual number of figures
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 	CFigure* SelectedFig; //Pointer to the selected figure
-
+	
 	//undo and redo variables
 	Action* last5Actions[5];//this array is pointed to that last five actions that excuted (but is undoable)->we use it in the undo and redo
 	int CountofUndoed;//the count of the undid actions 
@@ -56,6 +56,14 @@ public:
 	void show();
 	void hide(int);
 	color GetFigColor(int);
+
+	//PlayMode Function
+	int GetSquareCount();
+	int GetRecCount();
+	int GetCircleCount();
+	int GetTriangleCount();
+	int GetHexaCount();
+
 	// -- Interface Management Functions
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output

@@ -42,7 +42,8 @@ public:
 
 	color getCrntDrawColor() const;	//get current drwawing color
 	color getCrntFillColor() const;	//get current filling color
-	int getCrntPenWidth() const;		//get current pen width
+	int getCrntPenWidth() const;	
+	bool getCrntFillState() const;	//get current pen width
 
 	void setCrntDrawColor(color color);	//get current drwawing color
 	void setCrntFillColor(color color);	//get current filling color

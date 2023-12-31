@@ -22,12 +22,21 @@ void SaveAction::Execute() {
 
 	Input* input = pManager->GetInput();
 	Output* output = pManager->GetOutput();
-	ofstream file(name);
-	
-	file << output->getCrntDrawColor() << " ";
-	file << output->getCrntFillColor() << " ";
-	
-	file << endl;
 
-	pManager->SaveAll(file);
+	try {
+		ofstream file(name);
+		file.clear();
+		file << output->getCrntDrawColor() << " ";
+
+		if (UI.FillState)
+			file << output->getCrntFillColor() << " ";
+		else
+			file << "NO-FILL" << " ";
+
+		file << endl;
+		pManager->SaveAll(file);
+	}
+	catch (exception e) {
+		output->PrintMessage("Save: Something went wrong, Please check the file name.");
+	}
 }

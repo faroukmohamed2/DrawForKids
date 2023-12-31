@@ -16,6 +16,7 @@ private:
 	Style  ReqStyle;
 	int FGindex;
 	bool lastFillstate;// we will use it in the undo and redo action
+	bool CurrentState;
 
 public:
 	ChangeFillAction(ApplicationManager* pApp, ActionType);

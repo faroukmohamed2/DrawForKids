@@ -60,7 +60,7 @@ Output::Output()
 	UI.MenuItemHeight = 30;
 
 	UI.DrawColor = BLUE;	//Drawing color
-	UI.FillColor = WHITE;	//Filling color
+	UI.FillColor = LIGHTGOLDENRODYELLOW;	//Filling color
 	UI.MsgColor = RED;		//Messages color
 	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
 	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
@@ -223,6 +223,11 @@ color Output::getCrntFillColor() const	//get current filling color
 	
 int Output::getCrntPenWidth() const		//get current pen width
 {	return UI.PenWidth;	}
+
+bool Output::getCrntFillState() const
+{
+	return UI.FillState;
+}
 
 void Output::setCrntDrawColor(color color)	//get current drwawing color
 {
